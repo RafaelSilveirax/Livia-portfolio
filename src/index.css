@@ -1,1 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Glacial+Indifference:wght@400;700&display=swap");
 @import "tailwindcss";
+
+@theme {
+  --color-livia-purple-dark: #413f86;
+  --color-livia-purple-light: #aaadeb;
+  --color-livia-yellow: #ffde59;
+
+  --bg-color: var(--color-livia-white);
+  --text-color: var(--color-livia-black);
+
+  --font-family-glacial: "Glacial Indifference", sans-serif;
+  --font-family-black-mango: "Black Mango", sans-serif;
+}
+
+/* Black Mango Regular (400) */
+@font-face {
+  font-family: "Black Mango";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/src/assets/fonts/black-mango-regular.ttf") format("truetype");
+}
+
+/* Black Mango Medium (500) */
+@font-face {
+  font-family: "Black Mango";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/src/assets/fonts/black-mango-medium.ttf") format("truetype");
+}
+
+/* Black Mango Semi-Bold (600) */
+@font-face {
+  font-family: "Black Mango";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/src/assets/fonts/black-mango-semi-bold.ttf") format("truetype");
+}
+
+/* Black Mango Bold (700) */
+@font-face {
+  font-family: "Black Mango";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/src/assets/fonts/black-mango-bold.ttf") format("truetype");
+}
