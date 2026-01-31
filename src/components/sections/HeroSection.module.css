@@ -1,0 +1,99 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background-color: var(--bg-color);
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 0 4rem;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    color-mix(in srgb, var(--bg-color) 88%, transparent),
+    color-mix(in srgb, var(--color-livia-purple-light) 25%, transparent)
+  );
+  opacity: 0.9;
+}
+
+.container {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  min-height: calc(100vh - 10rem);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 32rem;
+}
+
+.kicker {
+  font-family: var(--font-family-glacial);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-livia-purple-light);
+  font-size: 0.95rem;
+}
+
+.title {
+  font-family: var(--font-family-black-mango);
+  font-weight: 700;
+  font-size: clamp(2.8rem, 4vw, 4.5rem);
+  color: var(--color-livia-purple-dark);
+  line-height: 1.05;
+}
+
+.subtitle {
+  font-family: var(--font-family-glacial);
+  font-size: 1.1rem;
+  color: var(--text-color);
+  max-width: 28rem;
+}
+
+.cta {
+  font-family: var(--font-family-glacial);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.9rem 2.1rem;
+  border-radius: 999px;
+  border: none;
+  background: var(--color-livia-purple-dark);
+  color: var(--bg-color);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+  width: fit-content;
+}
+
+.cta:hover {
+  background: var(--color-livia-purple-light);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 900px) {
+  .container {
+    min-height: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    padding: 5rem 0 3rem;
+  }
+
+  .cta {
+    width: 100%;
+    text-align: center;
+  }
+}

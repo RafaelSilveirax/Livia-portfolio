@@ -1,0 +1,117 @@
+.about {
+  background: color-mix(
+    in srgb,
+    var(--color-livia-purple-light) 12%,
+    var(--bg-color)
+  );
+  padding: 3.5rem 0 4.5rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 3rem;
+  align-items: center;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-family: var(--font-family-black-mango);
+  font-size: clamp(2rem, 3vw, 3rem);
+  color: var(--color-livia-purple-dark);
+}
+
+.divider {
+  width: 4.5rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--color-livia-purple-light);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+  font-family: var(--font-family-glacial);
+  color: var(--text-color);
+}
+
+.listItem {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  line-height: 1.5;
+}
+
+.icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  background: color-mix(
+    in srgb,
+    var(--color-livia-purple-light) 30%,
+    transparent
+  );
+  display: grid;
+  place-items: center;
+  color: var(--color-livia-purple-dark);
+  flex-shrink: 0;
+}
+
+.icon svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.description {
+  font-family: var(--font-family-glacial);
+  color: var(--text-color);
+  max-width: 30rem;
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.card {
+  position: relative;
+  min-height: 280px;
+  border-radius: 28px;
+  background: linear-gradient(
+    140deg,
+    color-mix(in srgb, var(--color-livia-purple-light) 60%, transparent),
+    color-mix(in srgb, var(--color-livia-purple-dark) 40%, transparent)
+  );
+  box-shadow: 0 18px 40px
+    color-mix(in srgb, var(--color-livia-purple-dark) 20%, transparent);
+  overflow: hidden;
+}
+
+.cardGlow {
+  position: absolute;
+  inset: 20% -10% auto auto;
+  width: 200px;
+  height: 200px;
+  background: var(--color-livia-yellow);
+  opacity: 0.35;
+  filter: blur(50px);
+  border-radius: 999px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    min-height: 240px;
+  }
+}

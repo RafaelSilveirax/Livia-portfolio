@@ -1,0 +1,12 @@
+.page {
+  background: var(--bg-color);
+  color: var(--text-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.anchor {
+  position: relative;
+  top: -80px;
+  height: 0;
+}
