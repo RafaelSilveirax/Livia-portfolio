@@ -33,10 +33,11 @@
   background: transparent;
   border: none;
   color: inherit;
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   text-transform: capitalize;
   cursor: pointer;
   transition: color 0.2s ease;
+  font-weight: 600;
 }
 
 .linkButton:hover {

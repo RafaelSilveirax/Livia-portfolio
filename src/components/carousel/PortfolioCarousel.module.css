@@ -1,7 +1,7 @@
 .wrapper {
   background: var(--color-livia-purple-dark);
   padding: 3.5rem 0 4.5rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .container {
@@ -10,7 +10,7 @@
   padding: 0 1.5rem;
   display: grid;
   gap: 2.5rem;
-  overflow: hidden;
+  overflow: visible;
 }
 
 .portfolioHeader {
@@ -36,9 +36,12 @@
 .section {
   background: var(--color-white);
   border-radius: 24px;
-  padding: 1.8rem 1.8rem 2.2rem;
-  box-shadow: 0 18px 40px
-    color-mix(in srgb, var(--color-livia-purple-dark) 25%, transparent);
+  padding: 1.2rem 1.8rem 1.6rem;
+  box-shadow:
+    0 14px 30px
+      color-mix(in srgb, var(--color-livia-purple-dark) 20%, transparent),
+    inset 0 -28px 28px
+      color-mix(in srgb, var(--color-livia-purple-dark) 18%, transparent);
   border: 1px solid
     color-mix(in srgb, var(--color-livia-purple-light) 30%, transparent);
   overflow: hidden;
@@ -67,16 +70,36 @@
 }
 
 .divider {
-  width: 6rem;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+
+.divider::before {
+  content: "";
+  width: 8rem;
   height: 3px;
   border-radius: 999px;
   background: var(--color-livia-purple-light);
+}
+
+.divider::after {
+  content: "";
+  height: 3px;
+  flex: 1;
+  background: color-mix(
+    in srgb,
+    var(--color-livia-purple-dark) 18%,
+    transparent
+  );
 }
 
 .nav {
   display: flex;
   gap: 0.5rem;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .navButton {
@@ -116,7 +139,7 @@
   gap: 1.25rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
-  padding-bottom: 0.75rem;
+  padding-bottom: 0.35rem;
   scrollbar-width: thin;
   scrollbar-color: color-mix(
       in srgb,
@@ -142,8 +165,6 @@
 .card {
   background: var(--bg-color);
   border-radius: 18px;
-  box-shadow: 0 14px 30px
-    color-mix(in srgb, var(--color-livia-purple-dark) 20%, transparent);
   overflow: hidden;
   scroll-snap-align: start;
   border: 1px solid
@@ -151,13 +172,16 @@
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
-  flex: 0 0 364px;
+  flex: 0 0 348px;
+  width: 348px;
+  flex-shrink: 0;
 }
 
 .image {
-  height: 200px;
+  height: 196px;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   transition: transform 0.3s ease;
 }
 
@@ -167,7 +191,7 @@
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 18px 36px
+  box-shadow: 0 5px 5px
     color-mix(in srgb, var(--color-livia-purple-dark) 25%, transparent);
 }
 
@@ -204,10 +228,10 @@
 }
 
 .dot {
-  width: 6px;
-  height: 6px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
-  background: color-mix(in srgb, var(--bg-color) 70%, transparent);
+  background: var(--color-livia-purple-light);
 }
 
 @media (max-width: 900px) {
@@ -218,18 +242,10 @@
   .nav {
     display: none;
   }
-
-  .card {
-    flex-basis: 280px;
-  }
 }
 
 @media (max-width: 600px) {
   .wrapper {
     padding: 3rem 0 3.5rem;
-  }
-
-  .card {
-    flex-basis: 240px;
   }
 }

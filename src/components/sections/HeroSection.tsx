@@ -1,5 +1,5 @@
 import styles from "./HeroSection.module.css";
-import liviaFundo from "../../assets/liviafundo.png";
+import liviaFundo from "../../assets/backgroundmain.jpeg";
 
 export function HeroSection() {
   return (
