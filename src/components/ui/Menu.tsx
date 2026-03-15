@@ -4,7 +4,8 @@ import logoBalai from "../../assets/logo-balai.png";
 import styles from "./Menu.module.css";
 
 const sections = ["about", "portfolio", "contact"];
-export function Menu() {
+
+function Menu() {
   const [isOpen, setIsOpen] = useState(false);
 
   function scrollTo(section: string) {
@@ -99,3 +100,5 @@ export function Menu() {
     </nav>
   );
 }
+
+export default Menu;

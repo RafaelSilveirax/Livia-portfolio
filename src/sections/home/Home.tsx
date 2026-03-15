@@ -1,7 +1,7 @@
-import styles from "./HeroSection.module.css";
+import styles from "./home.module.css";
 import liviaFundo from "../../assets/backgroundmain.jpeg";
 
-export function HeroSection() {
+function Home() {
   return (
     <section
       className={styles.hero}
@@ -21,3 +21,5 @@ export function HeroSection() {
     </section>
   );
 }
+
+export default Home;

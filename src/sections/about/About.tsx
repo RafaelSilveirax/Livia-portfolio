@@ -1,4 +1,4 @@
-import styles from "./AboutSection.module.css";
+import styles from "./about.module.css";
 
 const highlights = [
   "Designer & ilustradora",
@@ -7,7 +7,7 @@ const highlights = [
   "Experiência em projetos autorais e comerciais",
 ];
 
-export function AboutSection() {
+function About() {
   return (
     <section className={styles.about} id="about">
       <div className={styles.container}>
@@ -48,3 +48,5 @@ export function AboutSection() {
     </section>
   );
 }
+
+export default About;

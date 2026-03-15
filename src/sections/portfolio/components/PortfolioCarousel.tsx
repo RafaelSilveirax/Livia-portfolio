@@ -18,7 +18,7 @@ export type CarouselProps = {
   sections: CarouselSection[];
 };
 
-export function PortfolioCarousel({ sections }: CarouselProps) {
+function PortfolioCarousel({ sections }: CarouselProps) {
   const trackRefs = useRef(new Map<string, HTMLDivElement | null>());
   const pauseUntilRef = useRef(new Map<string, number>());
   const prefersReducedMotion = useMemo(() => {
@@ -151,3 +151,5 @@ export function PortfolioCarousel({ sections }: CarouselProps) {
     </section>
   );
 }
+
+export default PortfolioCarousel;
