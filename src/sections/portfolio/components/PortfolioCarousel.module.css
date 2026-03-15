@@ -1,5 +1,5 @@
 .wrapper {
-  background: var(--color-livia-purple-dark);
+  background: var(--color-livia-navy-blue);
   padding: 3.5rem 0 4.5rem;
   overflow: visible;
 }
@@ -18,8 +18,8 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  color: var(--color-livia-purple-light);
-  font-family: var(--font-family-black-mango);
+  color: var(--color-livia-turquoise);
+  font-family: var(---font-family-montserrat);
   text-transform: lowercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.2rem;
@@ -39,11 +39,11 @@
   padding: 1.2rem 1.8rem 1.6rem;
   box-shadow:
     0 14px 30px
-      color-mix(in srgb, var(--color-livia-purple-dark) 20%, transparent),
+      color-mix(in srgb, var(--color-livia-navy-blue) 20%, transparent),
     inset 0 -28px 28px
-      color-mix(in srgb, var(--color-livia-purple-dark) 18%, transparent);
+      color-mix(in srgb, var(--color-livia-navy-blue) 18%, transparent);
   border: 1px solid
-    color-mix(in srgb, var(--color-livia-purple-light) 30%, transparent);
+    color-mix(in srgb, var(--color-livia-turquoise) 30%, transparent);
   overflow: hidden;
   max-width: 100%;
 }
@@ -64,9 +64,9 @@
 }
 
 .title {
-  font-family: var(--font-family-black-mango);
+  font-family: var(---font-family-montserrat);
   font-size: clamp(1.55rem, 2.4vw, 2.4rem);
-  color: var(--color-livia-purple-dark);
+  color: var(--color-livia-navy-blue);
 }
 
 .divider {
@@ -81,18 +81,14 @@
   width: 8rem;
   height: 3px;
   border-radius: 999px;
-  background: var(--color-livia-purple-light);
+  background: var(--color-livia-turquoise);
 }
 
 .divider::after {
   content: "";
   height: 3px;
   flex: 1;
-  background: color-mix(
-    in srgb,
-    var(--color-livia-purple-dark) 18%,
-    transparent
-  );
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 18%, transparent);
 }
 
 .nav {
@@ -107,9 +103,9 @@
   height: 32px;
   border-radius: 999px;
   border: 1px solid
-    color-mix(in srgb, var(--color-livia-purple-dark) 35%, transparent);
+    color-mix(in srgb, var(--color-livia-navy-blue) 35%, transparent);
   background: var(--bg-color);
-  color: var(--color-livia-purple-dark);
+  color: var(--color-livia-navy-blue);
   cursor: pointer;
   font-family: var(--font-family-glacial);
   transition:
@@ -121,7 +117,7 @@
   transform: translateY(-1px);
   background: color-mix(
     in srgb,
-    var(--color-livia-purple-light) 30%,
+    var(--color-livia-turquoise) 30%,
     var(--bg-color)
   );
 }
@@ -143,7 +139,7 @@
   scrollbar-width: thin;
   scrollbar-color: color-mix(
       in srgb,
-      var(--color-livia-purple-dark) 40%,
+      var(--color-livia-navy-blue) 40%,
       transparent
     )
     transparent;
@@ -154,11 +150,7 @@
 }
 
 .track::-webkit-scrollbar-thumb {
-  background: color-mix(
-    in srgb,
-    var(--color-livia-purple-dark) 40%,
-    transparent
-  );
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 40%, transparent);
   border-radius: 999px;
 }
 
@@ -168,7 +160,7 @@
   overflow: hidden;
   scroll-snap-align: start;
   border: 1px solid
-    color-mix(in srgb, var(--color-livia-purple-light) 40%, transparent);
+    color-mix(in srgb, var(--color-livia-turquoise) 40%, transparent);
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease;
@@ -192,7 +184,7 @@
 .card:hover {
   transform: translateY(-2px);
   box-shadow: 0 5px 5px
-    color-mix(in srgb, var(--color-livia-purple-dark) 25%, transparent);
+    color-mix(in srgb, var(--color-livia-navy-blue) 25%, transparent);
 }
 
 .cardBody {
@@ -201,7 +193,7 @@
   gap: 1rem;
   padding: 1rem 1.1rem 1.2rem;
   font-family: var(--font-family-glacial);
-  color: var(--color-livia-purple-dark);
+  color: var(--color-livia-navy-blue);
 }
 
 .cardTitle {
@@ -217,7 +209,7 @@
 
 .cardArrow {
   font-size: 1.1rem;
-  color: var(--color-livia-purple-dark);
+  color: var(--color-livia-navy-blue);
 }
 
 .dots {
@@ -231,7 +223,7 @@
   width: 9px;
   height: 9px;
   border-radius: 999px;
-  background: var(--color-livia-purple-light);
+  background: var(--color-livia-turquoise);
 }
 
 @media (max-width: 900px) {

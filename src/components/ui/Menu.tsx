@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IoLogoInstagram, IoLogoLinkedin } from "react-icons/io5";
-import logoBalai from "../../assets/logo-balai.png";
+import logoOficial from "../../assets/logo_oficial.svg";
 import styles from "./Menu.module.css";
 
 const sections = ["about", "portfolio", "contact"];
@@ -18,7 +18,7 @@ function Menu() {
   return (
     <nav className={styles.nav}>
       <div className={styles.inner}>
-        <img src={logoBalai} alt="Logo Livia" className={styles.logo} />
+        <img src={logoOficial} alt="Logo Livia" className={styles.logo} />
 
         <div className={styles.links}>
           {sections.map((sec) => (
@@ -30,24 +30,25 @@ function Menu() {
               {sec}
             </button>
           ))}
-          <div className={styles.socials}>
-            <a
-              href="https://www.linkedin.com/in/l%C3%ADvia-ballai-9b650b1a2/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn"
-            >
-              <IoLogoLinkedin className="text-4xl" />
-            </a>
-            <a
-              href="https://www.instagram.com/livia_zab/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Instagram"
-            >
-              <IoLogoInstagram className="text-4xl" />
-            </a>
-          </div>
+          <span className={styles.divider}>|</span>
+          <a
+            className={styles.socialLink}
+            href="https://www.linkedin.com/in/l%C3%ADvia-ballai-9b650b1a2/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <IoLogoLinkedin className="text-4xl" />
+          </a>
+          <a
+            className={styles.socialLink}
+            href="https://www.instagram.com/livia_zab/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+          >
+            <IoLogoInstagram className="text-4xl" />
+          </a>
         </div>
 
         <button

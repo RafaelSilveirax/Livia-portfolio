@@ -1,12 +1,14 @@
 import styles from "./home.module.css";
-import liviaFundo from "../../assets/backgroundmain.jpeg";
+import HomeBackground from "../../assets/home-background.png";
 
 function Home() {
   return (
     <section
       className={styles.hero}
       id="portfolio"
-      style={{ backgroundImage: `url(${liviaFundo})` }}
+      style={{
+        backgroundImage: `linear-gradient(120deg, rgba(0, 0, 0, 0.6), transparent), url(${HomeBackground})`,
+      }}
     >
       <div className={styles.container}>
         <div className={styles.content}>
