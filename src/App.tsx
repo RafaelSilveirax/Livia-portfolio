@@ -3,7 +3,7 @@ import { Landing } from "./pages/Landing/Landing.js";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/Livia-portfolio/">
       <Routes>
         <Route path="/" element={<Landing />} />
       </Routes>
