@@ -15,9 +15,8 @@ function Home() {
 
       <div className={styles.container}>
         <div className={styles.content}>
-          <p className={styles.kicker}>Designer & Ilustradora</p>
-
           <h1 className={styles.title}>Livia Ballai</h1>
+          <p className={styles.kicker}>Designer & Ilustradora</p>
 
           <p className={styles.subtitle}>
             Visual Arts • Illustration • Character Design

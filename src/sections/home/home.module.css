@@ -51,7 +51,7 @@
   border-radius: 20px;
   backdrop-filter: blur(12px);
   /* background: rgba(0, 0, 0, 0.25); */
-  background: color-mix(in srgb, var(--color-livia-navy-blue) 25%, transparent);
+  background: color-mix(var(--color-livia-navy-blue) 0%, transparent);
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
 }
 
@@ -68,7 +68,7 @@
   font-family: var(--font-family-montserrat);
   font-weight: 700;
   font-size: clamp(3rem, 6vw, 5rem);
-  color: var(--color-livia-dark-coral);
+  color: var(--color-livia-turquoise);
   line-height: 1.05;
 }
 
@@ -87,7 +87,7 @@
   border-radius: 999px;
   border: none;
   background: #fff;
-  color: var(--color-livia-copper);
+  color: var(--color-livia-turquoise);
   cursor: pointer;
   transition:
     transform 0.25s ease,
@@ -96,7 +96,7 @@
 }
 
 .cta:hover {
-  background: var(--color-livia-copper);
+  background: var(--color-livia-turquoise);
   color: white;
   transform: translateY(-3px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
