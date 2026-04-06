@@ -19,7 +19,7 @@
   justify-content: center;
   gap: 0.4rem;
   color: var(--color-livia-turquoise);
-  font-family: var(---font-family-montserrat);
+  font-family: var(--font-family-montserrat);
   text-transform: lowercase;
   letter-spacing: 0.08em;
   margin-bottom: 0.2rem;
@@ -64,7 +64,7 @@
 }
 
 .title {
-  font-family: var(---font-family-montserrat);
+  font-family: var(--font-family-playfair);
   font-size: clamp(1.55rem, 2.4vw, 2.4rem);
   color: var(--color-livia-navy-blue);
 }
@@ -107,7 +107,7 @@
   background: var(--bg-color);
   color: var(--color-livia-navy-blue);
   cursor: pointer;
-  font-family: var(--font-family-glacial);
+  font-family: var(--font-family-montserrat);
   transition:
     transform 0.2s ease,
     background 0.2s ease;
@@ -192,7 +192,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.1rem 1.2rem;
-  font-family: var(--font-family-glacial);
+  font-family: var(--font-family-montserrat);
   color: var(--color-livia-navy-blue);
 }
 

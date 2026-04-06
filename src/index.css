@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Glacial+Indifference:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
@@ -9,11 +9,6 @@
   --color-livia-mustard: #d99f2b;
   --color-livia-copper: #cd6d32;
 
-  --font-family-glacial: "Glacial Indifference", sans-serif;
-  ---font-family-montserrat: "Black Mango", sans-serif;
+  --font-family-playfair: "Playfair Display", serif;
   --font-family-montserrat: "Montserrat", sans-serif;
 }
-
-/* new fonts 
-https://fonts.google.com/specimen/Playfair+Display?query=playfair - home titulo
-https://fonts.google.com/specimen/Montserrat - home subtitulo e texto do projeto | menu bold 700 */

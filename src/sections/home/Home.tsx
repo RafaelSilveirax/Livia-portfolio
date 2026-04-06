@@ -1,11 +1,11 @@
 import styles from "./home.module.css";
-import HomeBackground from "../../assets/home-background.png";
+import BackgroundLivia from "../../assets/background_livia.png";
 
 function Home() {
   return (
     <section className={styles.hero} id="portfolio">
       <img
-        src={HomeBackground}
+        src={BackgroundLivia}
         alt="Livia Ballai pintando mural artístico"
         className={styles.hero__img}
         fetchPriority="high"

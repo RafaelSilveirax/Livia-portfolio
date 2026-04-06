@@ -24,7 +24,7 @@
 }
 
 .title {
-  font-family: var(---font-family-montserrat);
+  font-family: var(--font-family-playfair);
   font-size: clamp(2rem, 3vw, 3rem);
   color: var(--color-livia-navy-blue);
 }
@@ -42,7 +42,7 @@
   margin: 0;
   display: grid;
   gap: 0.85rem;
-  font-family: var(--font-family-glacial);
+  font-family: var(--font-family-montserrat);
   color: var(--text-color);
 }
 
@@ -70,7 +70,7 @@
 }
 
 .description {
-  font-family: var(--font-family-glacial);
+  font-family: var(--font-family-montserrat);
   color: var(--text-color);
   max-width: 30rem;
   font-size: 1.02rem;
