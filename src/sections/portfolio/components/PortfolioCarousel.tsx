@@ -1,5 +1,9 @@
-import { useEffect, useMemo, useRef } from "react";
-import styles from "./PortfolioCarousel.module.css";
+import { useEffect, useRef } from "react";
+
+// Inicializado uma vez por carregamento de app — nunca muda (advanced-init-once)
+const prefersReducedMotion =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export type CarouselCard = {
   id: string;
@@ -21,33 +25,19 @@ export type CarouselProps = {
 function PortfolioCarousel({ sections }: CarouselProps) {
   const trackRefs = useRef(new Map<string, HTMLDivElement | null>());
   const pauseUntilRef = useRef(new Map<string, number>());
-  const prefersReducedMotion = useMemo(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  }, []);
 
   useEffect(() => {
-    if (prefersReducedMotion) {
-      return undefined;
-    }
+    if (prefersReducedMotion) return undefined;
 
     const intervalId = window.setInterval(() => {
       const now = Date.now();
       sections.forEach((section) => {
         const pausedUntil = pauseUntilRef.current.get(section.id);
-        if (pausedUntil && now < pausedUntil) {
-          return;
-        }
+        if (pausedUntil && now < pausedUntil) return;
         const track = trackRefs.current.get(section.id);
-        if (!track) {
-          return;
-        }
+        if (!track) return;
         const maxScroll = track.scrollWidth - track.clientWidth;
-        if (maxScroll <= 0) {
-          return;
-        }
+        if (maxScroll <= 0) return;
         const nextScroll = track.scrollLeft + 1;
         if (nextScroll >= maxScroll) {
           track.scrollTo({ left: 0, behavior: "auto" });
@@ -62,9 +52,7 @@ function PortfolioCarousel({ sections }: CarouselProps) {
 
   function handleScroll(sectionId: string, direction: "left" | "right") {
     const track = trackRefs.current.get(sectionId);
-    if (!track) {
-      return;
-    }
+    if (!track) return;
     pauseUntilRef.current.set(sectionId, Date.now() + 2000);
     const offset = direction === "left" ? -320 : 320;
     track.scrollBy({ left: offset, behavior: "smooth" });
@@ -75,72 +63,92 @@ function PortfolioCarousel({ sections }: CarouselProps) {
   }
 
   return (
-    <section className={styles.wrapper} id="portfolio">
-      <div className={styles.container}>
-        <div className={styles.portfolioHeader}>
-          <span className={styles.portfolioMark} aria-hidden="true">
-            ✦
-          </span>
-          <h2 className={styles.portfolioTitle}>portfolio</h2>
+    <section className="bg-livia-navy-blue py-14 pb-[4.5rem] overflow-visible" id="portfolio">
+      <div className="w-[min(1200px,100%)] mx-auto px-6 grid gap-10 overflow-visible">
+        {/* Header do portfolio */}
+        <div className="flex items-center justify-center gap-[0.4rem] text-livia-turquoise font-montserrat lowercase tracking-[0.08em] mb-[0.2rem]">
+          <span className="text-[0.9rem]" aria-hidden="true">✦</span>
+          <h2 className="text-[clamp(1.3rem,2.2vw,1.9rem)]">portfolio</h2>
         </div>
+
         {sections.map((section) => (
-          <div key={section.id} className={styles.section}>
-            <div className={styles.header}>
-              <div className={styles.headerTitle}>
-                <h2 className={styles.title}>{section.title}</h2>
-                <span className={styles.divider} aria-hidden="true" />
+          <div
+            key={section.id}
+            className="bg-white rounded-[24px] p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-28px_28px_color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]"
+          >
+            {/* Header da seção */}
+            <div className="flex items-start justify-between gap-6 mb-[1.3rem]">
+              <div className="flex flex-col gap-2 w-full">
+                <h2 className="font-playfair text-[clamp(1.55rem,2.4vw,2.4rem)] text-livia-navy-blue">
+                  {section.title}
+                </h2>
+                {/* Divisor */}
+                <span
+                  className="flex items-center w-full before:content-[''] before:w-32 before:h-[3px] before:rounded-full before:bg-livia-turquoise after:content-[''] after:h-[3px] after:flex-1 after:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)]"
+                  aria-hidden="true"
+                />
               </div>
             </div>
-            <div className={styles.carousel}>
+
+            {/* Carrossel */}
+            <div className="overflow-hidden w-full bg-white">
               <div
-                className={styles.track}
-                ref={(node) => {
-                  trackRefs.current.set(section.id, node);
-                }}
+                ref={(node) => { trackRefs.current.set(section.id, node); }}
+                className="flex w-full min-w-0 gap-5 overflow-x-auto scroll-snap-x-mandatory pb-[0.35rem] scrollbar-thin scrollbar-color-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[6px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)] [&::-webkit-scrollbar-thumb]:rounded-full"
+                style={{ scrollSnapType: "x mandatory" }}
                 onPointerDown={() => pauseAutoScroll(section.id)}
                 onTouchStart={() => pauseAutoScroll(section.id)}
                 onWheel={() => pauseAutoScroll(section.id)}
                 onScroll={() => pauseAutoScroll(section.id)}
               >
                 {section.cards.map((card) => (
-                  <article key={card.id} className={styles.card}>
+                  <article
+                    key={card.id}
+                    className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] transition-[transform,box-shadow] duration-200 flex-none w-[348px] scroll-snap-start hover:-translate-y-[2px] hover:shadow-[0_5px_5px_color-mix(in_srgb,var(--color-livia-navy-blue)_25%,transparent)] group"
+                    style={{ scrollSnapAlign: "start" }}
+                  >
                     <div
-                      className={styles.image}
+                      className="h-[196px] bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
                       style={{ backgroundImage: `url(${card.image})` }}
                       aria-hidden="true"
                     />
-                    <div className={styles.cardBody}>
+                    <div className="flex justify-between gap-4 px-[1.1rem] pt-4 pb-[1.2rem] font-montserrat text-livia-navy-blue">
                       <div>
-                        <h3 className={styles.cardTitle}>{card.title}</h3>
-                        <p className={styles.cardSubtitle}>{card.subtitle}</p>
+                        <h3 className="text-base font-semibold mb-[0.15rem]">{card.title}</h3>
+                        <p className="text-[0.85rem] opacity-80">{card.subtitle}</p>
                       </div>
-                      <span className={styles.cardArrow} aria-hidden="true">
-                        →
-                      </span>
+                      <span className="text-[1.1rem] text-livia-navy-blue" aria-hidden="true">→</span>
                     </div>
                   </article>
                 ))}
               </div>
             </div>
-            <div className={styles.dots} aria-hidden="true">
+
+            {/* Dots */}
+            <div className="flex justify-center gap-[0.4rem] mt-5" aria-hidden="true">
               {section.cards.map((card) => (
-                <span key={card.id} className={styles.dot} />
+                <span
+                  key={card.id}
+                  className="w-[9px] h-[9px] rounded-full bg-livia-turquoise"
+                />
               ))}
             </div>
-            <div className={styles.nav}>
+
+            {/* Nav buttons */}
+            <div className="flex gap-2 items-center justify-end mt-3 max-[900px]:hidden">
               <button
                 type="button"
-                className={styles.navButton}
                 onClick={() => handleScroll(section.id, "left")}
                 aria-label={`Voltar em ${section.title}`}
+                className="w-8 h-8 rounded-full border border-[color-mix(in_srgb,var(--color-livia-navy-blue)_35%,transparent)] bg-white text-livia-navy-blue cursor-pointer font-montserrat transition-[transform,background] duration-200 hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,white)]"
               >
                 ←
               </button>
               <button
                 type="button"
-                className={styles.navButton}
                 onClick={() => handleScroll(section.id, "right")}
                 aria-label={`Avançar em ${section.title}`}
+                className="w-8 h-8 rounded-full border border-[color-mix(in_srgb,var(--color-livia-navy-blue)_35%,transparent)] bg-white text-livia-navy-blue cursor-pointer font-montserrat transition-[transform,background] duration-200 hover:-translate-y-px hover:bg-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,white)]"
               >
                 →
               </button>

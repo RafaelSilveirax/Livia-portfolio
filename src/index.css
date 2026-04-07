@@ -3,12 +3,84 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brand colors */
   --color-livia-navy-blue: #294155;
   --color-livia-turquoise: #3a9dab;
   --color-livia-dark-coral: #d0493a;
   --color-livia-mustard: #d99f2b;
   --color-livia-copper: #cd6d32;
 
+  /* Semantic colors */
+  --color-background: #ffffff;
+  --color-foreground: #294155;
+
+  /* Radius tokens */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Font families */
   --font-family-playfair: "Playfair Display", serif;
   --font-family-montserrat: "Montserrat", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ── Glassmorphism utilities ── */
+@utility glass-nav {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 50%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@utility glass-mobile {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 70%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+/* ── Hero overlay gradient ── */
+@utility hero-overlay {
+  background:
+    radial-gradient(circle at 70% 50%, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.65)),
+    linear-gradient(
+      110deg,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.1) 70%
+    );
+}
+
+/* ── Hamburger button animation ── */
+@layer components {
+  .menu-btn span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 9999px;
+    transition:
+      transform 0.25s ease,
+      opacity 0.2s ease;
+  }
+
+  .menu-btn-open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-btn-open span:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  .menu-btn-open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
 }

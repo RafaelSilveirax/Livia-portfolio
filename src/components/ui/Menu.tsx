@@ -4,7 +4,7 @@ import {
   IoLogoLinkedin,
   IoLogoBehance,
 } from "react-icons/io5";
-import styles from "./Menu.module.css";
+import { cn } from "../../lib/utils.js";
 
 const sections = ["home", "about", "portfolio", "contact"];
 
@@ -28,6 +28,7 @@ const socialLinks = [
 
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
+
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 821px)");
 
@@ -45,32 +46,32 @@ function Menu() {
   }
 
   return (
-    <nav className={styles.nav}>
+    <nav className="fixed top-0 w-full z-50 pt-5 max-[820px]:pt-0">
       {/* ── Barra principal ── */}
-      <div className={styles.inner}>
+      <div className="max-w-[1200px] mx-auto px-4 py-4 flex items-center justify-end max-[820px]:p-0">
         {/* Links desktop */}
-        <div className={styles.links}>
-          <div className={styles.linksPages}>
+        <div className="flex w-full gap-4 font-montserrat text-white max-[820px]:hidden">
+          <div className="glass-nav border-b border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg flex w-full justify-around items-center h-[54px] px-8">
             {sections.map((sec) => (
               <button
-                className={styles.linkButton}
                 key={sec}
                 onClick={() => scrollTo(sec)}
+                className="bg-transparent border-0 text-white text-sm cursor-pointer transition-colors duration-200 font-semibold uppercase tracking-[0.05em] p-0 hover:text-livia-turquoise"
               >
                 {sec}
               </button>
             ))}
           </div>
 
-          <div className={styles.socials}>
+          <div className="glass-nav border-b border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg flex items-center gap-12 h-[54px] px-8">
             {socialLinks.map(({ href, icon, label }) => (
               <a
                 key={label}
-                className={styles.socialLink}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
+                className="text-white transition-colors duration-200 flex items-center hover:text-livia-turquoise"
               >
                 {icon}
               </a>
@@ -80,7 +81,10 @@ function Menu() {
 
         {/* Hamburguer — aparece só no mobile */}
         <button
-          className={`${styles.menuButton} ${isOpen ? styles.menuButtonOpen : ""}`}
+          className={cn(
+            "hidden max-[820px]:flex glass-nav border border-white/30 rounded-lg p-[10px_11px] cursor-pointer text-white flex-col gap-[5px] items-center justify-center menu-btn",
+            isOpen && "menu-btn-open"
+          )}
           onClick={() => setIsOpen((prev) => !prev)}
           aria-expanded={isOpen}
           aria-controls="mobile-menu"
@@ -95,35 +99,38 @@ function Menu() {
       {/* ── Painel mobile ── */}
       <div
         id="mobile-menu"
-        className={`${styles.mobilePanel} ${isOpen ? styles.mobilePanelOpen : ""}`}
+        className={cn(
+          "overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out",
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        )}
         aria-hidden={!isOpen}
       >
-        <div className={styles.mobilePanelInner}>
+        <div className="mx-6 mt-2 mb-4 px-6 py-5 flex flex-col gap-5 glass-mobile border border-white/12 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
           {/* Links de navegação */}
-          <div className={styles.mobileLinks}>
+          <div className="flex flex-col gap-1">
             {sections.map((sec) => (
               <button
-                className={styles.mobileLinkButton}
                 key={sec}
                 onClick={() => scrollTo(sec)}
+                className="bg-transparent border-0 border-b border-white/8 last:border-b-0 text-white font-montserrat text-[0.9rem] font-semibold uppercase tracking-[0.08em] cursor-pointer text-left py-[0.65rem] transition-[color,padding-left] duration-200 hover:text-livia-turquoise hover:pl-[6px]"
               >
                 {sec}
               </button>
             ))}
           </div>
 
-          <div className={styles.mobileDivider} />
+          <div className="h-px bg-white/10" />
 
           {/* Redes sociais */}
-          <div className={styles.mobileSocials}>
+          <div className="flex gap-5 items-center">
             {socialLinks.map(({ href, icon, label }) => (
               <a
                 key={label}
-                className={styles.mobileSocialLink}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
+                className="text-white/75 transition-colors duration-200 flex items-center hover:text-livia-turquoise"
               >
                 {icon}
               </a>
