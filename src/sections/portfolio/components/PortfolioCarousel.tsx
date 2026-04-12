@@ -1,9 +1,5 @@
 import { useEffect, useRef } from "react";
 
-// Inicializado uma vez por carregamento de app — nunca muda (advanced-init-once)
-const prefersReducedMotion =
-  typeof window !== "undefined" &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export type CarouselCard = {
   id: string;
@@ -27,28 +23,49 @@ function PortfolioCarousel({ sections }: CarouselProps) {
   const pauseUntilRef = useRef(new Map<string, number>());
 
   useEffect(() => {
-    if (prefersReducedMotion) return undefined;
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let intervalId: number | undefined;
 
-    const intervalId = window.setInterval(() => {
-      const now = Date.now();
-      sections.forEach((section) => {
-        const pausedUntil = pauseUntilRef.current.get(section.id);
-        if (pausedUntil && now < pausedUntil) return;
-        const track = trackRefs.current.get(section.id);
-        if (!track) return;
-        const maxScroll = track.scrollWidth - track.clientWidth;
-        if (maxScroll <= 0) return;
-        const nextScroll = track.scrollLeft + 1;
-        if (nextScroll >= maxScroll) {
-          track.scrollTo({ left: 0, behavior: "auto" });
-        } else {
-          track.scrollLeft = nextScroll;
-        }
-      });
-    }, 30);
+    function startScroll() {
+      if (intervalId !== undefined) return;
+      intervalId = window.setInterval(() => {
+        const now = Date.now();
+        sections.forEach((section) => {
+          const pausedUntil = pauseUntilRef.current.get(section.id);
+          if (pausedUntil && now < pausedUntil) return;
+          const track = trackRefs.current.get(section.id);
+          if (!track) return;
+          const maxScroll = track.scrollWidth - track.clientWidth;
+          if (maxScroll <= 0) return;
+          const nextScroll = track.scrollLeft + 1;
+          if (nextScroll >= maxScroll) {
+            track.scrollTo({ left: 0, behavior: "auto" });
+          } else {
+            track.scrollLeft = nextScroll;
+          }
+        });
+      }, 30);
+    }
 
-    return () => window.clearInterval(intervalId);
-  }, [prefersReducedMotion, sections]);
+    function stopScroll() {
+      if (intervalId !== undefined) {
+        window.clearInterval(intervalId);
+        intervalId = undefined;
+      }
+    }
+
+    function handleMotionChange() {
+      mq.matches ? stopScroll() : startScroll();
+    }
+
+    if (!mq.matches) startScroll();
+    mq.addEventListener("change", handleMotionChange);
+
+    return () => {
+      stopScroll();
+      mq.removeEventListener("change", handleMotionChange);
+    };
+  }, [sections]);
 
   function handleScroll(sectionId: string, direction: "left" | "right") {
     const track = trackRefs.current.get(sectionId);
@@ -79,9 +96,9 @@ function PortfolioCarousel({ sections }: CarouselProps) {
             {/* Header da seção */}
             <div className="flex items-start justify-between gap-6 mb-[1.3rem]">
               <div className="flex flex-col gap-2 w-full">
-                <h2 className="font-playfair text-[clamp(1.55rem,2.4vw,2.4rem)] text-livia-navy-blue">
+                <h3 className="font-playfair text-[clamp(1.55rem,2.4vw,2.4rem)] text-livia-navy-blue">
                   {section.title}
-                </h2>
+                </h3>
                 {/* Divisor */}
                 <span
                   className="flex items-center w-full before:content-[''] before:w-32 before:h-[3px] before:rounded-full before:bg-livia-turquoise after:content-[''] after:h-[3px] after:flex-1 after:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)]"
@@ -104,20 +121,17 @@ function PortfolioCarousel({ sections }: CarouselProps) {
                 {section.cards.map((card) => (
                   <article
                     key={card.id}
-                    className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] transition-[transform,box-shadow] duration-200 flex-none w-[348px] scroll-snap-start hover:-translate-y-[2px] hover:shadow-[0_5px_5px_color-mix(in_srgb,var(--color-livia-navy-blue)_25%,transparent)] group"
+                    className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] flex-none w-[348px] scroll-snap-start"
                     style={{ scrollSnapAlign: "start" }}
                   >
                     <div
-                      className="h-[196px] bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+                      className="h-[196px] bg-cover bg-center bg-no-repeat"
                       style={{ backgroundImage: `url(${card.image})` }}
                       aria-hidden="true"
                     />
-                    <div className="flex justify-between gap-4 px-[1.1rem] pt-4 pb-[1.2rem] font-montserrat text-livia-navy-blue">
-                      <div>
-                        <h3 className="text-base font-semibold mb-[0.15rem]">{card.title}</h3>
-                        <p className="text-[0.85rem] opacity-80">{card.subtitle}</p>
-                      </div>
-                      <span className="text-[1.1rem] text-livia-navy-blue" aria-hidden="true">→</span>
+                    <div className="flex flex-col gap-[0.15rem] px-[1.1rem] pt-4 pb-[1.2rem] font-montserrat text-livia-navy-blue">
+                      <h4 className="text-base font-semibold">{card.title}</h4>
+                      <p className="text-[0.85rem] opacity-80">{card.subtitle}</p>
                     </div>
                   </article>
                 ))}

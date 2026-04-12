@@ -66,9 +66,14 @@
     height: 2px;
     background: currentColor;
     border-radius: 9999px;
-    transition:
-      transform 0.25s ease,
-      opacity 0.2s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .menu-btn span {
+      transition:
+        transform 0.25s ease,
+        opacity 0.2s ease;
+    }
   }
 
   .menu-btn-open span:nth-child(1) {

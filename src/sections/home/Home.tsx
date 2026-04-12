@@ -6,6 +6,8 @@ function Home() {
       <img
         src={BackgroundLivia}
         alt="Livia Ballai pintando mural artístico"
+        width={1920}
+        height={1080}
         className="absolute inset-0 w-full h-full object-cover object-[center_35%] z-0 max-[768px]:object-[60%_25%] min-[2000px]:object-[center_20%]"
         fetchPriority="high"
       />
@@ -26,9 +28,12 @@ function Home() {
             Visual Arts • Illustration • Character Design
           </p>
 
-          <button className="font-montserrat font-semibold text-[0.95rem] px-8 py-[0.9rem] mt-4 rounded-full border-0 bg-white text-livia-turquoise cursor-pointer transition-[transform,box-shadow,background] duration-300 ease-in-out hover:bg-livia-turquoise hover:text-white hover:-translate-y-[3px] hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)] max-[768px]:w-full">
+          <a
+            href="#portfolio"
+            className="font-montserrat font-semibold text-[0.95rem] px-8 py-[0.9rem] mt-4 rounded-full bg-white text-livia-turquoise transition-[transform,opacity] duration-300 ease-in-out hover:opacity-90 hover:-translate-y-[3px] max-[768px]:w-full max-[768px]:text-center"
+          >
             Ver Portfólio
-          </button>
+          </a>
         </div>
       </div>
     </section>

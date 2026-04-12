@@ -53,13 +53,14 @@ function Menu() {
         <div className="flex w-full gap-4 font-montserrat text-white max-[820px]:hidden">
           <div className="glass-nav border-b border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg flex w-full justify-around items-center h-[54px] px-8">
             {sections.map((sec) => (
-              <button
+              <a
                 key={sec}
-                onClick={() => scrollTo(sec)}
-                className="bg-transparent border-0 text-white text-sm cursor-pointer transition-colors duration-200 font-semibold uppercase tracking-[0.05em] p-0 hover:text-livia-turquoise"
+                href={`#${sec}`}
+                onClick={(e) => { e.preventDefault(); scrollTo(sec); }}
+                className="text-white text-sm transition-colors duration-200 font-semibold uppercase tracking-[0.05em] hover:text-livia-turquoise"
               >
                 {sec}
-              </button>
+              </a>
             ))}
           </div>
 
@@ -100,8 +101,10 @@ function Menu() {
       <div
         id="mobile-menu"
         className={cn(
-          "overflow-hidden transition-[max-height,opacity] duration-300 ease-in-out",
-          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+          "absolute top-full left-0 right-0 transition-[transform,opacity] duration-300 ease-in-out",
+          isOpen
+            ? "opacity-100 translate-y-0 pointer-events-auto"
+            : "opacity-0 -translate-y-2 pointer-events-none"
         )}
         aria-hidden={!isOpen}
       >
@@ -109,13 +112,14 @@ function Menu() {
           {/* Links de navegação */}
           <div className="flex flex-col gap-1">
             {sections.map((sec) => (
-              <button
+              <a
                 key={sec}
-                onClick={() => scrollTo(sec)}
-                className="bg-transparent border-0 border-b border-white/8 last:border-b-0 text-white font-montserrat text-[0.9rem] font-semibold uppercase tracking-[0.08em] cursor-pointer text-left py-[0.65rem] transition-[color,padding-left] duration-200 hover:text-livia-turquoise hover:pl-[6px]"
+                href={`#${sec}`}
+                onClick={(e) => { e.preventDefault(); scrollTo(sec); }}
+                className="border-b border-white/8 last:border-b-0 text-white font-montserrat text-[0.9rem] font-semibold uppercase tracking-[0.08em] text-left py-[0.65rem] transition-[color,opacity] duration-200 hover:text-livia-turquoise hover:opacity-90"
               >
                 {sec}
-              </button>
+              </a>
             ))}
           </div>
 
