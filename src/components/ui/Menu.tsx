@@ -47,9 +47,7 @@ function Menu() {
 
   return (
     <nav className="fixed top-0 w-full z-50 pt-5 max-[820px]:pt-0">
-      {/* ── Barra principal ── */}
       <div className="max-w-[1200px] mx-auto px-4 py-4 flex items-center justify-end max-[820px]:p-0">
-        {/* Links desktop */}
         <div className="flex w-full gap-4 font-montserrat text-white max-[820px]:hidden">
           <div className="glass-nav border-b border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg flex w-full justify-around items-center h-[54px] px-8">
             {sections.map((sec) => (
@@ -57,7 +55,7 @@ function Menu() {
                 key={sec}
                 href={`#${sec}`}
                 onClick={(e) => { e.preventDefault(); scrollTo(sec); }}
-                className="text-white text-sm transition-colors duration-200 font-semibold uppercase tracking-[0.05em] hover:text-livia-turquoise"
+                className="text-white text-sm transition-colors duration-200 font-semibold uppercase tracking-wider hover:text-livia-turquoise"
               >
                 {sec}
               </a>
@@ -80,7 +78,6 @@ function Menu() {
           </div>
         </div>
 
-        {/* Hamburguer — aparece só no mobile */}
         <button
           className={cn(
             "hidden max-[820px]:flex glass-nav border border-white/30 rounded-lg p-[10px_11px] cursor-pointer text-white flex-col gap-[5px] items-center justify-center menu-btn",
@@ -97,7 +94,6 @@ function Menu() {
         </button>
       </div>
 
-      {/* ── Painel mobile ── */}
       <div
         id="mobile-menu"
         className={cn(
@@ -109,7 +105,6 @@ function Menu() {
         aria-hidden={!isOpen}
       >
         <div className="mx-6 mt-2 mb-4 px-6 py-5 flex flex-col gap-5 glass-mobile border border-white/12 rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.2)]">
-          {/* Links de navegação */}
           <div className="flex flex-col gap-1">
             {sections.map((sec) => (
               <a
@@ -125,7 +120,6 @@ function Menu() {
 
           <div className="h-px bg-white/10" />
 
-          {/* Redes sociais */}
           <div className="flex gap-5 items-center">
             {socialLinks.map(({ href, icon, label }) => (
               <a

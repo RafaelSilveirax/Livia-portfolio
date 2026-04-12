@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 
-
 export type CarouselCard = {
   id: string;
   image: string;
@@ -80,9 +79,8 @@ function PortfolioCarousel({ sections }: CarouselProps) {
   }
 
   return (
-    <section className="bg-livia-navy-blue py-14 pb-[4.5rem] overflow-visible" id="portfolio">
+    <section className="bg-livia-navy-blue py-14 pb-18 overflow-visible" id="portfolio">
       <div className="w-[min(1200px,100%)] mx-auto px-6 grid gap-10 overflow-visible">
-        {/* Header do portfolio */}
         <div className="flex items-center justify-center gap-[0.4rem] text-livia-turquoise font-montserrat lowercase tracking-[0.08em] mb-[0.2rem]">
           <span className="text-[0.9rem]" aria-hidden="true">✦</span>
           <h2 className="text-[clamp(1.3rem,2.2vw,1.9rem)]">portfolio</h2>
@@ -91,15 +89,13 @@ function PortfolioCarousel({ sections }: CarouselProps) {
         {sections.map((section) => (
           <div
             key={section.id}
-            className="bg-white rounded-[24px] p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-28px_28px_color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]"
+            className="bg-white rounded-3xl p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-28px_28px_color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]"
           >
-            {/* Header da seção */}
             <div className="flex items-start justify-between gap-6 mb-[1.3rem]">
               <div className="flex flex-col gap-2 w-full">
                 <h3 className="font-playfair text-[clamp(1.55rem,2.4vw,2.4rem)] text-livia-navy-blue">
                   {section.title}
                 </h3>
-                {/* Divisor */}
                 <span
                   className="flex items-center w-full before:content-[''] before:w-32 before:h-[3px] before:rounded-full before:bg-livia-turquoise after:content-[''] after:h-[3px] after:flex-1 after:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)]"
                   aria-hidden="true"
@@ -107,11 +103,10 @@ function PortfolioCarousel({ sections }: CarouselProps) {
               </div>
             </div>
 
-            {/* Carrossel */}
             <div className="overflow-hidden w-full bg-white">
               <div
                 ref={(node) => { trackRefs.current.set(section.id, node); }}
-                className="flex w-full min-w-0 gap-5 overflow-x-auto scroll-snap-x-mandatory pb-[0.35rem] scrollbar-thin scrollbar-color-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)_transparent] [scrollbar-width:thin] [&::-webkit-scrollbar]:h-[6px] [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)] [&::-webkit-scrollbar-thumb]:rounded-full"
+                className="flex w-full min-w-0 gap-5 overflow-x-auto pb-[0.35rem] [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)_transparent] [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)] [&::-webkit-scrollbar-thumb]:rounded-full"
                 style={{ scrollSnapType: "x mandatory" }}
                 onPointerDown={() => pauseAutoScroll(section.id)}
                 onTouchStart={() => pauseAutoScroll(section.id)}
@@ -121,11 +116,11 @@ function PortfolioCarousel({ sections }: CarouselProps) {
                 {section.cards.map((card) => (
                   <article
                     key={card.id}
-                    className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] flex-none w-[348px] scroll-snap-start"
+                    className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] flex-none w-87"
                     style={{ scrollSnapAlign: "start" }}
                   >
                     <div
-                      className="h-[196px] bg-cover bg-center bg-no-repeat"
+                      className="h-49 bg-cover bg-center bg-no-repeat"
                       style={{ backgroundImage: `url(${card.image})` }}
                       aria-hidden="true"
                     />
@@ -138,7 +133,6 @@ function PortfolioCarousel({ sections }: CarouselProps) {
               </div>
             </div>
 
-            {/* Dots */}
             <div className="flex justify-center gap-[0.4rem] mt-5" aria-hidden="true">
               {section.cards.map((card) => (
                 <span
@@ -148,7 +142,6 @@ function PortfolioCarousel({ sections }: CarouselProps) {
               ))}
             </div>
 
-            {/* Nav buttons */}
             <div className="flex gap-2 items-center justify-end mt-3 max-[900px]:hidden">
               <button
                 type="button"

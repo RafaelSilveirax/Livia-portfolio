@@ -12,9 +12,9 @@ function Home() {
         fetchPriority="high"
       />
 
-      <div className="absolute inset-0 z-[1] hero-overlay" />
+      <div className="absolute inset-0 z-1 hero-overlay" />
 
-      <div className="relative z-[2] w-full max-w-[1280px] mx-auto px-[clamp(1.5rem,5vw,4rem)] min-h-svh flex items-center max-[768px]:items-end max-[768px]:pb-16">
+      <div className="relative z-2 w-full max-w-7xl mx-auto px-[clamp(1.5rem,5vw,4rem)] min-h-svh flex items-center max-[768px]:items-end max-[768px]:pb-16">
         <div className="flex flex-col gap-3 max-w-[520px] p-10 rounded-[20px] backdrop-blur-md shadow-[0_20px_60px_rgba(0,0,0,0.35)] max-[768px]:max-w-full max-[768px]:p-8">
           <p className="font-montserrat font-semibold tracking-[0.12em] uppercase text-white/85 text-base">
             Designer & Ilustradora
