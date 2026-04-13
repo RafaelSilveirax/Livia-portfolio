@@ -8,8 +8,8 @@ function Contact() {
     >
       <div className="w-full max-w-[1200px] mx-auto px-6">
         <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-livia-navy-blue mb-14 text-center">
-          Vamos
-          <em className="not-italic text-livia-turquoise">trabalhar</em> juntos?
+          Vamos <em className="not-italic text-livia-turquoise">trabalhar</em>{" "}
+          juntos?
         </h2>
 
         <div className="grid grid-cols-2 gap-16 max-[900px]:grid-cols-1 max-[900px]:gap-10">
