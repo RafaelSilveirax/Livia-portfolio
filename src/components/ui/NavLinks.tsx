@@ -15,7 +15,7 @@ function NavLinks({ onNavigate }: Props) {
             e.preventDefault();
             onNavigate(sec);
           }}
-          className="text-white text-sm transition-colors duration-200 font-semibold uppercase tracking-wider hover:text-livia-turquoise"
+          className="font-montserrat text-white text-sm transition-colors duration-200 font-semibold uppercase tracking-wider hover:text-livia-turquoise"
         >
           {sec}
         </a>

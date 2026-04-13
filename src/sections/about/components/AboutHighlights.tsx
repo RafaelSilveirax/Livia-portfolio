@@ -8,7 +8,7 @@ const highlights = [
 function AboutHighlights() {
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="font-playfair text-[clamp(2rem,3vw,3rem)] text-livia-navy-blue">
+      <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-livia-navy-blue">
         About Me
       </h2>
 
@@ -17,7 +17,7 @@ function AboutHighlights() {
         aria-hidden="true"
       />
 
-      <ul className="list-none p-0 m-0 grid gap-[0.85rem] font-montserrat text-foreground">
+      <ul className="list-none p-0 m-0 grid gap-[0.85rem] font-montserrat font-medium text-foreground">
         {highlights.map((item) => (
           <li key={item} className="flex gap-3 items-start leading-normal">
             <span
@@ -43,7 +43,7 @@ function AboutHighlights() {
         ))}
       </ul>
 
-      <p className="font-montserrat text-foreground max-w-120 text-[1.02rem] leading-[1.7]">
+      <p className="font-montserrat font-medium text-foreground max-w-120 text-[1.02rem] leading-[1.7]">
         Apaixonada por narrativa visual, personagens e composição. Busco criar
         imagens expressivas que conectam estética, conceito e emoção.
       </p>

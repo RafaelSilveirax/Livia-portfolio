@@ -23,7 +23,7 @@ function CarouselSectionBlock({
     <div className="bg-white rounded-3xl p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-28px_28px_color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]">
       <div className="flex items-start justify-between gap-6 mb-[1.3rem]">
         <div className="flex flex-col gap-2 w-full">
-          <h3 className="font-playfair text-[clamp(1.55rem,2.4vw,2.4rem)] text-livia-navy-blue">
+          <h3 className="font-playfair font-bold text-[clamp(1.3rem,2vw,1.8rem)] text-livia-navy-blue">
             {section.title}
           </h3>
           <span
