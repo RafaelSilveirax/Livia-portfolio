@@ -15,7 +15,7 @@ function HeroCard() {
 
       <a
         href="#portfolio"
-        className="font-montserrat font-semibold text-[0.95rem] px-8 py-[0.9rem] mt-4 rounded-full bg-white text-livia-turquoise transition-[transform,opacity] duration-300 ease-in-out hover:opacity-90 hover:-translate-y-[3px] max-[768px]:w-full max-[768px]:text-center"
+        className="font-montserrat font-semibold text-[0.95rem] px-8 py-[0.9rem] mt-4 rounded-full bg-white text-livia-turquoise transition-[transform,opacity] duration-300 ease-in-out hover:opacity-90 hover:-translate-y-[3px] max-[768px]:w-full text-center"
       >
         Ver Portfólio
       </a>
