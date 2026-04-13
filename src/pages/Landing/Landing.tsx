@@ -2,6 +2,7 @@ import Menu from "../../components/ui/Menu.js";
 import Home from "../../sections/home/Home.js";
 import About from "../../sections/about/About.js";
 import Portfolio from "../../sections/portfolio/Portfolio.js";
+import Contact from "../../sections/contact/index.js";
 
 export function Landing() {
   return (
@@ -16,7 +17,7 @@ export function Landing() {
       <Home />
       <About />
       <Portfolio />
-      <div id="contact" className="relative -top-20 h-0" aria-hidden="true" />
+      <Contact />
     </main>
   );
 }

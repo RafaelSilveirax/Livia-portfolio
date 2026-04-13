@@ -7,11 +7,11 @@ type Props = {
 function CarouselCardItem({ card }: Props) {
   return (
     <article
-      className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] flex-none w-87"
+      className="bg-white rounded-[18px] overflow-hidden border border-[color-mix(in_srgb,var(--color-livia-turquoise)_40%,transparent)] flex-none w-87 transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_5px_5px_color-mix(in_srgb,var(--color-livia-navy-blue)_25%,transparent)] group"
       style={{ scrollSnapAlign: "start" }}
     >
       <div
-        className="h-49 bg-cover bg-center bg-no-repeat"
+        className="h-49 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
         style={{ backgroundImage: `url(${card.image})` }}
         aria-hidden="true"
       />
