@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { scrollToSection } from "../../lib/utils.js";
 
 const DESKTOP_BREAKPOINT = "(min-width: 821px)";
 
@@ -27,7 +28,7 @@ export function useMenuState() {
   }, []);
 
   function navigateTo(section: string) {
-    document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
+    scrollToSection(section);
     setIsOpen(false);
   }
 

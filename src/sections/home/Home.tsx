@@ -15,7 +15,7 @@ function Home() {
 
       <div className="absolute inset-0 z-1 hero-overlay" />
 
-      <div className="relative z-2 w-full max-w-7xl mx-auto px-[clamp(1.5rem,5vw,4rem)] min-h-svh flex items-center max-[768px]:items-end max-[768px]:pb-16">
+      <div className="relative z-2 w-full max-w-7xl mx-auto px-[clamp(1.5rem,5vw,4rem)] min-h-svh flex items-center max-[768px]:justify-center">
         <HeroCard />
       </div>
     </section>
