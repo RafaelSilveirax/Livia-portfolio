@@ -35,15 +35,15 @@
 
 /* ── Glassmorphism utilities ── */
 @utility glass-nav {
-  background: color-mix(in srgb, var(--color-livia-navy-blue) 50%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-@utility glass-mobile {
   background: color-mix(in srgb, var(--color-livia-navy-blue) 70%, transparent);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
+}
+
+@utility glass-mobile {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 50%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 
 /* ── Hero overlay gradient ── */

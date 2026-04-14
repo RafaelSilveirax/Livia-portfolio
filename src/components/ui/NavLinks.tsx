@@ -8,10 +8,13 @@ type Props = {
 
 function NavLinks({ onNavigate, scrolled }: Props) {
   return (
-    <div className={cn(
-      "flex w-full justify-around items-center px-8 h-[54px] transition-all duration-500",
-      scrolled && "glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg"
-    )}>
+    <div
+      className={cn(
+        "flex w-full justify-around items-center px-8 h-[54px] transition-all duration-500",
+        scrolled &&
+          "glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg",
+      )}
+    >
       {navSections.map((sec) => (
         <a
           key={sec}

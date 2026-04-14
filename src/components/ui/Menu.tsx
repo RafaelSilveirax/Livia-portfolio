@@ -36,13 +36,16 @@ function Menu() {
   return (
     <nav className="fixed top-0 w-full z-50 max-[820px]:pt-0">
       <div
-        className="absolute inset-0 glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-opacity duration-500"
-        style={{ opacity: scrolled ? 0 : 1 }}
+        className={cn(
+          "absolute inset-0 glass-nav max-[820px]:glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-opacity duration-500",
+          !isOpen && "max-[820px]:hidden",
+        )}
+        style={{ opacity: scrolled && !isOpen ? 0 : 1 }}
       />
 
       <div
         className={cn(
-          "relative max-w-[1200px] mx-auto px-4 flex items-center justify-end transition-all duration-500 max-[820px]:p-0",
+          "relative max-w-[1200px] mx-auto px-4 flex items-center justify-end transition-all duration-500 max-[820px]:py-3 max-[820px]:px-4",
           scrolled ? "pt-9 py-4" : "pt-0 py-0",
         )}
       >
@@ -60,7 +63,7 @@ function Menu() {
 
         <button
           className={cn(
-            "hidden max-[820px]:flex glass-nav border border-white/30 rounded-lg p-[10px_11px] cursor-pointer text-white flex-col gap-[5px] items-center justify-center menu-btn",
+            "hidden max-[820px]:flex glass-mobile border border-white/30 rounded-lg p-[10px_11px] cursor-pointer text-white flex-col gap-[5px] items-center justify-center menu-btn",
             isOpen && "menu-btn-open",
           )}
           onClick={() => setIsOpen((prev) => !prev)}

@@ -1,14 +1,15 @@
-import { socialLinks } from "./menuData.js";
+import { socialLinksData } from "./menuData.js";
 
 type Props = {
   className?: string;
   linkClassName?: string;
+  iconSize?: number;
 };
 
-function SocialLinks({ className, linkClassName }: Props) {
+function SocialLinks({ className, linkClassName, iconSize = 24 }: Props) {
   return (
     <div className={className}>
-      {socialLinks.map(({ href, icon, label }) => (
+      {socialLinksData.map(({ href, Icon, label }) => (
         <a
           key={label}
           href={href}
@@ -17,7 +18,7 @@ function SocialLinks({ className, linkClassName }: Props) {
           aria-label={label}
           className={linkClassName}
         >
-          {icon}
+          <Icon size={iconSize} />
         </a>
       ))}
     </div>
