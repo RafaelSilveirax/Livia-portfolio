@@ -1,11 +1,15 @@
 import { cn } from "../../lib/utils.js";
 import { navSections } from "./menuData.js";
+import NavItem from "./NavItem.js";
 import SocialLinks from "./SocialLinks.js";
 
 type Props = {
   isOpen: boolean;
   onNavigate: (section: string) => void;
 };
+
+const NAV_ITEM_CLASS =
+  "border-b border-white/8 last:border-b-0 text-white font-montserrat text-[0.9rem] font-semibold uppercase tracking-[0.08em] text-left py-4 transition-[color,opacity] duration-200 hover:text-livia-turquoise hover:opacity-90";
 
 function MobileMenu({ isOpen, onNavigate }: Props) {
   return (
@@ -21,18 +25,14 @@ function MobileMenu({ isOpen, onNavigate }: Props) {
     >
       <div className="w-full h-screen px-6 py-5 flex flex-col gap-5 glass-mobile">
         <div className="flex flex-col gap-2">
-          {navSections.map((sec) => (
-            <a
-              key={sec}
-              href={`#${sec}`}
-              onClick={(e) => {
-                e.preventDefault();
-                onNavigate(sec);
-              }}
-              className="border-b border-white/8 last:border-b-0 text-white font-montserrat text-[0.9rem] font-semibold uppercase tracking-[0.08em] text-left py-4 transition-[color,opacity] duration-200 hover:text-livia-turquoise hover:opacity-90"
-            >
-              {sec}
-            </a>
+          {navSections.map(({ id, label }) => (
+            <NavItem
+              key={id}
+              id={id}
+              label={label}
+              onNavigate={onNavigate}
+              className={NAV_ITEM_CLASS}
+            />
           ))}
         </div>
 
