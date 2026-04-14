@@ -1,12 +1,17 @@
+import { cn } from "../../lib/utils.js";
 import { navSections } from "./menuData.js";
 
 type Props = {
   onNavigate: (section: string) => void;
+  scrolled?: boolean;
 };
 
-function NavLinks({ onNavigate }: Props) {
+function NavLinks({ onNavigate, scrolled }: Props) {
   return (
-    <div className="glass-nav border-b border-white/15 shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg flex w-full justify-around items-center h-[54px] px-8">
+    <div className={cn(
+      "flex w-full justify-around items-center px-8 h-[54px] transition-all duration-500",
+      scrolled && "glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg"
+    )}>
       {navSections.map((sec) => (
         <a
           key={sec}
