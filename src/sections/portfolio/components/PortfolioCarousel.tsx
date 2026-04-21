@@ -80,10 +80,10 @@ function PortfolioCarousel({ sections }: Props) {
   }
 
   return (
-    <section className="bg-livia-navy-blue py-14 pb-18 overflow-visible" id="portfolio">
+    <section className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] py-14 pb-18 overflow-visible" id="portfolio">
       <div className="w-[min(1200px,100%)] mx-auto px-6 grid gap-10 overflow-visible">
-        <div className="flex items-center justify-center gap-[0.4rem] text-livia-turquoise lowercase tracking-[0.08em] mb-[0.2rem]">
-          <span className="font-montserrat font-medium text-[clamp(2rem,3vw,3rem)]" aria-hidden="true">✦</span>
+        <div className="flex items-center justify-center gap-[0.4rem] text-livia-navy-blue lowercase tracking-[0.08em] mb-[0.2rem]">
+          <span className="font-montserrat font-medium text-[clamp(2rem,3vw,3rem)] text-livia-turquoise" aria-hidden="true">✦</span>
           <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)]">portfolio</h2>
         </div>
 
