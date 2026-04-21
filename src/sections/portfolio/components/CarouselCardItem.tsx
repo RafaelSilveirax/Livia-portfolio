@@ -11,12 +11,18 @@ function CarouselCardItem({ card }: Props) {
       style={{ scrollSnapAlign: "start" }}
     >
       <div
-        className="h-49 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
+        className="h-56 bg-cover bg-center bg-no-repeat transition-transform duration-300 group-hover:scale-105"
         style={{ backgroundImage: `url(${card.image})` }}
         aria-hidden="true"
       />
       <div className="flex flex-col gap-[0.15rem] px-[1.1rem] pt-4 pb-[1.2rem] text-livia-navy-blue">
-        <h4 className="font-playfair text-[1.1rem] font-semibold">
+        <h4
+          style={{
+            fontFamily: "'Playfair Display', serif",
+            fontSize: "1.1rem",
+            fontWeight: 600,
+          }}
+        >
           {card.title}
         </h4>
         <p className="font-montserrat text-[0.85rem] opacity-70">

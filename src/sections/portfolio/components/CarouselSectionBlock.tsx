@@ -20,10 +20,40 @@ function CarouselSectionBlock({
   onNext,
 }: Props) {
   return (
-    <div className="bg-white rounded-3xl p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-40px_36px_-8px_color-mix(in_srgb,var(--color-livia-navy-blue)_22%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]">
-      <div className="flex flex-col gap-1.5 mb-[1.3rem]">
-        <div className="flex items-center justify-between gap-3">
-          <h3 className="font-playfair font-bold text-[clamp(1.3rem,2vw,1.8rem)] text-livia-navy-blue">
+    <div
+      className="bg-white rounded-3xl overflow-hidden max-w-full"
+      style={{
+        padding: "1.4rem 1.8rem 1.6rem",
+        border: "1px solid color-mix(in srgb, #3a9dab 30%, transparent)",
+        boxShadow:
+          "0 14px 30px color-mix(in srgb, #294155 15%, transparent), inset 0 -40px 36px -8px rgba(41,65,85,0.10)",
+      }}
+    >
+      {/* Header: title + nav */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "6px",
+          marginBottom: "1.2rem",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "12px",
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 700,
+              fontSize: "clamp(1.3rem, 2vw, 1.7rem)",
+              color: "#294155",
+            }}
+          >
             {section.title}
           </h3>
           <CarouselNav
@@ -32,9 +62,12 @@ function CarouselSectionBlock({
             onNext={onNext}
           />
         </div>
+        {/* Divider: teal + gray */}
         <div
-          className="w-full h-[3px] mt-1 rounded-full"
           style={{
+            width: "100%",
+            height: "3px",
+            borderRadius: "9999px",
             background:
               "linear-gradient(to right, #3a9dab 128px, rgba(41,65,85,0.15) 128px)",
           }}
@@ -42,11 +75,18 @@ function CarouselSectionBlock({
         />
       </div>
 
-      <div className="overflow-hidden w-full bg-white">
+      {/* Cards track */}
+      <div style={{ overflow: "hidden", width: "100%" }}>
         <div
           ref={trackRef}
-          className="flex w-full min-w-0 gap-5 overflow-x-auto pb-[0.35rem] [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)_transparent] [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)] [&::-webkit-scrollbar-thumb]:rounded-full"
-          style={{ scrollSnapType: "x mandatory" }}
+          className="[scrollbar-width:thin] [scrollbar-color:rgba(41,65,85,0.3)_transparent] [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-[rgba(41,65,85,0.3)] [&::-webkit-scrollbar-thumb]:rounded-full"
+          style={{
+            display: "flex",
+            gap: "18px",
+            overflowX: "auto",
+            paddingBottom: "0.3rem",
+            scrollSnapType: "x mandatory",
+          }}
           onPointerDown={onPause}
           onTouchStart={onPause}
           onWheel={onPause}

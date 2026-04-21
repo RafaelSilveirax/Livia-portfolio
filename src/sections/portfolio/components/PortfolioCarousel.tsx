@@ -81,7 +81,7 @@ function PortfolioCarousel({ sections }: Props) {
 
   return (
     <section
-      className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] py-14 pb-18 overflow-visible"
+      className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] py-20 pb-24 overflow-visible"
       id="portfolio"
     >
       <div className="w-[min(1200px,100%)] mx-auto px-6 grid gap-10 overflow-visible">
@@ -92,7 +92,10 @@ function PortfolioCarousel({ sections }: Props) {
           >
             ✦
           </span>
-          <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-livia-navy-blue lowercase tracking-[0.06em]">
+          <h2
+            style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
+            className="text-[clamp(2rem,3vw,3rem)] text-livia-navy-blue lowercase tracking-[0.06em]"
+          >
             portfolio
           </h2>
         </div>
