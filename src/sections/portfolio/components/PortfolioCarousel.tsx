@@ -81,20 +81,48 @@ function PortfolioCarousel({ sections }: Props) {
 
   return (
     <section
-      className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] py-20 pb-24 overflow-visible"
+      className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] overflow-visible"
+      style={{ padding: "100px 0 100px" }}
       id="portfolio"
     >
-      <div className="w-[min(1200px,100%)] mx-auto px-6 grid gap-10 overflow-visible">
-        <div className="flex items-center justify-center gap-3 mb-[0.2rem]">
+      <div
+        style={{
+          width: "min(1200px, 92vw)",
+          margin: "0 auto",
+          display: "grid",
+          gap: "40px",
+        }}
+      >
+        {/* Title */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            gap: "12px",
+            marginBottom: "8px",
+          }}
+        >
           <span
-            className="text-livia-turquoise text-[clamp(1.6rem,2.5vw,2.2rem)]"
+            style={{
+              color: "var(--color-livia-turquoise)",
+              fontSize: "clamp(1.4rem, 2vw, 1.9rem)",
+              lineHeight: 1,
+            }}
             aria-hidden="true"
           >
             ✦
           </span>
           <h2
-            style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700 }}
-            className="text-[clamp(2rem,3vw,3rem)] text-livia-navy-blue lowercase tracking-[0.06em]"
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 700,
+              fontSize: "clamp(2rem, 3vw, 3rem)",
+              color: "var(--color-livia-navy-blue)",
+              textTransform: "lowercase",
+              letterSpacing: "0.06em",
+              margin: 0,
+            }}
           >
             portfolio
           </h2>

@@ -1,8 +1,10 @@
-import type { RefCallback } from "react";
+import { useState, useRef, type RefCallback } from "react";
 import type { CarouselSection } from "./PortfolioCarousel.js";
 import CarouselCardItem from "./CarouselCardItem.js";
 import CarouselDots from "./CarouselDots.js";
 import CarouselNav from "./CarouselNav.js";
+
+const VISIBLE = 3;
 
 type Props = {
   section: CarouselSection;
@@ -19,14 +21,38 @@ function CarouselSectionBlock({
   onPrev,
   onNext,
 }: Props) {
+  const [page, setPage] = useState(0);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const totalPages = Math.ceil(section.cards.length / VISIBLE);
+
+  function goTo(nextPage: number) {
+    const clamped = Math.max(0, Math.min(nextPage, totalPages - 1));
+    setPage(clamped);
+    onPause();
+  }
+
+  function handlePrev() {
+    goTo(page - 1);
+    onPrev();
+  }
+
+  function handleNext() {
+    goTo(page + 1);
+    onNext();
+  }
+
+  function handleDotClick(index: number) {
+    goTo(index);
+  }
+
   return (
     <div
-      className="bg-white rounded-3xl overflow-hidden max-w-full"
       style={{
-        padding: "1.4rem 1.8rem 1.6rem",
-        border: "1px solid color-mix(in srgb, #3a9dab 30%, transparent)",
+        background: "#fff",
+        borderRadius: "24px",
+        padding: "32px 32px 28px",
         boxShadow:
-          "0 14px 30px color-mix(in srgb, #294155 15%, transparent), inset 0 -40px 36px -8px rgba(41,65,85,0.10)",
+          "0 14px 30px rgba(36,52,71,0.13), inset 0 -40px 36px -8px rgba(36,52,71,0.10)",
       }}
     >
       {/* Header: title + nav */}
@@ -35,7 +61,7 @@ function CarouselSectionBlock({
           display: "flex",
           flexDirection: "column",
           gap: "6px",
-          marginBottom: "1.2rem",
+          marginBottom: "24px",
         }}
       >
         <div
@@ -50,7 +76,7 @@ function CarouselSectionBlock({
             style={{
               fontFamily: "'Playfair Display', serif",
               fontWeight: 700,
-              fontSize: "clamp(1.3rem, 2vw, 1.7rem)",
+              fontSize: "22px",
               color: "#294155",
             }}
           >
@@ -58,39 +84,44 @@ function CarouselSectionBlock({
           </h3>
           <CarouselNav
             sectionTitle={section.title}
-            onPrev={onPrev}
-            onNext={onNext}
+            onPrev={handlePrev}
+            onNext={handleNext}
           />
         </div>
-        {/* Divider: teal + gray */}
-        <div
-          style={{
-            width: "100%",
-            height: "3px",
-            borderRadius: "9999px",
-            background:
-              "linear-gradient(to right, #3a9dab 128px, rgba(41,65,85,0.15) 128px)",
-          }}
-          aria-hidden="true"
-        />
+
+        {/* Divider */}
+        <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+          <div
+            style={{
+              width: "100px",
+              height: "3px",
+              borderRadius: "9999px",
+              background: "var(--color-livia-turquoise)",
+              flexShrink: 0,
+            }}
+          />
+          <div
+            style={{
+              flex: 1,
+              height: "3px",
+              background: "rgba(36,52,71,0.15)",
+            }}
+          />
+        </div>
       </div>
 
-      {/* Cards track */}
-      <div style={{ overflow: "hidden", width: "100%" }}>
+      {/* Cards track — clipped container */}
+      <div ref={wrapRef} style={{ overflow: "hidden", width: "100%" }}>
         <div
           ref={trackRef}
-          className="[scrollbar-width:thin] [scrollbar-color:rgba(41,65,85,0.3)_transparent] [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-[rgba(41,65,85,0.3)] [&::-webkit-scrollbar-thumb]:rounded-full"
           style={{
             display: "flex",
             gap: "18px",
-            overflowX: "auto",
-            paddingBottom: "0.3rem",
-            scrollSnapType: "x mandatory",
+            transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+            transform: `translateX(calc(-${page * 100}% - ${page * 18}px))`,
           }}
           onPointerDown={onPause}
           onTouchStart={onPause}
-          onWheel={onPause}
-          onScroll={onPause}
         >
           {section.cards.map((card) => (
             <CarouselCardItem key={card.id} card={card} />
@@ -98,7 +129,11 @@ function CarouselSectionBlock({
         </div>
       </div>
 
-      <CarouselDots count={section.cards.length} />
+      <CarouselDots
+        count={totalPages}
+        activeIndex={page}
+        onDotClick={handleDotClick}
+      />
     </div>
   );
 }
