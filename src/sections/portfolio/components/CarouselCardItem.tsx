@@ -15,9 +15,13 @@ function CarouselCardItem({ card }: Props) {
         style={{ backgroundImage: `url(${card.image})` }}
         aria-hidden="true"
       />
-      <div className="flex flex-col gap-[0.15rem] px-[1.1rem] pt-4 pb-[1.2rem] font-montserrat text-livia-navy-blue">
-        <h4 className="text-base font-semibold">{card.title}</h4>
-        <p className="text-[0.85rem] opacity-80">{card.subtitle}</p>
+      <div className="flex flex-col gap-[0.15rem] px-[1.1rem] pt-4 pb-[1.2rem] text-livia-navy-blue">
+        <h4 className="font-playfair text-[1.1rem] font-semibold">
+          {card.title}
+        </h4>
+        <p className="font-montserrat text-[0.85rem] opacity-70">
+          {card.subtitle}
+        </p>
       </div>
     </article>
   );

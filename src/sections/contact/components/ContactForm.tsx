@@ -79,9 +79,27 @@ function ContactForm() {
           type="submit"
           className="mt-1 self-start flex items-center gap-2 font-montserrat font-semibold text-sm tracking-wide px-8 py-3.5 rounded-full bg-livia-turquoise text-white transition-[transform,opacity] duration-300 ease-in-out hover:opacity-90 hover:-translate-y-[3px] max-[480px]:self-stretch max-[480px]:justify-center"
         >
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M22 2L11 13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M22 2L15 22L11 13L2 9L22 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+          <svg
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+            fill="none"
+            aria-hidden="true"
+          >
+            <path
+              d="M22 2L11 13"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+            <path
+              d="M22 2L15 22L11 13L2 9L22 2Z"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
           </svg>
           Enviar Mensagem
         </button>

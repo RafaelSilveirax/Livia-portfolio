@@ -20,17 +20,26 @@ function CarouselSectionBlock({
   onNext,
 }: Props) {
   return (
-    <div className="bg-white rounded-3xl p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-28px_28px_color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]">
-      <div className="flex items-start justify-between gap-6 mb-[1.3rem]">
-        <div className="flex flex-col gap-2 w-full">
+    <div className="bg-white rounded-3xl p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-40px_36px_-8px_color-mix(in_srgb,var(--color-livia-navy-blue)_22%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]">
+      <div className="flex flex-col gap-1.5 mb-[1.3rem]">
+        <div className="flex items-center justify-between gap-3">
           <h3 className="font-playfair font-bold text-[clamp(1.3rem,2vw,1.8rem)] text-livia-navy-blue">
             {section.title}
           </h3>
-          <span
-            className="flex items-center w-full before:content-[''] before:w-32 before:h-[3px] before:rounded-full before:bg-livia-turquoise after:content-[''] after:h-[3px] after:flex-1 after:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)]"
-            aria-hidden="true"
+          <CarouselNav
+            sectionTitle={section.title}
+            onPrev={onPrev}
+            onNext={onNext}
           />
         </div>
+        <div
+          className="w-full h-[3px] mt-1 rounded-full"
+          style={{
+            background:
+              "linear-gradient(to right, #3a9dab 128px, rgba(41,65,85,0.15) 128px)",
+          }}
+          aria-hidden="true"
+        />
       </div>
 
       <div className="overflow-hidden w-full bg-white">
@@ -50,11 +59,6 @@ function CarouselSectionBlock({
       </div>
 
       <CarouselDots count={section.cards.length} />
-      <CarouselNav
-        sectionTitle={section.title}
-        onPrev={onPrev}
-        onNext={onNext}
-      />
     </div>
   );
 }
