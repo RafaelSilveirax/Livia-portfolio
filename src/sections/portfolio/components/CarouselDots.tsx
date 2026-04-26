@@ -1,3 +1,5 @@
+import { cn } from "../../../lib/utils.js";
+
 type Props = {
   count: number;
   activeIndex: number;
@@ -6,24 +8,18 @@ type Props = {
 
 function CarouselDots({ count, activeIndex, onDotClick }: Props) {
   return (
-    <div className="flex justify-center gap-[0.4rem] mt-5" aria-hidden="true">
+    <div className="flex justify-center gap-1.5 mt-5" aria-hidden="true">
       {Array.from({ length: count }).map((_, i) => (
         <span
           key={i}
           onClick={() => onDotClick?.(i)}
-          style={{
-            width: "7px",
-            height: "7px",
-            borderRadius: "9999px",
-            display: "inline-block",
-            cursor: onDotClick ? "pointer" : "default",
-            transition: "background 0.2s, transform 0.2s",
-            transform: i === activeIndex ? "scale(1.2)" : "scale(1)",
-            background:
-              i === activeIndex
-                ? "var(--color-livia-turquoise)"
-                : "color-mix(in srgb, var(--color-livia-navy-blue) 20%, transparent)",
-          }}
+          className={cn(
+            "inline-block w-[7px] h-[7px] rounded-full transition-[background-color,transform] duration-200",
+            onDotClick ? "cursor-pointer" : "cursor-default",
+            i === activeIndex
+              ? "bg-livia-turquoise scale-120"
+              : "bg-livia-navy-blue/20",
+          )}
         />
       ))}
     </div>

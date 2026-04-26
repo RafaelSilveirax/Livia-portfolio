@@ -8,15 +8,15 @@ type Props = {
   activeSection?: string;
 };
 
-const NAV_ITEM_CLASS =
-  "font-montserrat text-white text-sm font-semibold uppercase tracking-wider transition-colors duration-200 hover:text-livia-turquoise";
+const NAV_LINK_CLASS =
+  "font-sans text-white text-sm font-semibold uppercase tracking-wider transition-colors duration-200 hover:text-livia-turquoise";
 
 function NavLinks({ onNavigate, scrolled, activeSection }: Props) {
   return (
     <div
       className={cn(
-        "flex w-full justify-around items-center px-8 h-[54px] transition-all duration-500",
-        scrolled && "glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] rounded-lg",
+        "flex w-full items-center justify-around h-[54px] px-8 transition-all duration-500",
+        scrolled && "glass-nav rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.15)]",
       )}
     >
       {navSections.map(({ id, label }) => (
@@ -25,7 +25,7 @@ function NavLinks({ onNavigate, scrolled, activeSection }: Props) {
           id={id}
           label={label}
           onNavigate={onNavigate}
-          className={NAV_ITEM_CLASS}
+          className={NAV_LINK_CLASS}
           isActive={activeSection === id}
         />
       ))}

@@ -1,8 +1,11 @@
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
+/* ──────────────────────────────────────────────────────────
+   Design tokens
+   ────────────────────────────────────────────────────────── */
 @theme {
+  /* Brand */
   --color-livia-navy-blue: #294155;
   --color-livia-turquoise: #3a9dab;
   --color-livia-dark-coral: #d0493a;
@@ -10,19 +13,33 @@
   --color-livia-copper: #cd6d32;
   --color-background: #ffffff;
   --color-foreground: #294155;
-  --radius-sm: 0.25rem;
-  --radius-md: 0.5rem;
-  --radius-lg: 0.75rem;
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-full: 9999px;
-  --font-family-playfair: "Playfair Display", serif;
-  --font-family-montserrat: "Montserrat", sans-serif;
+
+  /* Typography */
+  --font-playfair: "Playfair Display", serif;
+  --font-montserrat: "Montserrat", sans-serif;
+
+  /* Default font roles — used by `font-sans` / `font-serif` Tailwind utilities */
+  --font-sans: var(--font-montserrat);
+  --font-serif: var(--font-playfair);
+
+  /* Breakpoints (used as `max-sm`, `max-md`, `max-lg`) */
+  --breakpoint-sm: 600px;
+  --breakpoint-md: 768px;
+  --breakpoint-nav: 820px;
+  --breakpoint-lg: 900px;
+  --breakpoint-xl: 1200px;
+
+  /* Layout container */
+  --container-page: 1200px;
+  --container-content: 1100px;
 }
 
+/* ──────────────────────────────────────────────────────────
+   Base
+   ────────────────────────────────────────────────────────── */
 @layer base {
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
     overflow: hidden;
     height: 100vh;
   }
@@ -35,53 +52,49 @@
   section {
     min-height: 100vh;
   }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
 }
 
-/* ── Fade-in ── */
-.fade-in {
-  opacity: 0;
-  transform: translateY(28px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
-}
-
-.fade-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ── Glassmorphism utilities ── */
-@utility glass-nav {
-  background: color-mix(in srgb, var(--color-livia-navy-blue) 70%, transparent);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-}
-
-@utility glass-mobile {
-  background: color-mix(in srgb, var(--color-livia-navy-blue) 50%, transparent);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-@utility hero-overlay {
-  background:
-    radial-gradient(circle at 70% 50%, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.65)),
-    linear-gradient(
-      110deg,
-      rgba(0, 0, 0, 0.75) 0%,
-      rgba(0, 0, 0, 0.4) 40%,
-      rgba(0, 0, 0, 0.1) 70%
-    );
-}
-
+/* ──────────────────────────────────────────────────────────
+   Reusable component classes
+   ────────────────────────────────────────────────────────── */
 @layer components {
+  /* Typography ─ fixed roles to avoid ad-hoc sizes scattered around the app */
+  .text-eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-livia-turquoise;
+  }
+
+  .text-section-title {
+    @apply font-serif font-bold leading-tight text-[clamp(2rem,3vw,3rem)];
+  }
+
+  .text-body {
+    @apply font-sans text-[0.97rem] leading-[1.8];
+  }
+
+  .text-quote {
+    @apply font-serif italic text-[1.15rem] leading-relaxed;
+  }
+
+  /* Pills / tags */
+  .tag-pill {
+    @apply font-sans text-[0.7rem] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full;
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply font-sans font-semibold rounded-full transition-[transform,background-color,color,opacity] duration-300 ease-in-out hover:-translate-y-[3px];
+  }
+
+  /* Hamburger lines */
   .menu-btn span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: currentColor;
-    border-radius: 9999px;
+    @apply block w-[22px] h-[2px] bg-current rounded-full;
   }
 
   @media (prefers-reduced-motion: no-preference) {
@@ -102,4 +115,96 @@
   .menu-btn-open span:nth-child(3) {
     transform: translateY(-7px) rotate(-45deg);
   }
+}
+
+/* ──────────────────────────────────────────────────────────
+   Animations: fade-in on scroll
+   ────────────────────────────────────────────────────────── */
+.fade-in {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
+}
+
+.fade-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ──────────────────────────────────────────────────────────
+   Glassmorphism utilities
+   ────────────────────────────────────────────────────────── */
+@utility glass-nav {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 70%, transparent);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+@utility glass-mobile {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 50%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+@utility glass-card {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 60%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
+  box-shadow: 0 8px 32px color-mix(in srgb, black 20%, transparent);
+}
+
+@utility glass-card-accent {
+  background: color-mix(in srgb, var(--color-livia-navy-blue) 60%, transparent);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid color-mix(in srgb, var(--color-livia-turquoise) 30%, transparent);
+  box-shadow: 0 8px 32px color-mix(in srgb, black 20%, transparent);
+}
+
+@utility glass-tag {
+  background: color-mix(in srgb, white 10%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, var(--color-livia-turquoise) 35%, transparent);
+}
+
+@utility glass-social {
+  background: color-mix(in srgb, white 7%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid color-mix(in srgb, white 15%, transparent);
+}
+
+@utility glass-field {
+  background: color-mix(in srgb, white 8%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid color-mix(in srgb, white 15%, transparent);
+}
+
+@utility glass-form {
+  background: color-mix(in srgb, white 6%, transparent);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid color-mix(in srgb, white 12%, transparent);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.25);
+}
+
+@utility tag-turquoise {
+  background: color-mix(in srgb, var(--color-livia-turquoise) 10%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-livia-turquoise) 28%, transparent);
+}
+
+@utility hero-overlay {
+  background:
+    radial-gradient(circle at 70% 50%, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.65)),
+    linear-gradient(
+      110deg,
+      rgba(0, 0, 0, 0.75) 0%,
+      rgba(0, 0, 0, 0.4) 40%,
+      rgba(0, 0, 0, 0.1) 70%
+    );
 }

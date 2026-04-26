@@ -6,23 +6,21 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="bg-livia-navy-blue text-white flex items-center justify-center min-h-svh py-24"
+      className="flex items-center justify-center min-h-svh py-24 bg-livia-navy-blue text-white"
     >
-      <div ref={ref} className="fade-in w-full max-w-[1100px] mx-auto px-6">
-        <div className="text-center mb-16 flex flex-col items-center gap-3">
-          <p className="font-montserrat font-semibold tracking-[0.18em] uppercase text-livia-turquoise text-xs">
-            Vamos conversar
-          </p>
-          <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-white">
+      <div ref={ref} className="fade-in w-full max-w-content mx-auto px-6">
+        <div className="flex flex-col items-center gap-3 text-center mb-16">
+          <p className="text-eyebrow">Vamos conversar</p>
+          <h2 className="text-section-title text-white">
             Vamos <em className="not-italic text-livia-turquoise">trabalhar</em>{" "}
             juntos?
           </h2>
-          <p className="font-montserrat text-xs text-white/35 tracking-widest uppercase">
+          <p className="font-sans text-xs uppercase tracking-widest text-white/35">
             Aberta a projetos e colaborações
           </p>
         </div>
 
-        <div className="grid grid-cols-2 gap-20 max-[900px]:grid-cols-1 max-[900px]:gap-12">
+        <div className="grid grid-cols-2 gap-20 max-lg:grid-cols-1 max-lg:gap-12">
           <ContactInfo />
           <ContactForm />
         </div>

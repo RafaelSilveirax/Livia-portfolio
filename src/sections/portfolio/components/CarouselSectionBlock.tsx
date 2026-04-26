@@ -41,45 +41,11 @@ function CarouselSectionBlock({
     onNext();
   }
 
-  function handleDotClick(index: number) {
-    goTo(index);
-  }
-
   return (
-    <div
-      style={{
-        background: "#fff",
-        borderRadius: "24px",
-        padding: "32px 32px 28px",
-        boxShadow:
-          "0 14px 30px rgba(36,52,71,0.13), inset 0 -40px 36px -8px rgba(36,52,71,0.10)",
-      }}
-    >
-      {/* Header: title + nav */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          gap: "6px",
-          marginBottom: "24px",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: "12px",
-          }}
-        >
-          <h3
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 700,
-              fontSize: "22px",
-              color: "#294155",
-            }}
-          >
+    <div className="bg-white rounded-3xl px-8 pt-8 pb-7 shadow-[0_14px_30px_rgba(36,52,71,0.13),inset_0_-40px_36px_-8px_rgba(36,52,71,0.10)]">
+      <div className="flex flex-col gap-1.5 mb-6">
+        <div className="flex items-center justify-between gap-3">
+          <h3 className="font-serif text-[22px] font-bold text-livia-navy-blue">
             {section.title}
           </h3>
           <CarouselNav
@@ -89,35 +55,17 @@ function CarouselSectionBlock({
           />
         </div>
 
-        {/* Divider */}
-        <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
-          <div
-            style={{
-              width: "100px",
-              height: "3px",
-              borderRadius: "9999px",
-              background: "var(--color-livia-turquoise)",
-              flexShrink: 0,
-            }}
-          />
-          <div
-            style={{
-              flex: 1,
-              height: "3px",
-              background: "rgba(36,52,71,0.15)",
-            }}
-          />
+        <div className="flex items-center w-full">
+          <div className="w-[100px] h-[3px] rounded-full bg-livia-turquoise shrink-0" />
+          <div className="flex-1 h-[3px] bg-livia-navy-blue/15" />
         </div>
       </div>
 
-      {/* Cards track — clipped container */}
-      <div ref={wrapRef} style={{ overflow: "hidden", width: "100%" }}>
+      <div ref={wrapRef} className="overflow-hidden w-full">
         <div
           ref={trackRef}
+          className="flex gap-[18px] transition-transform duration-350 ease-in-out"
           style={{
-            display: "flex",
-            gap: "18px",
-            transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
             transform: `translateX(calc(-${page * 100}% - ${page * 18}px))`,
           }}
           onPointerDown={onPause}
@@ -132,7 +80,7 @@ function CarouselSectionBlock({
       <CarouselDots
         count={totalPages}
         activeIndex={page}
-        onDotClick={handleDotClick}
+        onDotClick={goTo}
       />
     </div>
   );

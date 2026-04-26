@@ -17,14 +17,10 @@ function NavItem({ id, label, onNavigate, className, isActive }: Props) {
         onNavigate(id);
       }}
       className={cn(
-        className,
         "px-4 py-1.5 rounded-lg transition-all duration-300",
+        isActive && "bg-white/20 backdrop-blur-md",
+        className,
       )}
-      style={{
-        background: isActive ? "rgba(255,255,255,0.18)" : "rgba(255,255,255,0)",
-        backdropFilter: isActive ? "blur(8px)" : "none",
-        transition: "background 0.3s ease, backdrop-filter 0.3s ease",
-      }}
     >
       {label}
     </a>

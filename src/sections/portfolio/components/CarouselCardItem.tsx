@@ -6,64 +6,17 @@ type Props = {
 
 function CarouselCardItem({ card }: Props) {
   return (
-    <article
-      className="bg-white overflow-hidden group"
-      style={{
-        flex: "0 0 calc(33.333% - 12px)",
-        borderRadius: "16px",
-        border: "1.5px solid #edf2f5",
-        transition: "transform 0.2s, box-shadow 0.2s",
-        cursor: "pointer",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "translateY(-4px)";
-        (e.currentTarget as HTMLElement).style.boxShadow =
-          "0 10px 28px rgba(0,0,0,0.12)";
-      }}
-      onMouseLeave={(e) => {
-        (e.currentTarget as HTMLElement).style.transform = "";
-        (e.currentTarget as HTMLElement).style.boxShadow = "";
-      }}
-    >
+    <article className="group flex-[0_0_calc(33.333%-12px)] bg-white rounded-2xl border-[1.5px] border-[#edf2f5] overflow-hidden cursor-pointer transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.12)]">
       <div
-        style={{
-          width: "100%",
-          aspectRatio: "4/3",
-          backgroundImage: `url(${card.image})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
-          overflow: "hidden",
-          transition: "transform 0.3s",
-        }}
+        className="w-full aspect-4/3 bg-cover bg-center bg-no-repeat overflow-hidden transition-transform duration-300"
+        style={{ backgroundImage: `url(${card.image})` }}
         aria-hidden="true"
       />
-      <div
-        style={{
-          padding: "14px 16px",
-          display: "flex",
-          flexDirection: "column",
-          gap: "4px",
-        }}
-      >
-        <h4
-          style={{
-            fontFamily: "'Playfair Display', serif",
-            fontSize: "1.05rem",
-            fontWeight: 600,
-            color: "var(--color-livia-navy-blue)",
-          }}
-        >
+      <div className="flex flex-col gap-1 px-4 py-3.5">
+        <h4 className="font-serif text-[1.05rem] font-semibold text-livia-navy-blue">
           {card.title}
         </h4>
-        <p
-          style={{
-            fontFamily: "'Montserrat', sans-serif",
-            fontSize: "0.75rem",
-            color: "var(--color-livia-navy-blue)",
-            opacity: 0.6,
-          }}
-        >
+        <p className="font-sans text-xs text-livia-navy-blue/60">
           {card.subtitle}
         </p>
       </div>

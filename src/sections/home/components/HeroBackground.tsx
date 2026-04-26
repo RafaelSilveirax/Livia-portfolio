@@ -27,8 +27,7 @@ function HeroBackground() {
       alt="Livia Ballai pintando mural artístico"
       width={1920}
       height={1080}
-      className="absolute inset-0 w-full h-full object-cover object-[center_35%] z-0 max-[768px]:object-[60%_25%] min-[2000px]:object-[center_20%]"
-      style={{ willChange: "transform" }}
+      className="absolute inset-0 z-0 w-full h-full object-cover object-[center_35%] will-change-transform max-md:object-[60%_25%] min-[2000px]:object-[center_20%]"
       fetchPriority="high"
     />
   );

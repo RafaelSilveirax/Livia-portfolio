@@ -18,6 +18,9 @@ type Props = {
   sections: CarouselSection[];
 };
 
+const PAUSE_MS = 2000;
+const SCROLL_STEP_PX = 320;
+
 function PortfolioCarousel({ sections }: Props) {
   const trackRefs = useRef(new Map<string, HTMLDivElement | null>());
   const pauseUntilRef = useRef(new Map<string, number>());
@@ -70,59 +73,26 @@ function PortfolioCarousel({ sections }: Props) {
   function handleScroll(sectionId: string, direction: "left" | "right") {
     const track = trackRefs.current.get(sectionId);
     if (!track) return;
-    pauseUntilRef.current.set(sectionId, Date.now() + 2000);
-    const offset = direction === "left" ? -320 : 320;
+    pauseUntilRef.current.set(sectionId, Date.now() + PAUSE_MS);
+    const offset = direction === "left" ? -SCROLL_STEP_PX : SCROLL_STEP_PX;
     track.scrollBy({ left: offset, behavior: "smooth" });
   }
 
   function pauseAutoScroll(sectionId: string) {
-    pauseUntilRef.current.set(sectionId, Date.now() + 2000);
+    pauseUntilRef.current.set(sectionId, Date.now() + PAUSE_MS);
   }
 
   return (
-    <section
-      className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] overflow-visible"
-      style={{ padding: "100px 0 100px", scrollSnapAlign: "none" }}
-    >
-      <div
-        style={{
-          width: "min(1200px, 92vw)",
-          margin: "0 auto",
-          display: "grid",
-          gap: "40px",
-        }}
-      >
-        {/* Title */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "12px",
-            marginBottom: "8px",
-          }}
-        >
+    <section className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] overflow-visible py-[100px]">
+      <div className="grid gap-10 w-[min(1200px,92vw)] mx-auto">
+        <div className="flex items-center justify-center gap-3 mb-2">
           <span
-            style={{
-              color: "var(--color-livia-turquoise)",
-              fontSize: "clamp(1.4rem, 2vw, 1.9rem)",
-              lineHeight: 1,
-            }}
+            className="text-livia-turquoise text-[clamp(1.4rem,2vw,1.9rem)] leading-none"
             aria-hidden="true"
           >
             ✦
           </span>
-          <h2
-            style={{
-              fontFamily: "'Playfair Display', serif",
-              fontWeight: 700,
-              fontSize: "clamp(2rem, 3vw, 3rem)",
-              color: "var(--color-livia-navy-blue)",
-              textTransform: "lowercase",
-              letterSpacing: "0.06em",
-              margin: 0,
-            }}
-          >
+          <h2 className="text-section-title text-livia-navy-blue lowercase tracking-[0.06em]">
             portfolio
           </h2>
         </div>
