@@ -41,18 +41,16 @@ export function useSnapScroll(containerId: string) {
       return el.getBoundingClientRect().top + container!.scrollTop;
     }
 
-    function visiblePx(id: string): number {
-      const el = document.getElementById(id);
-      if (!el) return 0;
-      const rect = el.getBoundingClientRect();
-      const viewportH = container!.clientHeight;
-      return Math.max(Math.min(rect.bottom, viewportH) - Math.max(rect.top, 0), 0);
+    function isContactVisible(): boolean {
+      const el = document.getElementById("contact");
+      if (!el) return false;
+      return el.getBoundingClientRect().top <= container!.clientHeight;
     }
 
-    function isMostVisible(id: string, competitors: string[]): boolean {
-      const own = visiblePx(id);
-      if (own < container!.clientHeight * 0.4) return false;
-      return competitors.every((other) => visiblePx(other) <= own);
+    function isAtPortfolioTop(): boolean {
+      const el = document.getElementById("portfolio");
+      if (!el) return false;
+      return el.getBoundingClientRect().top >= -30;
     }
 
     function findTarget(direction: 1 | -1): number | null {
@@ -73,18 +71,12 @@ export function useSnapScroll(containerId: string) {
       if (direction === 1) {
         if (inHome) return aboutTop;
         if (inAbout) return portfolioTop;
-        if (inPortfolio && isMostVisible("contact", ["portfolio"])) return contactTop;
+        if (inPortfolio && isContactVisible()) return contactTop;
         return null;
       } else {
-        if (inContact && isMostVisible("portfolio", ["contact"])) return portfolioTop;
-        if (inPortfolio) {
-          if (scrollTop <= portfolioTop + MARGIN) return aboutTop;
-          return null;
-        }
-        if (inAbout) {
-          if (scrollTop > aboutTop + MARGIN) return aboutTop;
-          return homeTop;
-        }
+        if (inContact) return portfolioTop;
+        if (inPortfolio && isAtPortfolioTop()) return aboutTop;
+        if (inAbout) return homeTop;
         return null;
       }
     }
