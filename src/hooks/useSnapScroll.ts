@@ -28,7 +28,9 @@ export function useSnapScroll(containerId: string) {
           requestAnimationFrame(tick);
         } else {
           isAnimating = false;
-          setTimeout(() => { cooldown = false; }, 200);
+          setTimeout(() => {
+            cooldown = false;
+          }, 200);
         }
       }
 
@@ -47,36 +49,45 @@ export function useSnapScroll(containerId: string) {
       return el.getBoundingClientRect().top <= container!.clientHeight;
     }
 
-    function isAtPortfolioTop(): boolean {
+    function isPortfolioVisible(): boolean {
       const el = document.getElementById("portfolio");
+      if (!el) return false;
+      return el.getBoundingClientRect().top <= container!.clientHeight;
+    }
+
+    function isAtTop(id: string): boolean {
+      const el = document.getElementById(id);
       if (!el) return false;
       return el.getBoundingClientRect().top >= -30;
     }
 
-    function findTarget(direction: 1 | -1): number | null {
-      const scrollTop = container!.scrollTop;
+    function currentSection(): string {
+      const ids = ["contact", "portfolio", "about", "home"];
+      for (const id of ids) {
+        const el = document.getElementById(id);
+        if (!el) continue;
+        if (el.getBoundingClientRect().top <= container!.clientHeight / 2) return id;
+      }
+      return "home";
+    }
 
+    function findTarget(direction: 1 | -1): number | null {
       const homeTop = topOf("home");
       const aboutTop = topOf("about");
       const portfolioTop = topOf("portfolio");
       const contactTop = topOf("contact");
 
-      const MARGIN = 30;
-
-      const inHome = scrollTop < aboutTop - MARGIN;
-      const inAbout = scrollTop >= aboutTop - MARGIN && scrollTop < portfolioTop - MARGIN;
-      const inPortfolio = scrollTop >= portfolioTop - MARGIN && scrollTop < contactTop - MARGIN;
-      const inContact = scrollTop >= contactTop - MARGIN;
+      const section = currentSection();
 
       if (direction === 1) {
-        if (inHome) return aboutTop;
-        if (inAbout) return portfolioTop;
-        if (inPortfolio && isContactVisible()) return contactTop;
+        if (section === "home") return aboutTop;
+        if (section === "about" && isPortfolioVisible()) return portfolioTop;
+        if (section === "portfolio" && isContactVisible()) return contactTop;
         return null;
       } else {
-        if (inContact) return portfolioTop;
-        if (inPortfolio && isAtPortfolioTop()) return aboutTop;
-        if (inAbout) return homeTop;
+        if (section === "contact" && isAtTop("contact")) return portfolioTop;
+        if (section === "portfolio" && isAtTop("portfolio")) return aboutTop;
+        if (section === "about" && isAtTop("about")) return homeTop;
         return null;
       }
     }

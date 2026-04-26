@@ -7,7 +7,7 @@ function About() {
   const rightRef = useFadeIn();
 
   return (
-    <section id="about" className="flex items-center bg-livia-navy-blue">
+    <section id="about" className="flex items-center bg-livia-navy-blue py-24">
       <div className="grid grid-cols-2 gap-16 max-w-page mx-auto px-6 items-start max-lg:grid-cols-1 max-lg:gap-12">
         <div ref={leftRef} className="fade-in">
           <AboutHighlights />
