@@ -1,31 +1,11 @@
 import { useState } from "react";
+import { IoPaperPlane } from "react-icons/io5";
 
 const FIELD_CLASS =
   "glass-field rounded-xl px-4 py-3 font-sans text-sm text-white placeholder:text-white/30 outline-none transition-[border-color,background-color] duration-200 focus:border-livia-turquoise/70 focus:bg-white/12";
 
 const LABEL_CLASS =
   "font-sans text-xs font-semibold uppercase tracking-widest text-white/35";
-
-function SendIcon() {
-  return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-      <path
-        d="M22 2L11 13"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M22 2L15 22L11 13L2 9L22 2Z"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function ContactForm() {
   const [charCount, setCharCount] = useState(0);
@@ -84,7 +64,7 @@ function ContactForm() {
           type="submit"
           className="btn-primary mt-1 self-start flex items-center gap-2 px-8 py-3.5 text-sm tracking-wide bg-livia-turquoise text-white hover:opacity-90 max-sm:self-stretch max-sm:justify-center"
         >
-          <SendIcon />
+          <IoPaperPlane size={16} aria-hidden="true" />
           Enviar Mensagem
         </button>
       </form>

@@ -1,3 +1,5 @@
+import { IoChevronBack, IoChevronForward } from "react-icons/io5";
+
 type Props = {
   sectionTitle: string;
   onPrev: () => void;
@@ -10,23 +12,6 @@ const ARROW_BTN =
   "cursor-pointer transition-[background-color,border-color,color] duration-200 " +
   "hover:bg-livia-turquoise hover:border-livia-turquoise hover:text-white";
 
-function ArrowIcon({ direction }: { direction: "left" | "right" }) {
-  const points = direction === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6";
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <polyline points={points} />
-    </svg>
-  );
-}
 
 function CarouselNav({ sectionTitle, onPrev, onNext }: Props) {
   return (
@@ -37,7 +22,7 @@ function CarouselNav({ sectionTitle, onPrev, onNext }: Props) {
         aria-label={`Voltar em ${sectionTitle}`}
         className={ARROW_BTN}
       >
-        <ArrowIcon direction="left" />
+        <IoChevronBack size={14} aria-hidden="true" />
       </button>
       <button
         type="button"
@@ -45,7 +30,7 @@ function CarouselNav({ sectionTitle, onPrev, onNext }: Props) {
         aria-label={`Avançar em ${sectionTitle}`}
         className={ARROW_BTN}
       >
-        <ArrowIcon direction="right" />
+        <IoChevronForward size={14} aria-hidden="true" />
       </button>
     </div>
   );
