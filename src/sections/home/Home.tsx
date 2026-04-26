@@ -3,12 +3,15 @@ import HeroCard from "./components/HeroCard.js";
 
 function Home() {
   return (
-    <section className="relative w-full min-h-svh overflow-hidden" id="home">
+    <section
+      id="home"
+      className="relative w-full min-h-svh overflow-hidden"
+    >
       <HeroBackground />
 
       <div className="absolute inset-0 z-1 hero-overlay" />
 
-      <div className="relative z-2 w-full max-w-7xl mx-auto px-[clamp(1.5rem,5vw,4rem)] min-h-svh flex items-center max-[768px]:justify-center">
+      <div className="relative z-2 flex items-center min-h-svh w-full max-w-page mx-auto px-[clamp(1.5rem,5vw,4rem)] max-md:justify-center">
         <HeroCard />
       </div>
     </section>

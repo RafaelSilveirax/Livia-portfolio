@@ -4,87 +4,48 @@ type Props = {
   onNext: () => void;
 };
 
-const ArrowLeft = () => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="15 18 9 12 15 6" />
-  </svg>
-);
+const ARROW_BTN =
+  "flex shrink-0 items-center justify-center w-[34px] h-[34px] rounded-full " +
+  "border-[1.5px] border-livia-navy-blue/20 bg-livia-turquoise/10 text-livia-navy-blue " +
+  "cursor-pointer transition-[background-color,border-color,color] duration-200 " +
+  "hover:bg-livia-turquoise hover:border-livia-turquoise hover:text-white";
 
-const ArrowRight = () => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2.5"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <polyline points="9 18 15 12 9 6" />
-  </svg>
-);
+function ArrowIcon({ direction }: { direction: "left" | "right" }) {
+  const points = direction === "left" ? "15 18 9 12 15 6" : "9 18 15 12 9 6";
+  return (
+    <svg
+      width="14"
+      height="14"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <polyline points={points} />
+    </svg>
+  );
+}
 
 function CarouselNav({ sectionTitle, onPrev, onNext }: Props) {
-  const base: React.CSSProperties = {
-    width: "34px",
-    height: "34px",
-    borderRadius: "9999px",
-    border: "1.5px solid rgba(41,65,85,0.20)",
-    background: "color-mix(in srgb, #3a9dab 10%, white)",
-    color: "#294155",
-    cursor: "pointer",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    transition: "background 0.2s, border-color 0.2s, color 0.2s",
-    flexShrink: 0,
-  };
-
-  function over(e: React.MouseEvent<HTMLButtonElement>) {
-    const el = e.currentTarget;
-    el.style.background = "#3a9dab";
-    el.style.borderColor = "#3a9dab";
-    el.style.color = "#fff";
-  }
-
-  function out(e: React.MouseEvent<HTMLButtonElement>) {
-    const el = e.currentTarget;
-    el.style.background = "color-mix(in srgb, #3a9dab 10%, white)";
-    el.style.borderColor = "rgba(41,65,85,0.20)";
-    el.style.color = "#294155";
-  }
-
   return (
-    <div className="flex gap-2 items-center max-[900px]:hidden">
+    <div className="flex gap-2 items-center max-lg:hidden">
       <button
         type="button"
         onClick={onPrev}
         aria-label={`Voltar em ${sectionTitle}`}
-        style={base}
-        onMouseEnter={over}
-        onMouseLeave={out}
+        className={ARROW_BTN}
       >
-        <ArrowLeft />
+        <ArrowIcon direction="left" />
       </button>
       <button
         type="button"
         onClick={onNext}
         aria-label={`Avançar em ${sectionTitle}`}
-        style={base}
-        onMouseEnter={over}
-        onMouseLeave={out}
+        className={ARROW_BTN}
       >
-        <ArrowRight />
+        <ArrowIcon direction="right" />
       </button>
     </div>
   );
