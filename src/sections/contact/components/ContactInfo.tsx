@@ -1,4 +1,8 @@
-import { IoLogoLinkedin, IoLogoBehance, IoLogoInstagram } from "react-icons/io5";
+import {
+  IoLogoLinkedin,
+  IoLogoBehance,
+  IoLogoInstagram,
+} from "react-icons/io5";
 
 const availabilityTags = ["Freelance", "Remoto", "Híbrido", "CLT"];
 
@@ -24,7 +28,8 @@ const glassTag: React.CSSProperties = {
   background: "color-mix(in srgb, white 10%, transparent)",
   backdropFilter: "blur(10px)",
   WebkitBackdropFilter: "blur(10px)",
-  border: "1px solid color-mix(in srgb, var(--color-livia-turquoise) 35%, transparent)",
+  border:
+    "1px solid color-mix(in srgb, var(--color-livia-turquoise) 35%, transparent)",
 };
 
 const glassSocial: React.CSSProperties = {

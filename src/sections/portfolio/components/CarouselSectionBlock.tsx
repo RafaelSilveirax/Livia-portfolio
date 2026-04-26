@@ -1,8 +1,10 @@
-import type { RefCallback } from "react";
+import { useState, useRef, type RefCallback } from "react";
 import type { CarouselSection } from "./PortfolioCarousel.js";
 import CarouselCardItem from "./CarouselCardItem.js";
 import CarouselDots from "./CarouselDots.js";
 import CarouselNav from "./CarouselNav.js";
+
+const VISIBLE = 3;
 
 type Props = {
   section: CarouselSection;
@@ -19,29 +21,107 @@ function CarouselSectionBlock({
   onPrev,
   onNext,
 }: Props) {
+  const [page, setPage] = useState(0);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const totalPages = Math.ceil(section.cards.length / VISIBLE);
+
+  function goTo(nextPage: number) {
+    const clamped = Math.max(0, Math.min(nextPage, totalPages - 1));
+    setPage(clamped);
+    onPause();
+  }
+
+  function handlePrev() {
+    goTo(page - 1);
+    onPrev();
+  }
+
+  function handleNext() {
+    goTo(page + 1);
+    onNext();
+  }
+
+  function handleDotClick(index: number) {
+    goTo(index);
+  }
+
   return (
-    <div className="bg-white rounded-3xl p-[1.2rem_1.8rem_1.6rem] border border-[color-mix(in_srgb,var(--color-livia-turquoise)_30%,transparent)] overflow-hidden max-w-full shadow-[0_14px_30px_color-mix(in_srgb,var(--color-livia-navy-blue)_20%,transparent),inset_0_-28px_28px_color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)] max-[900px]:p-[1.5rem_1.3rem_1.8rem]">
-      <div className="flex items-start justify-between gap-6 mb-[1.3rem]">
-        <div className="flex flex-col gap-2 w-full">
-          <h3 className="font-playfair font-bold text-[clamp(1.3rem,2vw,1.8rem)] text-livia-navy-blue">
+    <div
+      style={{
+        background: "#fff",
+        borderRadius: "24px",
+        padding: "32px 32px 28px",
+        boxShadow:
+          "0 14px 30px rgba(36,52,71,0.13), inset 0 -40px 36px -8px rgba(36,52,71,0.10)",
+      }}
+    >
+      {/* Header: title + nav */}
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "6px",
+          marginBottom: "24px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: "12px",
+          }}
+        >
+          <h3
+            style={{
+              fontFamily: "'Playfair Display', serif",
+              fontWeight: 700,
+              fontSize: "22px",
+              color: "#294155",
+            }}
+          >
             {section.title}
           </h3>
-          <span
-            className="flex items-center w-full before:content-[''] before:w-32 before:h-[3px] before:rounded-full before:bg-livia-turquoise after:content-[''] after:h-[3px] after:flex-1 after:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_18%,transparent)]"
-            aria-hidden="true"
+          <CarouselNav
+            sectionTitle={section.title}
+            onPrev={handlePrev}
+            onNext={handleNext}
+          />
+        </div>
+
+        {/* Divider */}
+        <div style={{ display: "flex", alignItems: "center", width: "100%" }}>
+          <div
+            style={{
+              width: "100px",
+              height: "3px",
+              borderRadius: "9999px",
+              background: "var(--color-livia-turquoise)",
+              flexShrink: 0,
+            }}
+          />
+          <div
+            style={{
+              flex: 1,
+              height: "3px",
+              background: "rgba(36,52,71,0.15)",
+            }}
           />
         </div>
       </div>
 
-      <div className="overflow-hidden w-full bg-white">
+      {/* Cards track — clipped container */}
+      <div ref={wrapRef} style={{ overflow: "hidden", width: "100%" }}>
         <div
           ref={trackRef}
-          className="flex w-full min-w-0 gap-5 overflow-x-auto pb-[0.35rem] [scrollbar-width:thin] [scrollbar-color:color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)_transparent] [&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar-thumb]:bg-[color-mix(in_srgb,var(--color-livia-navy-blue)_40%,transparent)] [&::-webkit-scrollbar-thumb]:rounded-full"
-          style={{ scrollSnapType: "x mandatory" }}
+          style={{
+            display: "flex",
+            gap: "18px",
+            transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+            transform: `translateX(calc(-${page * 100}% - ${page * 18}px))`,
+          }}
           onPointerDown={onPause}
           onTouchStart={onPause}
-          onWheel={onPause}
-          onScroll={onPause}
         >
           {section.cards.map((card) => (
             <CarouselCardItem key={card.id} card={card} />
@@ -49,11 +129,10 @@ function CarouselSectionBlock({
         </div>
       </div>
 
-      <CarouselDots count={section.cards.length} />
-      <CarouselNav
-        sectionTitle={section.title}
-        onPrev={onPrev}
-        onNext={onNext}
+      <CarouselDots
+        count={totalPages}
+        activeIndex={page}
+        onDotClick={handleDotClick}
       />
     </div>
   );

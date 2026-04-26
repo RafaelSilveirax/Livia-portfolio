@@ -1,48 +1,61 @@
-const highlights = [
-  "Designer & ilustradora",
-  "Graduanda em Artes Visuais – UFF",
-  "Foco em ilustração, concept art e design visual",
-  "Experiência em projetos autorais e comerciais",
-];
-
 function AboutHighlights() {
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-white">
+      <p className="font-montserrat font-semibold tracking-[0.18em] uppercase text-livia-turquoise text-xs">
+        Quem sou eu
+      </p>
+
+      <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-white leading-tight">
         About Me
       </h2>
 
       <div
-        className="w-18 h-0.5 rounded-full bg-livia-turquoise"
+        className="w-16 h-0.5 rounded-full bg-livia-turquoise"
         aria-hidden="true"
       />
 
-      <ul className="list-none p-0 m-0 grid gap-[0.85rem] font-montserrat font-medium text-white/75">
-        {highlights.map((item) => (
-          <li key={item} className="flex gap-3 items-start leading-normal">
-            <span
-              className="w-[1.6rem] h-[1.6rem] rounded-full bg-livia-turquoise/25 grid place-items-center text-livia-turquoise shrink-0 [&_svg]:w-4 [&_svg]:h-4"
-              aria-hidden="true"
-            >
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M5 12.5L9.2 16.5L19 7.5"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
-            <span>{item}</span>
-          </li>
-        ))}
-      </ul>
-
-      <p className="font-montserrat font-medium text-white/70 max-w-120 text-[1.02rem] leading-[1.7]">
-        Apaixonada por narrativa visual, personagens e composição. Busco criar
-        imagens expressivas que conectam estética, conceito e emoção.
+      <p className="font-playfair italic text-white/90 text-[1.15rem] leading-relaxed">
+        "Arte que conecta, design que comunica."
       </p>
+
+      <p className="font-montserrat font-normal text-white/65 text-[0.97rem] leading-[1.8]">
+        Sou Livia Ballai, designer gráfica e ilustradora baseada em Niterói, RJ.
+        Trabalho na interseção entre arte e design, criando identidades visuais,
+        ilustrações e personagens que contam histórias únicas.
+      </p>
+
+      <p className="font-montserrat font-normal text-white/65 text-[0.97rem] leading-[1.8]">
+        Com experiência em{" "}
+        <span className="text-white/90 font-medium">
+          Graphic Design, Illustration e Character Design
+        </span>
+        , desenvolvo projetos que vão desde branding e design editorial até
+        ilustrações digitais para produtos, jogos e mídias sociais.
+      </p>
+
+      <div className="flex flex-wrap gap-2 mt-2">
+        {[
+          "Photoshop",
+          "Illustrator",
+          "Procreate",
+          "Figma",
+          "Character Design",
+          "Branding",
+        ].map((tag) => (
+          <span
+            key={tag}
+            className="font-montserrat text-[0.7rem] font-semibold tracking-widest uppercase px-4 py-1.5 rounded-full text-livia-turquoise"
+            style={{
+              background:
+                "color-mix(in srgb, var(--color-livia-turquoise) 10%, transparent)",
+              border:
+                "1px solid color-mix(in srgb, var(--color-livia-turquoise) 28%, transparent)",
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
     </div>
   );
 }

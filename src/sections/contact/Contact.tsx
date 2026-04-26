@@ -7,13 +7,15 @@ function Contact() {
       className="bg-livia-navy-blue text-white flex justify-center py-24"
     >
       <div className="w-full max-w-[1100px] mx-auto px-6">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 flex flex-col items-center gap-3">
+          <p className="font-montserrat font-semibold tracking-[0.18em] uppercase text-livia-turquoise text-xs">
+            Vamos conversar
+          </p>
           <h2 className="font-playfair font-bold text-[clamp(2rem,3vw,3rem)] text-white">
-            Vamos{" "}
-            <em className="not-italic text-livia-turquoise">trabalhar</em>{" "}
+            Vamos <em className="not-italic text-livia-turquoise">trabalhar</em>{" "}
             juntos?
           </h2>
-          <p className="font-montserrat text-sm text-white/35 mt-3 tracking-widest uppercase">
+          <p className="font-montserrat text-xs text-white/35 tracking-widest uppercase">
             Aberta a projetos e colaborações
           </p>
         </div>
