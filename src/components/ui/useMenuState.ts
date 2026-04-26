@@ -21,38 +21,36 @@ export function useMenuState() {
   }, []);
 
   useEffect(() => {
-    function handleScroll() {
-      setScrolled(window.scrollY > 10);
-    }
+    const container = document.getElementById("scroll-container");
+    if (!container) return;
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
+    const c = container;
     const sectionIds = navSections.map((s) => s.id);
 
     function onScroll() {
-      let mostVisible = sectionIds[0];
+      setScrolled(c.scrollTop > 10);
+
+      const viewportH = c.clientHeight;
+      let mostVisible = sectionIds[0] ?? "home";
       let maxVisible = 0;
 
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (!el) continue;
         const rect = el.getBoundingClientRect();
-        const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+        const visible = Math.min(rect.bottom, viewportH) - Math.max(rect.top, 0);
         if (visible > maxVisible) {
           maxVisible = visible;
           mostVisible = id;
         }
       }
 
-      if (mostVisible) setActiveSection(mostVisible);
+      setActiveSection(mostVisible);
     }
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    c.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => c.removeEventListener("scroll", onScroll);
   }, []);
 
   function navigateTo(section: string) {

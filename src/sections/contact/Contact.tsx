@@ -1,12 +1,14 @@
 import { ContactInfo, ContactForm, ContactFooter } from "./components/index.js";
+import { useFadeIn } from "../../hooks/useFadeIn.js";
 
 function Contact() {
+  const ref = useFadeIn();
   return (
     <section
       id="contact"
-      className="bg-livia-navy-blue text-white flex justify-center py-24"
+      className="bg-livia-navy-blue text-white flex items-center justify-center min-h-svh py-24"
     >
-      <div className="w-full max-w-[1100px] mx-auto px-6">
+      <div ref={ref} className="fade-in w-full max-w-[1100px] mx-auto px-6">
         <div className="text-center mb-16 flex flex-col items-center gap-3">
           <p className="font-montserrat font-semibold tracking-[0.18em] uppercase text-livia-turquoise text-xs">
             Vamos conversar

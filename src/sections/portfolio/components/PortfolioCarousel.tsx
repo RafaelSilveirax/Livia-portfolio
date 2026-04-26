@@ -82,8 +82,7 @@ function PortfolioCarousel({ sections }: Props) {
   return (
     <section
       className="bg-[color-mix(in_srgb,var(--color-livia-turquoise)_18%,white)] overflow-visible"
-      style={{ padding: "100px 0 100px" }}
-      id="portfolio"
+      style={{ padding: "100px 0 100px", scrollSnapAlign: "none" }}
     >
       <div
         style={{

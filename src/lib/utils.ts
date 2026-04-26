@@ -6,5 +6,9 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function scrollToSection(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  const container = document.getElementById("scroll-container");
+  const target = document.getElementById(id);
+  if (!container || !target) return;
+  const top = target.getBoundingClientRect().top + container.scrollTop;
+  container.scrollTo({ top, behavior: "smooth" });
 }
