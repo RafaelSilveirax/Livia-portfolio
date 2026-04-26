@@ -5,12 +5,13 @@ import NavItem from "./NavItem.js";
 type Props = {
   onNavigate: (section: string) => void;
   scrolled?: boolean;
+  activeSection?: string;
 };
 
 const NAV_ITEM_CLASS =
   "font-montserrat text-white text-sm font-semibold uppercase tracking-wider transition-colors duration-200 hover:text-livia-turquoise";
 
-function NavLinks({ onNavigate, scrolled }: Props) {
+function NavLinks({ onNavigate, scrolled, activeSection }: Props) {
   return (
     <div
       className={cn(
@@ -25,6 +26,7 @@ function NavLinks({ onNavigate, scrolled }: Props) {
           label={label}
           onNavigate={onNavigate}
           className={NAV_ITEM_CLASS}
+          isActive={activeSection === id}
         />
       ))}
     </div>

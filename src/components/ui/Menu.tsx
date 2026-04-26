@@ -5,7 +5,7 @@ import SocialLinks from "./SocialLinks.js";
 import MobileMenu from "./MobileMenu.js";
 
 function Menu() {
-  const { isOpen, scrolled, navigateTo, toggleMenu } = useMenuState();
+  const { isOpen, scrolled, navigateTo, toggleMenu, activeSection } = useMenuState();
 
   return (
     <nav className="fixed top-0 w-full z-50 max-[820px]:pt-0">
@@ -24,7 +24,7 @@ function Menu() {
         )}
       >
         <div className="flex w-full gap-4 font-montserrat text-white max-[820px]:hidden">
-          <NavLinks onNavigate={navigateTo} scrolled={scrolled} />
+          <NavLinks onNavigate={navigateTo} scrolled={scrolled} activeSection={activeSection} />
           <SocialLinks
             className={cn(
               "flex items-center gap-12 px-8 h-[54px] transition-all duration-500",
