@@ -6,9 +6,9 @@ type Props = {
 
 function CarouselCardItem({ card }: Props) {
   return (
-    <article className="group flex-[0_0_calc(33.333%-12px)] bg-white rounded-2xl border-[1.5px] border-[#edf2f5] overflow-hidden cursor-pointer transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.12)]">
+    <article className="group flex-none w-[364px] max-sm:w-[324px] bg-white rounded-2xl border-[1.5px] border-[#edf2f5] overflow-hidden cursor-pointer transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.12)]">
       <div
-        className="w-full aspect-4/3 bg-cover bg-center bg-no-repeat overflow-hidden transition-transform duration-300"
+        className="w-full h-[268px] max-sm:h-[238px] bg-cover bg-center bg-no-repeat transition-transform duration-300"
         style={{ backgroundImage: `url(${card.image})` }}
         aria-hidden="true"
       />
