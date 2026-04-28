@@ -5,13 +5,14 @@ import CarouselDots from "./CarouselDots.js";
 import CarouselNav from "./CarouselNav.js";
 
 const CARD_W_LG = 364;
-const CARD_W_SM = 324;
 const GAP = 18;
 const SM_BP = 600;
 const PADDING = 64;
 
 function getCardW(vw: number) {
-  return vw < SM_BP ? CARD_W_SM : CARD_W_LG;
+  if (vw >= SM_BP) return CARD_W_LG;
+  const containerW = vw * 0.92 - PADDING;
+  return Math.floor(containerW);
 }
 
 function calcVisible(containerW: number, cardW: number) {
@@ -86,7 +87,7 @@ function CarouselSectionBlock({ section }: Props) {
           style={{ transform: `translateX(-${offset}px)` }}
         >
           {section.cards.map((card) => (
-            <CarouselCardItem key={card.id} card={card} />
+            <CarouselCardItem key={card.id} card={card} cardW={cardW} />
           ))}
         </div>
       </div>

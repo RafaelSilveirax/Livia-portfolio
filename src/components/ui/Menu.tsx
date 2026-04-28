@@ -15,10 +15,9 @@ function Menu() {
     <nav className="fixed top-0 inset-x-0 z-50">
       <div
         className={cn(
-          "absolute inset-0 glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-opacity duration-500",
-          !isOpen && "max-nav:hidden",
+          "absolute inset-0 glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-opacity duration-300",
         )}
-        style={{ opacity: scrolled && !isOpen ? 0 : 1 }}
+        style={{ opacity: isOpen || !scrolled ? 1 : 0 }}
       />
 
       <div
