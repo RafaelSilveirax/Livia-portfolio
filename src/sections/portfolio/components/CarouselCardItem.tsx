@@ -3,7 +3,7 @@ import type { CarouselCard } from "./PortfolioCarousel.js";
 type Props = {
   card: CarouselCard;
   cardW: number;
-  onOpen: (card: CarouselCard) => void;
+  onOpen: () => void;
 };
 
 const IMG_RATIO = 268 / 364;
@@ -15,11 +15,11 @@ function CarouselCardItem({ card, cardW, onOpen }: Props) {
     <article
       role="button"
       tabIndex={0}
-      onClick={() => onOpen(card)}
+      onClick={onOpen}
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") {
           e.preventDefault();
-          onOpen(card);
+          onOpen();
         }
       }}
       className="group flex-none bg-white rounded-2xl border-[1.5px] border-[#edf2f5] overflow-hidden cursor-pointer transition-[transform,box-shadow] duration-200 hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(0,0,0,0.12)] focus:outline-none focus-visible:ring-2 focus-visible:ring-livia-turquoise"

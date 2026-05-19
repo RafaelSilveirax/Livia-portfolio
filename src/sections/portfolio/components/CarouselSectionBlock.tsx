@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import type { CarouselCard, CarouselSection } from "./PortfolioCarousel.js";
+import type { CarouselSection } from "./PortfolioCarousel.js";
 import CarouselCardItem from "./CarouselCardItem.js";
 import CarouselDots from "./CarouselDots.js";
 import CarouselNav from "./CarouselNav.js";
@@ -29,7 +29,7 @@ function CarouselSectionBlock({ section }: Props) {
   const trackWrapRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(1);
   const [cardW, setCardW] = useState(CARD_W_LG);
-  const [openCard, setOpenCard] = useState<CarouselCard | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   useEffect(() => {
     const update = () => {
@@ -88,12 +88,12 @@ function CarouselSectionBlock({ section }: Props) {
           className="flex gap-[18px] transition-transform duration-350 ease-in-out"
           style={{ transform: `translateX(-${offset}px)` }}
         >
-          {section.cards.map((card) => (
+          {section.cards.map((card, i) => (
             <CarouselCardItem
               key={card.id}
               card={card}
               cardW={cardW}
-              onOpen={setOpenCard}
+              onOpen={() => setOpenIndex(i)}
             />
           ))}
         </div>
@@ -101,7 +101,12 @@ function CarouselSectionBlock({ section }: Props) {
 
       <CarouselDots count={totalPages} activeIndex={page} onDotClick={goTo} />
 
-      <PortfolioModal card={openCard} onClose={() => setOpenCard(null)} />
+      <PortfolioModal
+        cards={section.cards}
+        index={openIndex}
+        onClose={() => setOpenIndex(null)}
+        onNavigate={setOpenIndex}
+      />
     </div>
   );
 }
