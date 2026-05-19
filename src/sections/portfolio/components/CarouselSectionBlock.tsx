@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from "react";
-import type { CarouselSection } from "./PortfolioCarousel.js";
+import type { CarouselCard, CarouselSection } from "./PortfolioCarousel.js";
 import CarouselCardItem from "./CarouselCardItem.js";
 import CarouselDots from "./CarouselDots.js";
 import CarouselNav from "./CarouselNav.js";
+import PortfolioModal from "./PortfolioModal.js";
 
 const CARD_W_LG = 364;
 const GAP = 18;
@@ -28,6 +29,7 @@ function CarouselSectionBlock({ section }: Props) {
   const trackWrapRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(1);
   const [cardW, setCardW] = useState(CARD_W_LG);
+  const [openCard, setOpenCard] = useState<CarouselCard | null>(null);
 
   useEffect(() => {
     const update = () => {
@@ -87,12 +89,19 @@ function CarouselSectionBlock({ section }: Props) {
           style={{ transform: `translateX(-${offset}px)` }}
         >
           {section.cards.map((card) => (
-            <CarouselCardItem key={card.id} card={card} cardW={cardW} />
+            <CarouselCardItem
+              key={card.id}
+              card={card}
+              cardW={cardW}
+              onOpen={setOpenCard}
+            />
           ))}
         </div>
       </div>
 
       <CarouselDots count={totalPages} activeIndex={page} onDotClick={goTo} />
+
+      <PortfolioModal card={openCard} onClose={() => setOpenCard(null)} />
     </div>
   );
 }
