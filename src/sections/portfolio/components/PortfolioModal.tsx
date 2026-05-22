@@ -89,6 +89,9 @@ function PortfolioModal({ cards, index, onClose, onNavigate }: Props) {
         <img
           src={loaded.src}
           alt={displayCard.title}
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
           className="block bg-[#f5f7f9] max-w-[85vw] max-h-[calc(90vh-80px)] w-auto h-auto"
           style={{ aspectRatio: loaded.ratio }}
         />
