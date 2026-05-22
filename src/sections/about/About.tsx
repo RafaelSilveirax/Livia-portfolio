@@ -1,19 +1,35 @@
-import AboutHighlights from "./components/AboutHighlights.js";
-import AboutDecorativeBox from "./components/AboutDecorativeBox.js";
+import AboutHeader from "./components/AboutHeader.js";
+import AboutStats from "./components/AboutStats.js";
+import AboutBio from "./components/AboutBio.js";
+import AboutSkills from "./components/AboutSkills.js";
 import { useFadeIn } from "../../hooks/useFadeIn.js";
 
 function About() {
-  const leftRef = useFadeIn();
-  const rightRef = useFadeIn();
+  const headerRef = useFadeIn();
+  const statsRef = useFadeIn();
+  const bioRef = useFadeIn();
+  const skillsRef = useFadeIn();
 
   return (
-    <section id="about" className="flex items-center bg-livia-navy-blue py-24">
-      <div className="grid grid-cols-2 gap-16 max-w-page mx-auto px-6 items-start max-lg:grid-cols-1 max-lg:gap-12">
-        <div ref={leftRef} className="fade-in">
-          <AboutHighlights />
+    <section
+      id="about"
+      className="flex items-center bg-livia-navy-blue py-24 max-md:py-16"
+    >
+      <div className="flex flex-col gap-12 max-w-page mx-auto px-6 w-full max-md:gap-10">
+        <div ref={headerRef} className="fade-in">
+          <AboutHeader />
         </div>
-        <div ref={rightRef} className="fade-in">
-          <AboutDecorativeBox />
+
+        <div ref={statsRef} className="fade-in">
+          <AboutStats />
+        </div>
+
+        <div ref={bioRef} className="fade-in">
+          <AboutBio />
+        </div>
+
+        <div ref={skillsRef} className="fade-in">
+          <AboutSkills />
         </div>
       </div>
     </section>
