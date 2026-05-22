@@ -16,8 +16,8 @@ function AboutHeader() {
         aria-hidden="true"
       />
 
-      <p className="text-quote text-white/80">
-        "Arte que conecta, design que comunica."
+      <p className="font-sans text-xs uppercase tracking-widest text-white/35">
+        Arte que conecta, design que comunica
       </p>
     </div>
   );

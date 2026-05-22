@@ -2,6 +2,7 @@ import {
   IoLogoLinkedin,
   IoLogoBehance,
   IoLogoInstagram,
+  IoLogoWhatsapp,
 } from "react-icons/io5";
 
 const availabilityTags = ["Freelance", "Remoto", "Híbrido", "CLT"];
@@ -48,6 +49,16 @@ function ContactInfo() {
           ))}
         </div>
       </div>
+
+      <a
+        href="https://wa.me/5521979797946"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="glass-social self-start flex items-center gap-2 font-sans text-sm font-medium text-white/60 px-4 py-2 rounded-lg transition-colors duration-200 hover:text-livia-turquoise"
+      >
+        <IoLogoWhatsapp size={18} />
+        Chamar no WhatsApp
+      </a>
 
       <div className="flex flex-wrap gap-2.5 mt-auto">
         {socialLinks.map(({ href, Icon, label }) => (
