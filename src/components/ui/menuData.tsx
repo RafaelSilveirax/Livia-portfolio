@@ -10,10 +10,10 @@ export type NavSection = {
 };
 
 export const navSections: NavSection[] = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "portfolio", label: "Portfolio" },
-  { id: "contact", label: "Contact" },
+  { id: "home", label: "Início" },
+  { id: "about", label: "Sobre" },
+  { id: "portfolio", label: "Portfólio" },
+  { id: "contact", label: "Contato" },
 ];
 
 export type SocialLink = {

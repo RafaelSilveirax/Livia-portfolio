@@ -1,19 +1,22 @@
-import { IoColorPaletteOutline, IoVideocamOutline, IoBrushOutline } from "react-icons/io5";
+import {
+  IoColorPaletteOutline,
+  IoVideocamOutline,
+  IoBrushOutline,
+} from "react-icons/io5";
 import type { IconType } from "react-icons";
-import { cn } from "../../../lib/utils.js";
 
 type SkillGroup = {
   title: string;
+  subtitle: string;
   Icon: IconType;
   items: string[];
-  accent: boolean;
 };
 
 const groups: SkillGroup[] = [
   {
-    title: "Graphic Design",
+    title: "Design Gráfico",
+    subtitle: "Identidade visual e comunicação",
     Icon: IoColorPaletteOutline,
-    accent: true,
     items: [
       "Photoshop",
       "Illustrator",
@@ -24,9 +27,9 @@ const groups: SkillGroup[] = [
     ],
   },
   {
-    title: "Video Editor",
+    title: "Edição de Vídeo",
+    subtitle: "Narrativa em movimento",
     Icon: IoVideocamOutline,
-    accent: true,
     items: [
       "After Effects",
       "Davinci Resolve",
@@ -35,12 +38,12 @@ const groups: SkillGroup[] = [
     ],
   },
   {
-    title: "Illustration",
+    title: "Ilustração",
+    subtitle: "Arte autoral e digital",
     Icon: IoBrushOutline,
-    accent: true,
     items: [
       "Procreate",
-      "Book Illustration",
+      "Ilustração de Livros",
       "2D Digital e Manual",
       "Background",
       "Concept Art",
@@ -52,54 +55,56 @@ const groups: SkillGroup[] = [
 function AboutSkills() {
   return (
     <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
-      {groups.map(({ title, Icon, items, accent }) => (
-        <div
+      {groups.map(({ title, subtitle, Icon, items }) => (
+        <article
           key={title}
-          className={cn(
-            "relative flex flex-col gap-5 p-8 rounded-2xl overflow-hidden transition-transform duration-200 hover:-translate-y-1 max-sm:p-6",
-            accent ? "glass-card-accent" : "glass-card",
-          )}
+          className="group relative flex flex-col gap-5 p-8 rounded-2xl overflow-hidden glass-card-accent transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-20px_rgba(58,157,171,0.45)] max-sm:p-6"
         >
           <div
-            className={cn(
-              "absolute top-0 inset-x-0 h-0.5 rounded-t-2xl bg-linear-to-r to-transparent",
-              accent ? "from-livia-turquoise" : "from-white/20",
-            )}
+            className="absolute top-0 inset-x-0 h-0.5 rounded-t-2xl bg-linear-to-r from-livia-turquoise to-transparent"
             aria-hidden="true"
           />
 
-          <div className="flex items-center gap-3">
-            <span
-              className={cn(
-                "flex items-center justify-center w-10 h-10 rounded-xl",
-                accent
-                  ? "bg-livia-turquoise/15 text-livia-turquoise"
-                  : "bg-white/10 text-white/80",
-              )}
-              aria-hidden="true"
-            >
-              <Icon size={20} />
-            </span>
-            <h4 className="font-serif text-[1.15rem] font-semibold text-white">
-              {title}
-            </h4>
-          </div>
+          <div
+            className="pointer-events-none absolute -top-16 -right-16 w-40 h-40 rounded-full bg-livia-turquoise/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+            aria-hidden="true"
+          />
 
-          <ul className="flex flex-col gap-2">
+          <header className="flex flex-col gap-4">
+            <div className="flex items-center gap-3">
+              <span
+                className="flex items-center justify-center w-11 h-11 rounded-xl bg-livia-turquoise/15 text-livia-turquoise ring-1 ring-livia-turquoise/25 transition-transform duration-300 group-hover:scale-110"
+                aria-hidden="true"
+              >
+                <Icon size={22} />
+              </span>
+              <div className="flex flex-col">
+                <h4 className="font-serif text-[1.2rem] font-semibold text-white leading-tight">
+                  {title}
+                </h4>
+                <p className="font-sans text-[0.78rem] text-white/50 leading-tight">
+                  {subtitle}
+                </p>
+              </div>
+            </div>
+
+            <div
+              className="h-px w-full bg-linear-to-r from-livia-turquoise/40 via-white/10 to-transparent"
+              aria-hidden="true"
+            />
+          </header>
+
+          <ul className="flex flex-wrap gap-2">
             {items.map((item) => (
               <li
                 key={item}
-                className="flex items-center gap-2.5 font-sans text-[0.9rem] leading-snug text-white/75"
+                className="inline-flex items-center px-3 py-1 rounded-full bg-white/5 ring-1 ring-white/10 font-sans text-[0.82rem] leading-none text-white/80 transition-colors hover:bg-livia-turquoise/15 hover:ring-livia-turquoise/30 hover:text-white"
               >
-                <span
-                  className="inline-block w-1.5 h-1.5 rounded-full bg-livia-turquoise/80 shrink-0"
-                  aria-hidden="true"
-                />
                 {item}
               </li>
             ))}
           </ul>
-        </div>
+        </article>
       ))}
     </div>
   );

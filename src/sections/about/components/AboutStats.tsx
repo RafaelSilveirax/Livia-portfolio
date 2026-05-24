@@ -20,27 +20,30 @@ const stats: Stat[] = [
 
 function AboutStats() {
   return (
-    <div className="glass-form rounded-2xl p-8 max-sm:p-6">
-      <div className="grid grid-cols-3 max-md:grid-cols-1 divide-x divide-white/10 max-md:divide-x-0 max-md:divide-y">
-        {stats.map(({ value, unit, description }) => (
+    <div className="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-md:grid-cols-1">
+      {stats.map(({ value, unit, description }) => (
+        <div
+          key={description}
+          className="relative flex flex-col items-center justify-center text-center gap-2 px-6 py-5 rounded-2xl overflow-hidden glass-form transition-transform duration-200 hover:-translate-y-1 max-sm:px-4 max-sm:py-4"
+        >
           <div
-            key={description}
-            className="flex flex-col items-center text-center gap-2 px-6 py-2 max-md:py-6 max-md:px-0"
-          >
-            <div className="flex items-baseline gap-1.5">
-              <span className="font-serif text-[2.75rem] leading-none font-bold text-livia-turquoise max-sm:text-[2.25rem]">
-                {value}
-              </span>
-              <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/55">
-                {unit}
-              </span>
-            </div>
-            <p className="font-sans text-[0.9rem] leading-snug text-white/70 max-w-[22ch]">
-              {description}
-            </p>
+            className="absolute left-0 inset-y-0 w-0.5 rounded-l-2xl bg-livia-turquoise"
+            aria-hidden="true"
+          />
+
+          <div className="flex items-baseline gap-1.5">
+            <span className="font-serif text-[2.75rem] leading-none font-bold text-livia-turquoise max-sm:text-[2.25rem]">
+              {value}
+            </span>
+            <span className="font-sans text-xs font-semibold uppercase tracking-widest text-white/55">
+              {unit}
+            </span>
           </div>
-        ))}
-      </div>
+          <p className="font-sans text-[0.9rem] leading-snug text-white/70 max-w-[22ch]">
+            {description}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }

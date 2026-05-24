@@ -1,14 +1,13 @@
 function AboutHeader() {
   return (
-    <div className="flex flex-col gap-5 max-w-3xl">
+    <div className="flex flex-col gap-5 w-full">
       <p className="font-sans text-xs font-semibold uppercase tracking-widest text-white/35">
         sobre mim
       </p>
 
       <h2 className="font-serif font-bold leading-[1.05] text-white text-[clamp(2.25rem,4vw,3.5rem)]">
-        Design, Video Editing
-        <br className="max-sm:hidden" /> and{" "}
-        <span className="text-livia-turquoise">Illustration</span>
+        Design, Edição de Vídeo e{" "}
+        <span className="text-livia-turquoise">Ilustração</span>
       </h2>
 
       <div
