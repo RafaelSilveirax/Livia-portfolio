@@ -1,17 +1,34 @@
 import CarouselSectionBlock from "./CarouselSectionBlock.js";
 
-export type CarouselCard = {
+export type ImageCard = {
   id: string;
   image: string;
   title: string;
   subtitle: string;
 };
 
-export type CarouselSection = {
+export type VideoCard = {
   id: string;
+  videoId: string;
   title: string;
-  cards: CarouselCard[];
+  subtitle: string;
 };
+
+export type CarouselCard = ImageCard;
+
+export type CarouselSection =
+  | {
+      id: string;
+      title: string;
+      kind?: "image";
+      cards: ImageCard[];
+    }
+  | {
+      id: string;
+      title: string;
+      kind: "video";
+      cards: VideoCard[];
+    };
 
 type Props = {
   sections: CarouselSection[];

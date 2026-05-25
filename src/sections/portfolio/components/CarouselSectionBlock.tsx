@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import type { CarouselSection } from "./PortfolioCarousel.js";
 import CarouselCardItem from "./CarouselCardItem.js";
+import VideoCardItem from "./VideoCardItem.js";
 import CarouselDots from "./CarouselDots.js";
 import CarouselNav from "./CarouselNav.js";
 import PortfolioModal from "./PortfolioModal.js";
@@ -30,6 +31,8 @@ function CarouselSectionBlock({ section }: Props) {
   const [visible, setVisible] = useState(1);
   const [cardW, setCardW] = useState(CARD_W_LG);
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const isVideo = section.kind === "video";
 
   useEffect(() => {
     const update = () => {
@@ -88,25 +91,31 @@ function CarouselSectionBlock({ section }: Props) {
           className="flex gap-[18px] transition-transform duration-350 ease-in-out"
           style={{ transform: `translateX(-${offset}px)` }}
         >
-          {section.cards.map((card, i) => (
-            <CarouselCardItem
-              key={card.id}
-              card={card}
-              cardW={cardW}
-              onOpen={() => setOpenIndex(i)}
-            />
-          ))}
+          {isVideo
+            ? section.cards.map((card) => (
+                <VideoCardItem key={card.id} card={card} cardW={cardW} />
+              ))
+            : section.cards.map((card, i) => (
+                <CarouselCardItem
+                  key={card.id}
+                  card={card}
+                  cardW={cardW}
+                  onOpen={() => setOpenIndex(i)}
+                />
+              ))}
         </div>
       </div>
 
       <CarouselDots count={totalPages} activeIndex={page} onDotClick={goTo} />
 
-      <PortfolioModal
-        cards={section.cards}
-        index={openIndex}
-        onClose={() => setOpenIndex(null)}
-        onNavigate={setOpenIndex}
-      />
+      {!isVideo && (
+        <PortfolioModal
+          cards={section.cards}
+          index={openIndex}
+          onClose={() => setOpenIndex(null)}
+          onNavigate={setOpenIndex}
+        />
+      )}
     </div>
   );
 }

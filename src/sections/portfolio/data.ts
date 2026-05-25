@@ -183,4 +183,29 @@ export const portfolioSections: CarouselSection[] = [
       },
     ],
   },
+  {
+    id: "video-editing",
+    title: "Edição de Vídeo",
+    kind: "video",
+    cards: [
+      {
+        id: "vid-1",
+        videoId: "UYXMBkMz4Ho",
+        title: "florstry",
+        subtitle: "Davinci Resolve",
+      },
+      {
+        id: "vid-2",
+        videoId: "UYXMBkMz4Ho",
+        title: "florstry",
+        subtitle: "Davinci Resolve",
+      },
+      {
+        id: "vid-3",
+        videoId: "UYXMBkMz4Ho",
+        title: "florstry",
+        subtitle: "Davinci Resolve",
+      },
+    ],
+  },
 ];
