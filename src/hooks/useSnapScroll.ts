@@ -1,8 +1,12 @@
 import { useEffect } from "react";
 
 const DURATION = 850;
+const EDGE_TOLERANCE = 4;
 const EASING = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+const SECTION_IDS = ["home", "about", "portfolio", "contact"] as const;
+type SectionId = (typeof SECTION_IDS)[number];
 
 export function useSnapScroll(containerId: string) {
   useEffect(() => {
@@ -43,61 +47,52 @@ export function useSnapScroll(containerId: string) {
       return el.getBoundingClientRect().top + container!.scrollTop;
     }
 
-    function isContactVisible(): boolean {
-      const el = document.getElementById("contact");
-      if (!el) return false;
-      return el.getBoundingClientRect().top <= container!.clientHeight;
-    }
-
-    function isPortfolioVisible(): boolean {
-      const el = document.getElementById("portfolio");
-      if (!el) return false;
-      return el.getBoundingClientRect().top <= container!.clientHeight;
-    }
-
-    function isAtTop(id: string): boolean {
-      const el = document.getElementById(id);
-      if (!el) return false;
-      return el.getBoundingClientRect().top >= -30;
-    }
-
-    function currentSection(): string {
-      const ids = ["contact", "portfolio", "about", "home"];
-      for (const id of ids) {
+    function currentSection(): SectionId {
+      const viewportMid = container!.clientHeight / 2;
+      let active: SectionId = "home";
+      for (const id of SECTION_IDS) {
         const el = document.getElementById(id);
         if (!el) continue;
-        if (el.getBoundingClientRect().top <= container!.clientHeight / 2) return id;
+        const top = el.getBoundingClientRect().top;
+        if (top <= viewportMid) active = id;
       }
-      return "home";
+      return active;
     }
 
-    function findTarget(direction: 1 | -1): number | null {
-      const homeTop = topOf("home");
-      const aboutTop = topOf("about");
-      const portfolioTop = topOf("portfolio");
-      const contactTop = topOf("contact");
-
-      const section = currentSection();
+    function shouldYieldToNative(direction: 1 | -1): boolean {
+      const el = document.getElementById(currentSection());
+      if (!el) return false;
+      const rect = el.getBoundingClientRect();
+      const viewportH = container!.clientHeight;
+      if (rect.height <= viewportH + 1) return false;
 
       if (direction === 1) {
-        if (section === "home") return aboutTop;
-        if (section === "about" && isPortfolioVisible()) return portfolioTop;
-        if (section === "portfolio" && isContactVisible()) return contactTop;
-        return null;
-      } else {
-        if (section === "contact" && isAtTop("contact")) return portfolioTop;
-        if (section === "portfolio" && isAtTop("portfolio")) return aboutTop;
-        if (section === "about" && isAtTop("about")) return homeTop;
-        return null;
+        return rect.bottom > viewportH + EDGE_TOLERANCE;
       }
+      return rect.top < -EDGE_TOLERANCE;
+    }
+
+    function nextSectionTop(direction: 1 | -1): number | null {
+      const section = currentSection();
+      const idx = SECTION_IDS.indexOf(section);
+      const nextIdx = idx + direction;
+      if (nextIdx < 0 || nextIdx >= SECTION_IDS.length) return null;
+      return topOf(SECTION_IDS[nextIdx]!);
     }
 
     function onWheel(e: WheelEvent) {
+      const direction: 1 | -1 = e.deltaY > 0 ? 1 : -1;
+
+      if (shouldYieldToNative(direction)) {
+        return;
+      }
+
       if (isAnimating || cooldown) {
         e.preventDefault();
         return;
       }
-      const target = findTarget(e.deltaY > 0 ? 1 : -1);
+
+      const target = nextSectionTop(direction);
       if (target !== null) {
         e.preventDefault();
         animateTo(target);
@@ -114,7 +109,11 @@ export function useSnapScroll(containerId: string) {
       if (isAnimating || cooldown) return;
       const dy = touchStartY - (e.changedTouches[0]?.clientY ?? 0);
       if (Math.abs(dy) < 40) return;
-      const target = findTarget(dy > 0 ? 1 : -1);
+      const direction: 1 | -1 = dy > 0 ? 1 : -1;
+
+      if (shouldYieldToNative(direction)) return;
+
+      const target = nextSectionTop(direction);
       if (target !== null) animateTo(target);
     }
 

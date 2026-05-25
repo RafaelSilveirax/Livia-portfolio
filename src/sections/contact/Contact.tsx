@@ -6,7 +6,7 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="flex flex-col bg-livia-navy-blue text-white"
+      className="flex flex-col min-h-svh bg-livia-navy-blue text-white"
     >
       <div className="flex-1 flex items-center justify-center py-24 max-md:py-16">
         <div

@@ -50,7 +50,6 @@
   }
 
   section {
-    min-height: 100svh;
     flex-shrink: 0;
   }
 

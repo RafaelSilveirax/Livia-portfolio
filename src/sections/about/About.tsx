@@ -13,7 +13,7 @@ function About() {
   return (
     <section
       id="about"
-      className="flex items-center bg-livia-navy-blue py-24 max-md:py-16"
+      className="flex items-center min-h-svh bg-livia-navy-blue py-24 max-md:py-16"
     >
       <div className="flex flex-col gap-12 max-w-page mx-auto px-6 w-full max-md:gap-10">
         <div ref={headerRef} className="fade-in">
