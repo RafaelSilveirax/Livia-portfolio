@@ -1,4 +1,6 @@
 import type { VideoCard } from "./PortfolioCarousel.js";
+import "lite-youtube-embed";
+import "lite-youtube-embed/src/lite-yt-embed.css";
 
 type Props = {
   card: VideoCard;

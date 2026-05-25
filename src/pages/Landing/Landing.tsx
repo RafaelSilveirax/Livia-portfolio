@@ -1,9 +1,11 @@
+import { lazy, Suspense } from "react";
 import Menu from "../../components/ui/Menu.js";
 import Home from "../../sections/home/Home.js";
-import About from "../../sections/about/About.js";
-import Portfolio from "../../sections/portfolio/Portfolio.js";
-import Contact from "../../sections/contact/index.js";
 import { useSnapScroll } from "../../hooks/useSnapScroll.js";
+
+const About = lazy(() => import("../../sections/about/About.js"));
+const Portfolio = lazy(() => import("../../sections/portfolio/Portfolio.js"));
+const Contact = lazy(() => import("../../sections/contact/Contact.js"));
 
 const SKIP_LINK_CLASS =
   "sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[200] " +
@@ -23,9 +25,11 @@ export function Landing() {
       </a>
       <Menu />
       <Home />
-      <About />
-      <Portfolio />
-      <Contact />
+      <Suspense fallback={<div style={{ minHeight: "100svh" }} />}>
+        <About />
+        <Portfolio />
+        <Contact />
+      </Suspense>
     </main>
   );
 }
