@@ -1,5 +1,5 @@
-import { useState, type FormEvent } from "react";
-import { IoPaperPlane } from "react-icons/io5";
+import { useEffect, useState, type FormEvent } from "react";
+import { IoPaperPlane, IoCheckmarkCircle, IoAlertCircle } from "react-icons/io5";
 import emailjs from "@emailjs/browser";
 
 const FIELD_CLASS =
@@ -26,6 +26,12 @@ function ContactForm() {
 
   const charCount = message.length;
 
+  useEffect(() => {
+    if (status !== "success" && status !== "error") return;
+    const timeout = window.setTimeout(() => setStatus("idle"), 6000);
+    return () => window.clearTimeout(timeout);
+  }, [status]);
+
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (status === "sending") return;
@@ -46,10 +52,9 @@ function ContactForm() {
         serviceId,
         templateId,
         {
-          from_name: name,
-          from_email: email,
+          name,
+          email,
           message,
-          to_email: "Liviazaballai@gmail.com",
         },
         { publicKey },
       );
@@ -64,93 +69,121 @@ function ContactForm() {
   }
 
   return (
-    <div className="glass-form rounded-2xl p-8 max-sm:p-6">
-      <form
-        className="flex flex-col gap-5"
-        onSubmit={handleSubmit}
-        aria-label="Formulário de contato"
-        noValidate={false}
-      >
-        <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="contact-name" className={LABEL_CLASS}>
-              Nome
-              <RequiredMark />
-            </label>
-            <input
-              id="contact-name"
-              type="text"
-              required
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              placeholder="Seu nome"
-              className={FIELD_CLASS}
-            />
-          </div>
-
-          <div className="flex flex-col gap-1.5">
-            <label htmlFor="contact-email" className={LABEL_CLASS}>
-              E-mail
-              <RequiredMark />
-            </label>
-            <input
-              id="contact-email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="seu@email.com"
-              className={FIELD_CLASS}
-            />
-          </div>
-        </div>
-
-        <div className="flex flex-col gap-1.5">
-          <label htmlFor="contact-message" className={LABEL_CLASS}>
-            Mensagem
-            <RequiredMark />
-          </label>
-          <textarea
-            id="contact-message"
-            rows={5}
-            required
-            maxLength={500}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="Conte sobre o projeto ou oportunidade..."
-            className={`${FIELD_CLASS} resize-none`}
-          />
-          <span className="font-sans text-xs text-white/25 text-right">
-            {charCount}/500
-          </span>
-        </div>
-
-        <button
-          type="submit"
-          disabled={status === "sending"}
-          className="btn-primary mt-1 self-start flex items-center gap-2 px-8 py-3.5 text-sm tracking-wide bg-livia-turquoise text-white hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed max-sm:self-stretch max-sm:justify-center"
+    <div className="flex flex-col gap-4">
+      <div className="glass-form rounded-2xl p-8 max-sm:p-6">
+        <form
+          className="flex flex-col gap-5"
+          onSubmit={handleSubmit}
+          aria-label="Formulário de contato"
+          noValidate={false}
         >
-          <IoPaperPlane size={16} aria-hidden="true" />
-          {status === "sending" ? "Enviando..." : "Enviar Mensagem"}
-        </button>
+          <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="contact-name" className={LABEL_CLASS}>
+                Nome
+                <RequiredMark />
+              </label>
+              <input
+                id="contact-name"
+                type="text"
+                required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Seu nome"
+                className={FIELD_CLASS}
+              />
+            </div>
 
-        {status === "success" && (
-          <p
-            role="status"
-            className="font-sans text-sm text-livia-turquoise"
+            <div className="flex flex-col gap-1.5">
+              <label htmlFor="contact-email" className={LABEL_CLASS}>
+                E-mail
+                <RequiredMark />
+              </label>
+              <input
+                id="contact-email"
+                type="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="seu@email.com"
+                className={FIELD_CLASS}
+              />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1.5">
+            <label htmlFor="contact-message" className={LABEL_CLASS}>
+              Mensagem
+              <RequiredMark />
+            </label>
+            <textarea
+              id="contact-message"
+              rows={5}
+              required
+              maxLength={500}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="Conte sobre o projeto ou oportunidade..."
+              className={`${FIELD_CLASS} resize-none`}
+            />
+            <span className="font-sans text-xs text-white/25 text-right">
+              {charCount}/500
+            </span>
+          </div>
+
+          <button
+            type="submit"
+            disabled={status === "sending"}
+            className="btn-primary mt-1 self-start flex items-center gap-2 px-8 py-3.5 text-sm tracking-wide bg-livia-turquoise text-white hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed max-sm:self-stretch max-sm:justify-center"
           >
-            Mensagem enviada! Em breve eu te respondo.
-          </p>
-        )}
-        {status === "error" && (
-          <p
-            role="alert"
-            className="font-sans text-sm text-livia-dark-coral"
-          >
-            Não consegui enviar. Tenta novamente ou me chama no WhatsApp.
-          </p>
-        )}
-      </form>
+            <IoPaperPlane size={16} aria-hidden="true" />
+            {status === "sending" ? "Enviando..." : "Enviar Mensagem"}
+          </button>
+        </form>
+      </div>
+
+      {status === "success" && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="glass-field flex w-full items-start gap-3 rounded-xl border border-livia-turquoise/40 bg-livia-turquoise/10 px-4 py-3.5 animate-[hero-rise_0.35s_ease-out_both]"
+        >
+          <IoCheckmarkCircle
+            size={22}
+            className="shrink-0 text-livia-turquoise"
+            aria-hidden="true"
+          />
+          <div className="flex flex-col gap-0.5">
+            <p className="font-sans text-sm font-semibold text-white">
+              Mensagem enviada com sucesso!
+            </p>
+            <p className="font-sans text-xs text-white/60">
+              Obrigada pelo contato — respondo em breve no e-mail informado.
+            </p>
+          </div>
+        </div>
+      )}
+      {status === "error" && (
+        <div
+          role="alert"
+          aria-live="assertive"
+          className="glass-field flex w-full items-start gap-3 rounded-xl border border-livia-dark-coral/40 bg-livia-dark-coral/10 px-4 py-3.5 animate-[hero-rise_0.35s_ease-out_both]"
+        >
+          <IoAlertCircle
+            size={22}
+            className="shrink-0 text-livia-dark-coral"
+            aria-hidden="true"
+          />
+          <div className="flex flex-col gap-0.5">
+            <p className="font-sans text-sm font-semibold text-white">
+              Não consegui enviar sua mensagem.
+            </p>
+            <p className="font-sans text-xs text-white/60">
+              Tenta novamente em alguns instantes ou me chama no WhatsApp.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
