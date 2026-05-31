@@ -91,6 +91,19 @@
     @apply font-sans font-semibold rounded-full transition-[transform,background-color,color,opacity] duration-300 ease-in-out hover:-translate-y-[3px];
   }
 
+  /* Pill CTA com bolinha + seta (ex.: Hero "Ver Trabalhos") */
+  .btn-pill-cta {
+    @apply relative inline-flex items-center gap-3 font-sans font-semibold uppercase tracking-[0.18em] text-xs text-livia-turquoise bg-white rounded-full pl-7 pr-2 py-2 transition-[transform,background-color,color] duration-300 ease-in-out hover:-translate-y-[3px] hover:bg-livia-turquoise hover:text-white;
+  }
+
+  .btn-pill-cta__icon {
+    @apply inline-flex items-center justify-center w-9 h-9 rounded-full bg-livia-turquoise text-white transition-[transform,background-color,color] duration-300 ease-in-out;
+  }
+
+  .btn-pill-cta:hover .btn-pill-cta__icon {
+    @apply bg-white text-livia-turquoise scale-110 rotate-12;
+  }
+
   /* Hamburger lines */
   .menu-btn span {
     @apply block w-[22px] h-[2px] bg-current rounded-full;
@@ -264,6 +277,25 @@
   animation: hero-draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
+@keyframes hero-draw-loop {
+  0% {
+    stroke-dashoffset: var(--draw-length, 400);
+  }
+  45%,
+  55% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: var(--draw-length, 400);
+  }
+}
+
+.hero-draw-loop {
+  stroke-dasharray: var(--draw-length, 400);
+  stroke-dashoffset: var(--draw-length, 400);
+  animation: hero-draw-loop 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+}
+
 .hero-float {
   animation: hero-float 6s ease-in-out infinite;
 }
@@ -302,6 +334,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-rise,
   .hero-draw,
+  .hero-draw-loop,
   .hero-float,
   .hero-blob,
   .hero-spin {
