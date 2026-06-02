@@ -20,15 +20,15 @@ function Home() {
       </div>
 
       <a
-        href="#portfolio"
+        href="#about"
         onClick={(e) => {
           e.preventDefault();
-          scrollToSection("portfolio");
+          scrollToSection("about");
         }}
         className="btn-pill-cta hero-rise absolute bottom-10 left-1/2 -translate-x-1/2 z-3 max-md:bottom-6"
         style={{ animationDelay: "0.7s" }}
       >
-        Ver Trabalhos
+        Sobre mim
         <span className="btn-pill-cta__icon" aria-hidden="true">
           <svg
             viewBox="0 0 24 24"

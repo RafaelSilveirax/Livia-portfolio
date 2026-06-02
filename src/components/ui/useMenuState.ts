@@ -6,7 +6,6 @@ const DESKTOP_BREAKPOINT = "(min-width: 821px)";
 
 export function useMenuState() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
@@ -28,8 +27,6 @@ export function useMenuState() {
     const sectionIds = navSections.map((s) => s.id);
 
     function onScroll() {
-      setScrolled(c.scrollTop > 10);
-
       const viewportH = c.clientHeight;
       let mostVisible = sectionIds[0] ?? "home";
       let maxVisible = 0;
@@ -63,5 +60,5 @@ export function useMenuState() {
     setIsOpen((prev) => !prev);
   }
 
-  return { isOpen, scrolled, navigateTo, toggleMenu, activeSection };
+  return { isOpen, navigateTo, toggleMenu, activeSection };
 }

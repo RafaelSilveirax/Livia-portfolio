@@ -101,7 +101,7 @@
   }
 
   .btn-pill-cta:hover .btn-pill-cta__icon {
-    @apply bg-white text-livia-turquoise scale-110 rotate-12;
+    @apply bg-white text-livia-turquoise;
   }
 
   /* Hamburger lines */

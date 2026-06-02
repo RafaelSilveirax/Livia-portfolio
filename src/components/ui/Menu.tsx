@@ -8,8 +8,7 @@ const SOCIAL_LINK_CLASS =
   "flex items-center text-white transition-colors duration-200 hover:text-livia-turquoise";
 
 function Menu() {
-  const { isOpen, scrolled, navigateTo, toggleMenu, activeSection } =
-    useMenuState();
+  const { isOpen, navigateTo, toggleMenu, activeSection } = useMenuState();
 
   return (
     <nav className="fixed top-0 inset-x-0 z-50">
@@ -17,28 +16,14 @@ function Menu() {
         className={cn(
           "absolute inset-0 glass-nav shadow-[0_8px_30px_rgba(0,0,0,0.15)] transition-opacity duration-300",
         )}
-        style={{ opacity: isOpen || !scrolled ? 1 : 0 }}
+        style={{ opacity: isOpen ? 1 : 0 }}
       />
 
-      <div
-        className={cn(
-          "relative mx-auto flex items-center justify-end max-w-page px-4 transition-all duration-500",
-          "max-nav:py-3",
-          scrolled ? "py-4 pt-5" : "py-0",
-        )}
-      >
+      <div className="relative mx-auto flex items-center justify-end max-w-page px-4 max-nav:py-3 py-4 pt-5">
         <div className="flex w-full gap-4 font-sans text-white max-nav:hidden">
-          <NavLinks
-            onNavigate={navigateTo}
-            scrolled={scrolled}
-            activeSection={activeSection}
-          />
+          <NavLinks onNavigate={navigateTo} activeSection={activeSection} />
           <SocialLinks
-            className={cn(
-              "flex items-center gap-12 h-[54px] px-8 transition-all duration-500",
-              scrolled &&
-                "glass-nav rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.15)]",
-            )}
+            className="flex items-center gap-12 h-[54px] px-8 glass-nav rounded-lg shadow-[0_8px_30px_rgba(0,0,0,0.15)]"
             linkClassName={SOCIAL_LINK_CLASS}
           />
         </div>
