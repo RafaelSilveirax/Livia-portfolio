@@ -11,16 +11,25 @@ function HeroBackground() {
     const container = document.getElementById("scroll-container");
     if (!container) return;
 
+    let rafId: number | null = null;
+
     function handleScroll() {
-      if (!imgRef.current || !container) return;
-      const scrollY = container.scrollTop;
-      if (scrollY < window.innerHeight) {
-        imgRef.current.style.transform = `translateY(${scrollY * 0.4}px)`;
-      }
+      if (rafId !== null) return;
+      rafId = requestAnimationFrame(() => {
+        rafId = null;
+        if (!imgRef.current || !container) return;
+        const scrollY = container.scrollTop;
+        if (scrollY < window.innerHeight) {
+          imgRef.current.style.transform = `translateY(${scrollY * 0.4}px)`;
+        }
+      });
     }
 
     container.addEventListener("scroll", handleScroll, { passive: true });
-    return () => container.removeEventListener("scroll", handleScroll);
+    return () => {
+      container.removeEventListener("scroll", handleScroll);
+      if (rafId !== null) cancelAnimationFrame(rafId);
+    };
   }, []);
 
   return (

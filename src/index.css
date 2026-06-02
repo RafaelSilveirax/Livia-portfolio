@@ -38,7 +38,7 @@
    ────────────────────────────────────────────────────────── */
 @layer base {
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-livia-navy-blue text-foreground font-sans;
     overflow: hidden;
     height: 100svh;
   }
@@ -300,31 +300,10 @@
   animation: hero-float 6s ease-in-out infinite;
 }
 
-@keyframes hero-blob {
-  0%,
-  100% {
-    border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
-    transform: translate(0, 0) rotate(0deg) scale(1);
-  }
-  33% {
-    border-radius: 40% 60% 45% 55% / 60% 45% 55% 40%;
-    transform: translate(20px, -15px) rotate(8deg) scale(1.05);
-  }
-  66% {
-    border-radius: 55% 45% 60% 40% / 45% 55% 40% 60%;
-    transform: translate(-15px, 12px) rotate(-6deg) scale(0.97);
-  }
-}
-
 @keyframes hero-spin {
   to {
     transform: rotate(360deg);
   }
-}
-
-.hero-blob {
-  animation: hero-blob 14s ease-in-out infinite;
-  will-change: transform, border-radius;
 }
 
 .hero-spin {
@@ -336,7 +315,6 @@
   .hero-draw,
   .hero-draw-loop,
   .hero-float,
-  .hero-blob,
   .hero-spin {
     animation: none;
     opacity: 1;

@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 
-const DURATION = 850;
-const EDGE_TOLERANCE = 4;
+const DURATION = 550;
+const EDGE_TOLERANCE = 12;
+const COOLDOWN = 150;
+
 const EASING = (t: number) =>
   t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
 
@@ -14,14 +16,19 @@ export function useSnapScroll(containerId: string) {
     if (!container) return;
 
     let isAnimating = false;
-    let cooldown = false;
+    let cooldownUntil = 0;
+
+    function isCooling() {
+      return performance.now() < cooldownUntil;
+    }
 
     function animateTo(target: number) {
-      isAnimating = true;
-      cooldown = true;
-
+      if (isAnimating || isCooling()) return;
       const start = container!.scrollTop;
       const distance = target - start;
+      if (Math.abs(distance) < 2) return;
+
+      isAnimating = true;
       const startTime = performance.now();
 
       function tick(now: number) {
@@ -32,9 +39,7 @@ export function useSnapScroll(containerId: string) {
           requestAnimationFrame(tick);
         } else {
           isAnimating = false;
-          setTimeout(() => {
-            cooldown = false;
-          }, 200);
+          cooldownUntil = performance.now() + COOLDOWN;
         }
       }
 
@@ -48,82 +53,103 @@ export function useSnapScroll(containerId: string) {
     }
 
     function currentSection(): SectionId {
-      const viewportMid = container!.clientHeight / 2;
-      let active: SectionId = "home";
+      const mid = container!.scrollTop + container!.clientHeight / 2;
+      let best: SectionId = "home";
       for (const id of SECTION_IDS) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        const top = el.getBoundingClientRect().top;
-        if (top <= viewportMid) active = id;
+        if (topOf(id) <= mid) best = id;
       }
-      return active;
+      return best;
     }
 
     function shouldYieldToNative(direction: 1 | -1): boolean {
       const el = document.getElementById(currentSection());
       if (!el) return false;
       const rect = el.getBoundingClientRect();
-      const viewportH = container!.clientHeight;
-      if (rect.height <= viewportH + 1) return false;
-
-      if (direction === 1) {
-        return rect.bottom > viewportH + EDGE_TOLERANCE;
-      }
-      return rect.top < -EDGE_TOLERANCE;
+      const vh = container!.clientHeight;
+      if (rect.height <= vh + EDGE_TOLERANCE) return false;
+      return direction === 1
+        ? rect.bottom > vh + EDGE_TOLERANCE
+        : rect.top < -EDGE_TOLERANCE;
     }
 
-    function nextSectionTop(direction: 1 | -1): number | null {
-      const section = currentSection();
-      const idx = SECTION_IDS.indexOf(section);
-      const nextIdx = idx + direction;
-      if (nextIdx < 0 || nextIdx >= SECTION_IDS.length) return null;
-      return topOf(SECTION_IDS[nextIdx]!);
+    function nextTop(direction: 1 | -1): number | null {
+      const idx = SECTION_IDS.indexOf(currentSection());
+      const next = idx + direction;
+      if (next < 0 || next >= SECTION_IDS.length) return null;
+      return topOf(SECTION_IDS[next]!);
     }
+
+    // ── Wheel ──────────────────────────────────────────────────────────────────
 
     function onWheel(e: WheelEvent) {
-      const direction: 1 | -1 = e.deltaY > 0 ? 1 : -1;
+      const dir: 1 | -1 = e.deltaY > 0 ? 1 : -1;
 
-      if (shouldYieldToNative(direction)) {
-        return;
-      }
+      if (shouldYieldToNative(dir)) return;
 
-      if (isAnimating || cooldown) {
-        e.preventDefault();
-        return;
-      }
+      e.preventDefault();
 
-      const target = nextSectionTop(direction);
-      if (target !== null) {
-        e.preventDefault();
-        animateTo(target);
-      }
+      if (isAnimating || isCooling()) return;
+      if (Math.abs(e.deltaY) < 2) return;
+
+      const target = nextTop(dir);
+      if (target !== null) animateTo(target);
     }
 
+    // ── Touch ──────────────────────────────────────────────────────────────────
+
     let touchStartY = 0;
+    let touchLastY = 0;
+    let touchLocked: "none" | "native" | "snap" = "none";
 
     function onTouchStart(e: TouchEvent) {
       touchStartY = e.touches[0]?.clientY ?? 0;
+      touchLastY = touchStartY;
+      touchLocked = "none";
     }
 
-    function onTouchEnd(e: TouchEvent) {
-      if (isAnimating || cooldown) return;
-      const dy = touchStartY - (e.changedTouches[0]?.clientY ?? 0);
+    function onTouchMove(e: TouchEvent) {
+      const y = e.touches[0]?.clientY ?? 0;
+      touchLastY = y;
+
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
+
+      if (touchLocked === "snap") {
+        e.preventDefault();
+        return;
+      }
+
+      if (touchLocked === "none" && Math.abs(touchStartY - y) >= 10) {
+        const dir: 1 | -1 = touchStartY > y ? 1 : -1;
+        touchLocked = shouldYieldToNative(dir) ? "native" : "snap";
+        if (touchLocked === "snap") e.preventDefault();
+      }
+    }
+
+    function onTouchEnd() {
+      if (isAnimating || isCooling()) return;
+
+      const dy = touchStartY - touchLastY;
       if (Math.abs(dy) < 40) return;
-      const direction: 1 | -1 = dy > 0 ? 1 : -1;
 
-      if (shouldYieldToNative(direction)) return;
+      const dir: 1 | -1 = dy > 0 ? 1 : -1;
+      if (touchLocked === "native" && shouldYieldToNative(dir)) return;
 
-      const target = nextSectionTop(direction);
+      const target = nextTop(dir);
       if (target !== null) animateTo(target);
     }
 
     container.addEventListener("wheel", onWheel, { passive: false });
     container.addEventListener("touchstart", onTouchStart, { passive: true });
+    container.addEventListener("touchmove", onTouchMove, { passive: false });
     container.addEventListener("touchend", onTouchEnd, { passive: true });
 
     return () => {
       container.removeEventListener("wheel", onWheel);
       container.removeEventListener("touchstart", onTouchStart);
+      container.removeEventListener("touchmove", onTouchMove);
       container.removeEventListener("touchend", onTouchEnd);
     };
   }, [containerId]);

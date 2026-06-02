@@ -1,6 +1,6 @@
 import { IoArrowDown } from "react-icons/io5";
 import HeroBackground from "./components/HeroBackground.js";
-import HeroBlobs from "./components/HeroBlobs.js";
+
 import HeroCard from "./components/HeroCard.js";
 import { scrollToSection } from "../../lib/utils.js";
 
