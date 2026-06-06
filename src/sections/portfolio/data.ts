@@ -26,6 +26,13 @@ import canvas4 from "../../assets/canvas/4- Dourado-Arte digital em Quadro.png";
 import canvas5 from "../../assets/canvas/5 -Noturno-Tinta Acrílica sobre madeira.jpg";
 import canvas6 from "../../assets/canvas/6 - Cabeça para baixo-Tinta Acrílica sobre papelão.jpg";
 
+import prints1 from "../../assets/prints/agony.png";
+import prints2 from "../../assets/prints/deeplove.png";
+import prints3 from "../../assets/prints/lifeisart.png";
+import prints4 from "../../assets/prints/slay.png";
+import prints5 from "../../assets/prints/song.png";
+import prints6 from "../../assets/prints/witch.png";
+
 export const portfolioSections: CarouselSection[] = [
   {
     id: "graphic-design",
@@ -184,6 +191,48 @@ export const portfolioSections: CarouselSection[] = [
     ],
   },
   {
+    id: "prints",
+    title: "Prints",
+    cards: [
+      {
+        id: "pr-1",
+        image: prints1,
+        title: "Agony",
+        subtitle: "Photoshop",
+      },
+      {
+        id: "pr-2",
+        image: prints2,
+        title: "Deeplove",
+        subtitle: "Photoshop",
+      },
+      {
+        id: "pr-3",
+        image: prints3,
+        title: "Lifeisart",
+        subtitle: "Photoshop",
+      },
+      {
+        id: "pr-4",
+        image: prints4,
+        title: "Slay",
+        subtitle: "Photoshop",
+      },
+      {
+        id: "pr-5",
+        image: prints5,
+        title: "Song",
+        subtitle: "Photoshop",
+      },
+      {
+        id: "pr-6",
+        image: prints6,
+        title: "Witch",
+        subtitle: "Photoshop",
+      },
+    ],
+  },
+  {
     id: "video-editing",
     title: "Edição de Vídeo",
     kind: "video",
@@ -191,19 +240,31 @@ export const portfolioSections: CarouselSection[] = [
       {
         id: "vid-1",
         videoId: "UYXMBkMz4Ho",
-        title: "florstry",
+        title: "Florstry",
         subtitle: "Davinci Resolve",
       },
       {
         id: "vid-2",
-        videoId: "UYXMBkMz4Ho",
-        title: "florstry",
-        subtitle: "Davinci Resolve",
+        videoId: "xYuNhRN1s9Y",
+        title: "Poetas como eu | Laura",
+        subtitle: "Capcut",
       },
       {
         id: "vid-3",
-        videoId: "UYXMBkMz4Ho",
-        title: "florstry",
+        videoId: "y0-LNL7gvsU",
+        title: "Saúde e Beleza-Teste",
+        subtitle: "Davinci Resolve",
+      },
+      {
+        id: "vid-4",
+        videoId: "RgAs4dN4eR0",
+        title: "Tajikistan-Teste",
+        subtitle: "Capcut",
+      },
+      {
+        id: "vid-5",
+        videoId: "W7LV5SOxxBE",
+        title: "Rillos-Teste",
         subtitle: "Davinci Resolve",
       },
     ],
