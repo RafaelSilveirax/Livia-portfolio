@@ -277,23 +277,33 @@
   animation: hero-draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
-@keyframes hero-draw-loop {
-  0% {
-    stroke-dashoffset: var(--draw-length, 400);
-  }
-  45%,
-  55% {
-    stroke-dashoffset: 0;
-  }
-  100% {
-    stroke-dashoffset: var(--draw-length, 400);
+@keyframes hero-color-cycle {
+  to {
+    background-position: 300% 0;
   }
 }
 
-.hero-draw-loop {
-  stroke-dasharray: var(--draw-length, 400);
-  stroke-dashoffset: var(--draw-length, 400);
-  animation: hero-draw-loop 5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+/* Ciclo de cor — a paleta da identidade corre pelas letras (clip no texto).
+   padding-right estende a caixa do gradiente p/ cobrir a ponta do itálico;
+   o margin-right negativo cancela esse espaço no layout, mantendo o alinhamento. */
+.hero-color-cycle {
+  display: inline-block;
+  padding-right: 0.16em;
+  margin-right: -0.16em;
+  background: linear-gradient(
+    90deg,
+    var(--color-livia-turquoise),
+    var(--color-livia-mustard),
+    var(--color-livia-copper),
+    var(--color-livia-dark-coral),
+    var(--color-livia-turquoise)
+  );
+  background-size: 300% 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: hero-color-cycle 7s linear infinite;
 }
 
 .hero-float {
@@ -313,7 +323,7 @@
 @media (prefers-reduced-motion: reduce) {
   .hero-rise,
   .hero-draw,
-  .hero-draw-loop,
+  .hero-color-cycle,
   .hero-float,
   .hero-spin {
     animation: none;

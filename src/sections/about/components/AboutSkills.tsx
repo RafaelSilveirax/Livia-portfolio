@@ -80,7 +80,7 @@ function AboutSkills() {
               </span>
               <div className="flex flex-col">
                 <h4 className="font-serif text-[1.2rem] font-semibold text-white leading-tight">
-                  {title}
+                  <span className="hero-color-cycle">{title}</span>
                 </h4>
                 <p className="font-sans text-[0.78rem] text-white/50 leading-tight">
                   {subtitle}

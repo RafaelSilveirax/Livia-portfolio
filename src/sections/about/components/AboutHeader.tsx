@@ -7,7 +7,7 @@ function AboutHeader() {
 
       <h2 className="font-serif font-bold leading-[1.05] text-white text-[clamp(2.25rem,4vw,3.5rem)]">
         Design, Edição de Vídeo e{" "}
-        <span className="text-livia-turquoise">Ilustração</span>
+        <span className="hero-color-cycle">Ilustração</span>
       </h2>
 
       <div

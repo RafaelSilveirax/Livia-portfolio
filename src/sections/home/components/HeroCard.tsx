@@ -82,35 +82,14 @@ function HeroCard() {
         </p>
       </div>
 
-      {/* Title — massive editorial */}
+      {/* Title — massive editorial, "Ballai" com ciclo de cor da paleta */}
       <h1
         className="hero-rise font-serif font-bold leading-[0.88] text-white text-[clamp(4.5rem,11vw,9rem)] tracking-tight"
         style={{ animationDelay: "0.2s" }}
       >
         Livia
         <br />
-        <span className="relative inline-block italic text-livia-turquoise">
-          Ballai
-          <svg
-            aria-hidden="true"
-            viewBox="0 0 320 24"
-            preserveAspectRatio="none"
-            className="absolute left-0 -bottom-3 w-full h-4 text-livia-mustard"
-          >
-            <path
-              d="M4 14 C 60 4, 140 22, 200 10 S 300 18, 316 8"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="4"
-              strokeLinecap="round"
-              className="hero-draw-loop"
-              style={{
-                ["--draw-length" as string]: "360",
-                animationDelay: "1s",
-              }}
-            />
-          </svg>
-        </span>
+        <span className="hero-color-cycle italic">Ballai</span>
       </h1>
 
       {/* Disciplines as standalone tags */}

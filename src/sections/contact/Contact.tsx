@@ -20,7 +20,7 @@ function Contact() {
 
             <h2 className="font-serif font-bold leading-[1.05] text-white text-[clamp(2.25rem,4vw,3.5rem)]">
               Vamos{" "}
-              <em className="not-italic text-livia-turquoise">trabalhar</em>{" "}
+              <em className="not-italic hero-color-cycle">trabalhar</em>{" "}
               juntos?
             </h2>
 
