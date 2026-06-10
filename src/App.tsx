@@ -3,7 +3,7 @@ import { Landing } from "./pages/Landing/Landing.js";
 
 function App() {
   return (
-    <Router basename="/Livia-portfolio/">
+    <Router basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<Landing />} />
       </Routes>
