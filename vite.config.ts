@@ -5,7 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  base: "/Livia-portfolio/",
+  base: "/",
   build: {
     target: "es2020",
     cssCodeSplit: true,
