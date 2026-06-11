@@ -224,17 +224,8 @@
     );
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 /* ──────────────────────────────────────────────────────────
-   Hero editorial — entrance + hand-drawn scribbles
+   Hero editorial — entrance + floating decorations
    ────────────────────────────────────────────────────────── */
 @keyframes hero-rise {
   from {
@@ -244,15 +235,6 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes hero-draw {
-  from {
-    stroke-dashoffset: var(--draw-length, 400);
-  }
-  to {
-    stroke-dashoffset: 0;
   }
 }
 
@@ -269,12 +251,6 @@
 .hero-rise {
   opacity: 0;
   animation: hero-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-.hero-draw {
-  stroke-dasharray: var(--draw-length, 400);
-  stroke-dashoffset: var(--draw-length, 400);
-  animation: hero-draw 1.6s cubic-bezier(0.65, 0, 0.35, 1) forwards;
 }
 
 @keyframes hero-color-cycle {
@@ -322,13 +298,11 @@
 
 @media (prefers-reduced-motion: reduce) {
   .hero-rise,
-  .hero-draw,
   .hero-color-cycle,
   .hero-float,
   .hero-spin {
     animation: none;
     opacity: 1;
-    stroke-dashoffset: 0;
     transform: none;
   }
 }
