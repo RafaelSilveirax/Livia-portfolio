@@ -224,6 +224,22 @@
     );
 }
 
+/* Fundo de seção: brilho turquesa frio no topo, escurecendo para um navy mais
+   profundo embaixo (só tons frios, sem nada quente/amarelado). About e Contact. */
+@utility section-gradient {
+  background:
+    radial-gradient(
+      ellipse 140% 100% at 50% -15%,
+      color-mix(in srgb, var(--color-livia-turquoise) 30%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-livia-navy-blue) 0%,
+      color-mix(in srgb, var(--color-livia-navy-blue) 82%, black) 100%
+    );
+}
+
 /* ──────────────────────────────────────────────────────────
    Hero editorial — entrance + floating decorations
    ────────────────────────────────────────────────────────── */

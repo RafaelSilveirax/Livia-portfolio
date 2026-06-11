@@ -6,7 +6,7 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="flex flex-col min-h-svh bg-livia-navy-blue text-white"
+      className="flex flex-col min-h-svh section-gradient text-white"
     >
       <div className="flex-1 flex items-center justify-center py-24 max-md:py-16">
         <div
@@ -14,9 +14,12 @@ function Contact() {
           className="fade-in w-full max-w-page mx-auto px-6 flex flex-col gap-12 max-md:gap-10"
         >
           <div className="flex flex-col items-start gap-5 max-w-3xl">
-            <p className="font-sans text-xs font-semibold uppercase tracking-widest text-white/35">
-              Vamos conversar
-            </p>
+            <div className="flex items-center gap-3">
+              <span className="text-livia-mustard text-lg" aria-hidden="true">
+                ✦
+              </span>
+              <p className="text-eyebrow">Vamos conversar</p>
+            </div>
 
             <h2 className="font-serif font-bold leading-[1.05] text-white text-[clamp(2.25rem,4vw,3.5rem)]">
               Vamos{" "}

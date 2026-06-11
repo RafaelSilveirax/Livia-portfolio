@@ -1,4 +1,4 @@
-import { IoArrowDown, IoSparkles } from "react-icons/io5";
+import BrandStamp from "../../../components/ui/BrandStamp.js";
 
 function HeroCard() {
   return (
@@ -115,40 +115,8 @@ function HeroCard() {
         className="hero-rise mt-4 flex items-center justify-center gap-x-8 gap-y-6 max-md:flex-col max-md:items-stretch"
         style={{ animationDelay: "0.55s" }}
       >
-        {/* Rotating stamp — wide screens only */}
-        <div className="relative ml-auto w-28 h-28 max-md:mx-auto max-md:w-24 max-md:h-24">
-          <svg
-            viewBox="0 0 200 200"
-            className="hero-spin absolute inset-0 w-full h-full text-white"
-            aria-hidden="true"
-          >
-            <defs>
-              <path
-                id="stamp-circle"
-                d="M 100,100 m -78,0 a 78,78 0 1,1 156,0 a 78,78 0 1,1 -156,0"
-              />
-            </defs>
-            <text
-              fill="currentColor"
-              className="font-sans"
-              style={{
-                fontSize: "18px",
-                letterSpacing: "0.28em",
-                fontWeight: 600,
-              }}
-            >
-              <textPath href="#stamp-circle">
-                PORTFOLIO • 2026 • LIVIA BALLAI •
-              </textPath>
-            </text>
-          </svg>
-          <div className="absolute inset-0 flex items-center justify-center">
-            <IoSparkles
-              className="w-7 h-7 text-livia-mustard"
-              aria-hidden="true"
-            />
-          </div>
-        </div>
+        {/* Rotating stamp — motivo de marca compartilhado (ver BrandStamp) */}
+        <BrandStamp className="ml-auto max-md:mx-auto max-md:w-24 max-md:h-24" />
       </div>
     </div>
   );
