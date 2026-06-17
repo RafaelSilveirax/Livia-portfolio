@@ -12,7 +12,7 @@ Sistema de estilos do projeto. Tailwind v4 com tokens em `@theme` e utilities/co
 ```
 src/
 ├── assets/                  # imagens estáticas (png, svg)
-├── components/ui/           # componentes genéricos reutilizáveis (Menu, NavItem, SocialLinks…)
+├── components/ui/           # componentes genéricos reutilizáveis (Menu, NavItem, SocialLinks, BrandStamp…)
 ├── hooks/                   # hooks customizados (useFadeIn, useSnapScroll, useMenuState)
 ├── lib/utils.ts             # cn(), scrollToSection()
 ├── pages/Landing/           # página raiz — só monta layout + useSnapScroll
@@ -142,6 +142,14 @@ Além do fade-in por scroll, existe a família `hero-*` definida em [src/index.c
 
 `hero-rise` também pode ser disparada inline como animação Tailwind arbitrária quando você precisa de uma duração diferente (ex.: feedback de formulário): `animate-[hero-rise_0.35s_ease-out_both]`.
 
+**Selo giratório da marca** — o selo circular (`hero-spin` + sparkle) é o componente compartilhado [`BrandStamp`](../../../src/components/ui/BrandStamp.tsx), usado no Hero e no About. Não recrie o SVG inline; importe e passe `className` para dimensionar:
+
+```tsx
+import BrandStamp from "../../../components/ui/BrandStamp.js";
+
+<BrandStamp className="w-24 h-24" />
+```
+
 ## Utilities customizadas (`@utility`)
 
 Estas existem em [src/index.css](../../../src/index.css). Reuse antes de criar `style={{}}`:
@@ -158,6 +166,7 @@ Estas existem em [src/index.css](../../../src/index.css). Reuse antes de criar `
 | `glass-form` | Card grande do formulário |
 | `tag-turquoise` | Fundo + borda turquesa (combina com `tag-pill`) |
 | `hero-overlay` | Gradient escurecido sobre o hero |
+| `section-gradient` | Fundo de seção: brilho turquesa frio no topo escurecendo para um navy mais profundo embaixo (só tons frios). Padrão de fundo das seções escuras (About, Contact) — **não** use `bg-livia-navy-blue` chapado nelas |
 
 Se você se encontrar escrevendo `color-mix(in srgb, ...)` em um JSX, **pare** — isso é sinal de que precisa virar uma utility no `index.css`.
 
@@ -267,6 +276,23 @@ const FIELD_CLASS =
 ```
 
 Não crie um arquivo separado pra isso — fica no topo do componente que o usa.
+
+### Variar cor por item: strings literais, nunca nome de classe montado
+
+O Tailwind v4 só gera as classes cujo **nome completo aparece literalmente** no código. Montar o nome em runtime (`bg-livia-${cor}/15`) faz a classe ser purgada e o estilo somem no build. Para variar a cor da paleta por item (cards de skills, stats…), guarde os nomes completos num objeto de config e combine com `cn()`:
+
+```tsx
+// ❌ Errado — purga no build
+<span className={`bg-livia-${accent}/15 text-livia-${accent}`} />
+
+// ✅ Certo — strings literais por cor
+const turquoise = { chip: "bg-livia-turquoise/15 text-livia-turquoise", bar: "from-livia-turquoise" };
+const mustard   = { chip: "bg-livia-mustard/15 text-livia-mustard",   bar: "from-livia-mustard" };
+// …
+<span className={cn("rounded-xl ring-1", group.accent.chip)} />
+```
+
+Mapeie um item por cor da paleta (`turquoise` → `mustard` → `dark-coral`…) para espalhar a identidade da home, como no `AboutSkills`/`AboutStats`.
 
 ### Prefira classes canônicas do Tailwind v4
 

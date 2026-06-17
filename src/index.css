@@ -88,12 +88,12 @@
 
   /* Buttons */
   .btn-primary {
-    @apply font-sans font-semibold rounded-full transition-[transform,background-color,color,opacity] duration-300 ease-in-out hover:-translate-y-[3px];
+    @apply font-sans font-semibold rounded-2xl transition-[transform,background-color,color,opacity] duration-300 ease-in-out hover:-translate-y-[3px];
   }
 
   /* Pill CTA com bolinha + seta (ex.: Hero "Ver Trabalhos") */
   .btn-pill-cta {
-    @apply relative inline-flex items-center gap-3 font-sans font-semibold uppercase tracking-[0.18em] text-xs text-livia-turquoise bg-white rounded-full pl-7 pr-2 py-2 transition-[transform,background-color,color] duration-300 ease-in-out hover:-translate-y-[3px] hover:bg-livia-turquoise hover:text-white;
+    @apply relative inline-flex items-center gap-3 font-sans font-semibold uppercase tracking-[0.18em] text-xs text-livia-turquoise bg-white rounded-2xl pl-7 pr-2 py-2 transition-[transform,background-color,color] duration-300 ease-in-out hover:-translate-y-[3px] hover:bg-livia-turquoise hover:text-white;
   }
 
   .btn-pill-cta__icon {
@@ -221,6 +221,22 @@
       rgba(0, 0, 0, 0.75) 0%,
       rgba(0, 0, 0, 0.4) 40%,
       rgba(0, 0, 0, 0.1) 70%
+    );
+}
+
+/* Fundo de seção: brilho turquesa frio no topo, escurecendo para um navy mais
+   profundo embaixo (só tons frios, sem nada quente/amarelado). About e Contact. */
+@utility section-gradient {
+  background:
+    radial-gradient(
+      ellipse 140% 100% at 50% -15%,
+      color-mix(in srgb, var(--color-livia-turquoise) 30%, transparent) 0%,
+      transparent 55%
+    ),
+    linear-gradient(
+      180deg,
+      var(--color-livia-navy-blue) 0%,
+      color-mix(in srgb, var(--color-livia-navy-blue) 82%, black) 100%
     );
 }
 
