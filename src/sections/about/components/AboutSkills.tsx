@@ -125,6 +125,8 @@ function AboutSkills() {
             aria-hidden="true"
           />
 
+          <span className="card-shine" aria-hidden="true" />
+
           <header className="flex flex-col gap-4">
             <div className="flex items-center gap-3">
               <span
