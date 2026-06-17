@@ -1,10 +1,10 @@
 import { IoArrowDown, IoLocationOutline } from "react-icons/io5";
-import BrandStamp from "../../../components/ui/BrandStamp.js";
 import { scrollToSection } from "../../../lib/utils.js";
+import fotoLivia from "../../../assets/foto-livia.jpeg";
 
 function AboutIntro() {
   return (
-    <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-center gap-12 max-lg:grid-cols-1 max-lg:gap-10">
+    <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-stretch gap-12 max-lg:grid-cols-1 max-lg:gap-10">
       {/* Editorial — texto */}
       <div className="flex flex-col items-start gap-6">
         <div className="flex items-center gap-3">
@@ -49,33 +49,16 @@ function AboutIntro() {
         </button>
       </div>
 
-      {/* Cartão de identidade — eco do Hero */}
-      <div className="glass-card-accent flex flex-col items-center gap-5 rounded-3xl p-8 text-center transition-transform duration-300 hover:-translate-y-1 max-lg:mx-auto max-lg:max-w-sm">
-        <BrandStamp />
-
-        <div className="flex flex-col gap-1">
-          <p className="font-serif text-2xl font-semibold text-white">
-            Livia Ballai
-          </p>
-          <p className="text-eyebrow">Designer &amp; Ilustradora</p>
-        </div>
-
-        <div className="flex items-center gap-2 font-sans text-sm text-white/55">
-          <IoLocationOutline
-            className="w-4 h-4 text-livia-turquoise"
-            aria-hidden="true"
+      {/* Foto emoldurada + textos — sem card, pra dar mais respiro */}
+      <div className="flex h-full flex-col items-center justify-center text-center max-lg:h-auto max-lg:mx-auto">
+        {/* Quadro: foto da Livia com borda animada (mesma paleta do texto) */}
+        <div className="photo-frame h-full w-full max-w-96 max-lg:h-auto">
+          <img
+            src={fotoLivia}
+            alt="Livia Ballai desenhando em um tablet"
+            className="aspect-square w-full object-cover object-top"
+            loading="lazy"
           />
-          Niterói, RJ · Brasil
-        </div>
-
-        <div className="glass-tag flex items-center gap-2 rounded-full px-4 py-1.5">
-          <span className="relative flex h-2 w-2" aria-hidden="true">
-            <span className="absolute inline-flex h-full w-full rounded-full bg-livia-turquoise opacity-70 animate-ping" />
-            <span className="relative inline-flex h-2 w-2 rounded-full bg-livia-turquoise" />
-          </span>
-          <span className="font-sans text-xs font-medium text-white/80">
-            Disponível para projetos
-          </span>
         </div>
       </div>
     </div>

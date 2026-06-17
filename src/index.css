@@ -313,6 +313,37 @@
 }
 
 /* ──────────────────────────────────────────────────────────
+   Photo frame — quadro com a paleta da marca correndo na borda.
+   Mesma paleta/animação do `hero-color-cycle` (texto), aqui como
+   moldura. Envolve uma <img>; o gradiente é a borda e a imagem
+   cobre o miolo. `--frame-w` controla a espessura.
+   ────────────────────────────────────────────────────────── */
+.photo-frame {
+  --frame-w: 6px;
+  --frame-radius: 1.15rem;
+  padding: var(--frame-w);
+  border-radius: var(--frame-radius);
+  background: linear-gradient(
+    90deg,
+    var(--color-livia-turquoise),
+    var(--color-livia-mustard),
+    var(--color-livia-copper),
+    var(--color-livia-dark-coral),
+    var(--color-livia-turquoise)
+  );
+  background-size: 300% 100%;
+  animation: hero-color-cycle 7s linear infinite;
+  box-shadow: 0 12px 32px color-mix(in srgb, black 30%, transparent);
+}
+
+.photo-frame > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: calc(var(--frame-radius) - var(--frame-w));
+}
+
+/* ──────────────────────────────────────────────────────────
    Card hover — varredura de luz ("animação de luz")
    Coloque <span class="card-shine"> dentro de um card `group`
    com overflow-hidden (ex.: AboutSkills, AboutStats).
@@ -356,7 +387,8 @@
   .hero-rise,
   .hero-color-cycle,
   .hero-float,
-  .hero-spin {
+  .hero-spin,
+  .photo-frame {
     animation: none;
     opacity: 1;
     transform: none;
