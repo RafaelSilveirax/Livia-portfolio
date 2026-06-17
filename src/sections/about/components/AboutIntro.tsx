@@ -50,7 +50,7 @@ function AboutIntro() {
       </div>
 
       {/* Cartão de identidade — eco do Hero */}
-      <div className="glass-card-accent flex flex-col items-center gap-5 rounded-3xl p-8 text-center max-lg:mx-auto max-lg:max-w-sm">
+      <div className="glass-card-accent flex flex-col items-center gap-5 rounded-3xl p-8 text-center transition-transform duration-300 hover:-translate-y-1 max-lg:mx-auto max-lg:max-w-sm">
         <BrandStamp />
 
         <div className="flex flex-col gap-1">

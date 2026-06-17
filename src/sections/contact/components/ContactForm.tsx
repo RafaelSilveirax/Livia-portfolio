@@ -1,12 +1,21 @@
 import { useEffect, useState, type FormEvent } from "react";
-import { IoPaperPlane, IoCheckmarkCircle, IoAlertCircle } from "react-icons/io5";
+import {
+  IoPaperPlane,
+  IoCheckmarkCircle,
+  IoAlertCircle,
+  IoPersonOutline,
+  IoMailOutline,
+  IoCreateOutline,
+} from "react-icons/io5";
 import emailjs from "@emailjs/browser";
 
 const FIELD_CLASS =
-  "glass-field rounded-xl px-4 py-3 font-sans text-sm text-white placeholder:text-white/30 outline-none transition-[border-color,background-color] duration-200 focus:border-livia-turquoise/70 focus:bg-white/12";
+  "w-full bg-transparent border-0 border-b border-white/15 px-0 py-2.5 font-sans text-sm text-white placeholder:text-white/30 outline-none transition-colors duration-200 hover:border-white/30 focus:border-livia-turquoise";
 
 const LABEL_CLASS =
-  "font-sans text-xs font-semibold uppercase tracking-widest text-white/35";
+  "flex items-center gap-2 font-sans text-xs font-semibold uppercase tracking-widest text-white/35";
+
+const ICON_CLASS = "h-4 w-4 text-livia-turquoise";
 
 type Status = "idle" | "sending" | "success" | "error";
 
@@ -71,54 +80,65 @@ function ContactForm() {
   return (
     <div className="flex flex-col gap-4">
       <div className="glass-form rounded-2xl p-8 max-sm:p-6">
+        <div className="glass-tag mb-7 flex items-center gap-2 self-start rounded-full px-4 py-1.5">
+          <span className="relative flex h-2 w-2" aria-hidden="true">
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-livia-turquoise opacity-70" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-livia-turquoise" />
+          </span>
+          <span className="font-sans text-xs font-medium text-white/80">
+            Disponível para projetos
+          </span>
+        </div>
+
         <form
-          className="flex flex-col gap-5"
+          className="flex flex-col gap-6"
           onSubmit={handleSubmit}
           aria-label="Formulário de contato"
           noValidate={false}
         >
-          <div className="grid grid-cols-2 gap-4 max-sm:grid-cols-1">
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-name" className={LABEL_CLASS}>
-                Nome
-                <RequiredMark />
-              </label>
-              <input
-                id="contact-name"
-                type="text"
-                required
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                placeholder="Seu nome"
-                className={FIELD_CLASS}
-              />
-            </div>
-
-            <div className="flex flex-col gap-1.5">
-              <label htmlFor="contact-email" className={LABEL_CLASS}>
-                E-mail
-                <RequiredMark />
-              </label>
-              <input
-                id="contact-email"
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="seu@email.com"
-                className={FIELD_CLASS}
-              />
-            </div>
+          <div className="flex flex-col gap-2">
+            <label htmlFor="contact-name" className={LABEL_CLASS}>
+              <IoPersonOutline className={ICON_CLASS} aria-hidden="true" />
+              Nome
+              <RequiredMark />
+            </label>
+            <input
+              id="contact-name"
+              type="text"
+              required
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Seu nome"
+              className={FIELD_CLASS}
+            />
           </div>
 
-          <div className="flex flex-col gap-1.5">
+          <div className="flex flex-col gap-2">
+            <label htmlFor="contact-email" className={LABEL_CLASS}>
+              <IoMailOutline className={ICON_CLASS} aria-hidden="true" />
+              E-mail
+              <RequiredMark />
+            </label>
+            <input
+              id="contact-email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="seu@email.com"
+              className={FIELD_CLASS}
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
             <label htmlFor="contact-message" className={LABEL_CLASS}>
+              <IoCreateOutline className={ICON_CLASS} aria-hidden="true" />
               Mensagem
               <RequiredMark />
             </label>
             <textarea
               id="contact-message"
-              rows={5}
+              rows={4}
               required
               maxLength={500}
               value={message}
@@ -134,7 +154,7 @@ function ContactForm() {
           <button
             type="submit"
             disabled={status === "sending"}
-            className="btn-primary mt-1 self-start flex items-center gap-2 px-8 py-3.5 text-sm tracking-wide bg-livia-turquoise text-white hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed max-sm:self-stretch max-sm:justify-center"
+            className="btn-primary mt-1 flex items-center justify-center gap-2 self-stretch px-8 py-3.5 text-sm tracking-wide bg-livia-turquoise text-white hover:opacity-90 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             <IoPaperPlane size={16} aria-hidden="true" />
             {status === "sending" ? "Enviando..." : "Enviar Mensagem"}
