@@ -94,15 +94,18 @@ function ContactInfo() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col">
-        {contactLinks.map(({ href, Icon, label, value, badge }) => (
+      <div className="w-full glass-form flex flex-col rounded-2xl p-3">
+        {contactLinks.map(({ href, Icon, label, value, badge }, index) => (
           <a
             key={label}
             href={href}
             target="_blank"
             rel="noopener noreferrer"
             aria-label={`${label} — ${value}`}
-            className="group -mx-2 flex items-center gap-4 rounded-xl border-b border-white/10 px-2 py-4 transition-colors duration-200 hover:bg-white/5"
+            className={cn(
+              "group flex items-center gap-4 rounded-xl px-3 py-3 transition-colors duration-200 hover:bg-white/5",
+              index < contactLinks.length - 1 && "border-b border-white/10",
+            )}
           >
             <span
               className={cn(
