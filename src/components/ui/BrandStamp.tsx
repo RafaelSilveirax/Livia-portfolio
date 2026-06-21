@@ -7,11 +7,6 @@ type BrandStampProps = {
   label?: string;
 };
 
-/**
- * Selo circular giratório da marca (texto correndo na borda + sparkle no centro).
- * Motivo do Hero, reutilizado no About. O id do path é único por instância para
- * permitir múltiplos selos na mesma página sem colidir o `textPath href`.
- */
 function BrandStamp({
   className,
   label = "PORTFOLIO • 2026 • LIVIA BALLAI •",

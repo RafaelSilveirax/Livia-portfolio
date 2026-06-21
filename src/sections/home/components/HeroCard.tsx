@@ -69,7 +69,6 @@ function HeroCard() {
         />
       </svg>
 
-      {/* Eyebrow with thick rule */}
       <div
         className="hero-rise flex items-center justify-center gap-4 max-sm:flex-col max-sm:gap-2"
         style={{ animationDelay: "0.05s" }}
@@ -82,7 +81,6 @@ function HeroCard() {
         </p>
       </div>
 
-      {/* Title — massive editorial, "Ballai" com ciclo de cor da paleta */}
       <h1
         className="hero-rise font-serif font-bold leading-[0.88] text-white text-[clamp(4.5rem,11vw,9rem)] tracking-tight"
         style={{ animationDelay: "0.2s" }}
@@ -92,7 +90,6 @@ function HeroCard() {
         <span className="hero-color-cycle italic">Ballai</span>
       </h1>
 
-      {/* Disciplines as standalone tags */}
       <div
         className="hero-rise flex flex-wrap items-center justify-center gap-x-3 gap-y-2 max-w-2xl"
         style={{ animationDelay: "0.4s" }}
@@ -110,12 +107,10 @@ function HeroCard() {
         </span>
       </div>
 
-      {/* Rotating stamp row */}
       <div
         className="hero-rise mt-4 flex items-center justify-center gap-x-8 gap-y-6 max-md:flex-col max-md:items-stretch"
         style={{ animationDelay: "0.55s" }}
       >
-        {/* Rotating stamp — motivo de marca compartilhado (ver BrandStamp) */}
         <BrandStamp className="ml-auto max-md:mx-auto max-md:w-24 max-md:h-24" />
       </div>
     </div>

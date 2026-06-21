@@ -1,11 +1,10 @@
-import { IoArrowDown, IoLocationOutline } from "react-icons/io5";
+import { IoArrowDown } from "react-icons/io5";
 import { scrollToSection } from "../../../lib/utils.js";
 import fotoLivia from "../../../assets/foto-livia.jpeg";
 
 function AboutIntro() {
   return (
     <div className="grid grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)] items-stretch gap-12 max-lg:grid-cols-1 max-lg:gap-10">
-      {/* Editorial — texto */}
       <div className="flex flex-col items-start gap-6">
         <div className="flex items-center gap-3">
           <span className="text-livia-mustard text-lg" aria-hidden="true">
@@ -30,7 +29,6 @@ function AboutIntro() {
           .
         </p>
 
-        {/* Separador com a paleta da marca */}
         <div className="flex items-center gap-3 text-lg" aria-hidden="true">
           <span className="text-livia-turquoise">✦</span>
           <span className="text-livia-mustard">✦</span>
@@ -49,9 +47,7 @@ function AboutIntro() {
         </button>
       </div>
 
-      {/* Foto emoldurada + textos — sem card, pra dar mais respiro */}
       <div className="flex h-full flex-col items-center justify-center text-center max-lg:h-auto max-lg:mx-auto">
-        {/* Quadro: foto da Livia com borda animada (mesma paleta do texto) */}
         <div className="photo-frame h-full w-full max-w-96 max-lg:h-auto">
           <img
             src={fotoLivia}

@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 
-const DURATION = 550; // duração da animação de snap
-const EDGE = 8; // tolerância (px) para detectar bordas de seção
-const ALIGN_TOL = 4; // proximidade do topo de uma seção que já conta como "encaixado"
-const COOLDOWN = 150; // ignora input logo após um snap programático
-const SETTLE_DELAY = 120; // silêncio de scroll (ms) antes de realinhar
+const DURATION = 550;
+const EDGE = 8;
+const ALIGN_TOL = 4;
+const COOLDOWN = 150;
+const SETTLE_DELAY = 120;
 const WHEEL_MIN = 2;
 const TOUCH_MIN = 8;
 
@@ -30,8 +30,6 @@ export function useSnapScroll(containerId: string) {
     const isCooling = () => performance.now() < cooldownUntil;
     const vh = () => c.clientHeight;
 
-    // Posições e alturas reais das seções (recalculadas a cada uso para
-    // acompanhar lazy-load, resize e a diferença mobile/desktop).
     function geom(): Geom[] {
       const top0 = c.scrollTop;
       return SECTION_IDS.map((id) => {
@@ -42,7 +40,6 @@ export function useSnapScroll(containerId: string) {
       });
     }
 
-    // Seção que ocupa o topo da viewport (a "âncora" atual).
     function anchorIndex(secs: Geom[], S: number): number {
       let idx = 0;
       for (let i = 0; i < secs.length; i++) {
@@ -53,35 +50,26 @@ export function useSnapScroll(containerId: string) {
 
     const isTall = (g: Geom) => g.height > vh() + EDGE;
 
-    // Alvo para um empurrão explícito (wheel/swipe).
-    // null = não fazer snap, deixar a rolagem nativa acontecer.
     function gestureTarget(S: number, dir: 1 | -1): number | null {
       const secs = geom();
       const i = anchorIndex(secs, S);
       const a = secs[i]!;
 
       if (dir === 1) {
-        // ainda há conteúdo abaixo dentro de uma seção alta → rola nativo
         if (isTall(a) && a.top + a.height > S + vh() + EDGE) return null;
         const next = secs[i + 1];
         return next && next.height > 0 ? next.top : null;
       }
 
-      // ainda há conteúdo acima dentro de uma seção alta → rola nativo
       if (isTall(a) && a.top < S - EDGE) return null;
-      // dentro de uma seção (curta) abaixo do seu topo → sobe pro topo dela
       if (S > a.top + EDGE) return a.top;
-      // já no topo da âncora → vai para a seção anterior
       const prev = secs[i - 1];
       return prev ? prev.top : null;
     }
 
-    // Alvo depois que a rolagem (incluindo inércia) para.
-    // null = a posição atual é um repouso válido.
     function settleTarget(S: number, dir: 1 | -1): number | null {
       const secs = geom();
 
-      // já encaixado no topo de alguma seção
       for (const g of secs) {
         if (g.height > 0 && Math.abs(g.top - S) <= ALIGN_TOL) return null;
       }
@@ -89,7 +77,6 @@ export function useSnapScroll(containerId: string) {
       const i = anchorIndex(secs, S);
       const a = secs[i]!;
 
-      // repousar lendo o miolo de uma seção alta é legítimo
       if (
         isTall(a) &&
         S >= a.top - EDGE &&
@@ -98,8 +85,6 @@ export function useSnapScroll(containerId: string) {
         return null;
       }
 
-      // desalinhado (mostrando duas seções / transição de borda):
-      // encaixa no sentido do movimento — nunca puxa para trás.
       if (dir === 1) {
         const next = secs[i + 1];
         return next && next.height > 0 ? next.top : a.top;
@@ -132,18 +117,16 @@ export function useSnapScroll(containerId: string) {
       requestAnimationFrame(tick);
     }
 
-    // ── Wheel: snap magnético imediato; nativo dentro de seção alta ──────────
     function onWheel(e: WheelEvent) {
       if (Math.abs(e.deltaY) < WHEEL_MIN) return;
       const dir: 1 | -1 = e.deltaY > 0 ? 1 : -1;
       const target = gestureTarget(c.scrollTop, dir);
-      if (target === null) return; // rolagem livre numa seção alta
+      if (target === null) return;
       e.preventDefault();
       if (isAnimating || isCooling()) return;
       animateTo(target);
     }
 
-    // ── Touch: seção curta = snap de uma seção; seção alta = nativo ──────────
     let touchStartY = 0;
     let touchDecision: "none" | "snap" | "native" = "none";
 
@@ -173,11 +156,10 @@ export function useSnapScroll(containerId: string) {
         e.preventDefault();
         animateTo(target);
       } else {
-        touchDecision = "native"; // seção alta → deixa rolar (settle limpa)
+        touchDecision = "native";
       }
     }
 
-    // ── Settle: realinha quando a rolagem (incl. inércia) para ───────────────
     function onScroll() {
       const S = c.scrollTop;
       if (S > prevScrollTop + 0.5) lastDir = 1;

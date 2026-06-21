@@ -1,10 +1,6 @@
 @import "tailwindcss";
 
-/* ──────────────────────────────────────────────────────────
-   Design tokens
-   ────────────────────────────────────────────────────────── */
 @theme {
-  /* Brand */
   --color-livia-navy-blue: #294155;
   --color-livia-turquoise: #3a9dab;
   --color-livia-dark-coral: #d0493a;
@@ -13,29 +9,22 @@
   --color-background: #ffffff;
   --color-foreground: #294155;
 
-  /* Typography */
   --font-playfair: "Playfair Display", serif;
   --font-montserrat: "Montserrat", sans-serif;
 
-  /* Default font roles — used by `font-sans` / `font-serif` Tailwind utilities */
   --font-sans: var(--font-montserrat);
   --font-serif: var(--font-playfair);
 
-  /* Breakpoints (used as `max-sm`, `max-md`, `max-lg`) */
   --breakpoint-sm: 600px;
   --breakpoint-md: 768px;
   --breakpoint-nav: 820px;
   --breakpoint-lg: 900px;
   --breakpoint-xl: 1200px;
 
-  /* Layout container */
   --container-page: 1200px;
   --container-content: 1100px;
 }
 
-/* ──────────────────────────────────────────────────────────
-   Base
-   ────────────────────────────────────────────────────────── */
 @layer base {
   body {
     @apply bg-livia-navy-blue text-foreground font-sans;
@@ -60,11 +49,7 @@
   }
 }
 
-/* ──────────────────────────────────────────────────────────
-   Reusable component classes
-   ────────────────────────────────────────────────────────── */
 @layer components {
-  /* Typography ─ fixed roles to avoid ad-hoc sizes scattered around the app */
   .text-eyebrow {
     @apply font-sans text-xs font-semibold uppercase tracking-[0.18em] text-livia-turquoise;
   }
@@ -81,17 +66,14 @@
     @apply font-serif italic text-[1.15rem] leading-relaxed;
   }
 
-  /* Pills / tags */
   .tag-pill {
     @apply font-sans text-[0.7rem] font-semibold uppercase tracking-widest px-4 py-1.5 rounded-full;
   }
 
-  /* Buttons */
   .btn-primary {
     @apply font-sans font-semibold rounded-2xl transition-[transform,background-color,color,opacity] duration-300 ease-in-out hover:-translate-y-[3px];
   }
 
-  /* Pill CTA com bolinha + seta (ex.: Hero "Ver Trabalhos") */
   .btn-pill-cta {
     @apply relative inline-flex items-center gap-3 font-sans font-semibold uppercase tracking-[0.18em] text-xs text-livia-turquoise bg-white rounded-2xl pl-7 pr-2 py-2 transition-[transform,background-color,color] duration-300 ease-in-out hover:-translate-y-[3px] hover:bg-livia-turquoise hover:text-white;
   }
@@ -104,7 +86,6 @@
     @apply bg-white text-livia-turquoise;
   }
 
-  /* Hamburger lines */
   .menu-btn span {
     @apply block w-[22px] h-[2px] bg-current rounded-full;
   }
@@ -129,9 +110,6 @@
   }
 }
 
-/* ──────────────────────────────────────────────────────────
-   Animations: fade-in on scroll
-   ────────────────────────────────────────────────────────── */
 .fade-in {
   opacity: 0;
   transform: translateY(28px);
@@ -145,9 +123,6 @@
   transform: translateY(0);
 }
 
-/* ──────────────────────────────────────────────────────────
-   Glassmorphism utilities
-   ────────────────────────────────────────────────────────── */
 @utility glass-nav {
   background: color-mix(in srgb, var(--color-livia-navy-blue) 70%, transparent);
   backdrop-filter: blur(16px);
@@ -224,8 +199,6 @@
     );
 }
 
-/* Fundo de seção: brilho turquesa frio no topo, escurecendo para um navy mais
-   profundo embaixo (só tons frios, sem nada quente/amarelado). About e Contact. */
 @utility section-gradient {
   background:
     radial-gradient(
@@ -240,9 +213,6 @@
     );
 }
 
-/* ──────────────────────────────────────────────────────────
-   Hero editorial — entrance + floating decorations
-   ────────────────────────────────────────────────────────── */
 @keyframes hero-rise {
   from {
     opacity: 0;
@@ -275,9 +245,8 @@
   }
 }
 
-/* Ciclo de cor — a paleta da identidade corre pelas letras (clip no texto).
-   padding-right estende a caixa do gradiente p/ cobrir a ponta do itálico;
-   o margin-right negativo cancela esse espaço no layout, mantendo o alinhamento. */
+/* padding-right + margin-right negativo: cobrem a ponta do itálico sem
+   alterar o layout. Não remover. */
 .hero-color-cycle {
   display: inline-block;
   padding-right: 0.16em;
@@ -312,12 +281,6 @@
   animation: hero-spin 22s linear infinite;
 }
 
-/* ──────────────────────────────────────────────────────────
-   Photo frame — quadro com a paleta da marca correndo na borda.
-   Mesma paleta/animação do `hero-color-cycle` (texto), aqui como
-   moldura. Envolve uma <img>; o gradiente é a borda e a imagem
-   cobre o miolo. `--frame-w` controla a espessura.
-   ────────────────────────────────────────────────────────── */
 .photo-frame {
   --frame-w: 6px;
   --frame-radius: 1.15rem;
@@ -343,11 +306,6 @@
   border-radius: calc(var(--frame-radius) - var(--frame-w));
 }
 
-/* ──────────────────────────────────────────────────────────
-   Card hover — varredura de luz ("animação de luz")
-   Coloque <span class="card-shine"> dentro de um card `group`
-   com overflow-hidden (ex.: AboutSkills, AboutStats).
-   ────────────────────────────────────────────────────────── */
 @keyframes card-shine {
   0% {
     transform: translateX(-130%);

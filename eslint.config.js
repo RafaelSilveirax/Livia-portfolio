@@ -11,7 +11,7 @@ export default defineConfig([
     extends: ["js/recommended", "plugin:prettier/recommended"],
     languageOptions: { globals: globals.browser },
     rules: {
-      "prettier/prettier": "error" // mostra erro se o código não estiver formatado
+      "prettier/prettier": "error"
     }
   },
   pluginReact.configs.flat.recommended

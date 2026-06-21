@@ -4,7 +4,6 @@ type Stat = {
   value: string;
   unit: string;
   description: string;
-  /** Cor da paleta da marca — espalha turquesa / mostarda / coral pelos cards. */
   valueClass: string;
   barClass: string;
   glowClass: string;
